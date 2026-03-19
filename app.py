@@ -24,6 +24,8 @@ def main():
 
     if leaderboard_data:
         df = pd.DataFrame(leaderboard_data).sort_values(by="נקודות", ascending=False)
+        df.index = range(1, len(df) + 1)
+        df.index.name = "מיקום"
         st.sidebar.table(df)
     else:
         st.sidebar.write("עוד אין ניחושים. תהיו הראשונים!")
@@ -33,7 +35,6 @@ def main():
 
     with tab_tree:
         st.header("מבנה הטורניר")
-        # בחירת משתמש לתצוגת העץ שלו
         view_user = st.selectbox("בחר חבר כדי לראות את העץ שלו:", ["תוצאות אמת"] + list(all_guesses.keys()))
 
         is_actual_view = (view_user == "תוצאות אמת")
@@ -41,12 +42,23 @@ def main():
 
         eliminated_teams = logic.get_eliminated_teams(actual_results)
 
-        # --- פונקציות עזר לתצוגה קומפקטית ---
+        # מילון הדגלים
+        TEAM_FLAGS = {
+            "Paris Saint-Germain": "🇫🇷", "Chelsea": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Galatasaray": "🇹🇷",
+            "Liverpool": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Real Madrid": "🇪🇸", "Manchester City": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+            "Atalanta": "🇮🇹", "Bayern Munich": "🇩🇪", "Newcastle": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+            "Barcelona": "🇪🇸", "Atlético Madrid": "🇪🇸", "Tottenham": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+            "Bodø/Glimt": "🇳🇴", "Sporting CP": "🇵🇹", "Bayer Leverkusen": "🇩🇪", "Arsenal": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
+        }
+
+        # פונקציית עזר לתצוגה עם דגלים
         def format_team(team_name, is_winner_node):
             if team_name == "TBD": return "<i>TBD</i>"
+            flag = TEAM_FLAGS.get(team_name, "")
             prefix_icon = " 🌟" if team_name == is_winner_node else ""
             style = "font-weight: bold;" if team_name == is_winner_node else ""
-            return f"<span style='{style}'>{team_name}{prefix_icon}</span>"
+
+            return f"<span style='{style}'>{flag} {team_name}{prefix_icon}</span>"
 
         # פונקציה לייצור משבצת משחק - העדכון פותר את בעיית המרווחים המבולגנים על ידי קומפקטיות וגובה קבוע predicatable
         def get_match_box_html(m_id, winner_node, user_eliminated_node, correction_node, actual_w_node):
