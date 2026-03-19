@@ -6,6 +6,13 @@ import logic
 import data_manager
 import os  # דרוש לכפתור האיפוס
 
+ROUND_DICT = {
+    f"R16_M{i}": f"שמינית הגמר {i}" for i in range(1, 9)}
+ROUND_DICT.update({f"QF{i}": f"רבע הגמר {i}" for i in range(1, 5)})
+ROUND_DICT.update({f"SF{i}": f"חצי הגמר {i}" for i in range(1, 3)})
+ROUND_DICT["QF"] = "רבע הגמר"
+ROUND_DICT["SF"] = "חצי הגמר"
+ROUND_DICT["FINAL"] = "גמר ליגת האלופות"
 
 def main():
     st.set_page_config(page_title=APP_TITLE, layout="wide", page_icon="🏆")
@@ -17,18 +24,45 @@ def main():
 
     # --- sidebar: טבלת ניקוד ---
     st.sidebar.header("📊 טבלת ניקוד")
+
+    # הגדרת הדגלים גם כאן לשימוש בטבלה
+    TEAM_FLAGS = {
+        "Paris Saint-Germain": "🇫🇷", "Chelsea": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Galatasaray": "🇹🇷",
+        "Liverpool": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Real Madrid": "🇪🇸", "Manchester City": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "Atalanta": "🇮🇹", "Bayern Munich": "🇩🇪", "Newcastle": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "Barcelona": "🇪🇸", "Atlético Madrid": "🇪🇸", "Tottenham": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "Bodø/Glimt": "🇳🇴", "Sporting CP": "🇵🇹", "Bayer Leverkusen": "🇩🇪", "Arsenal": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
+    }
+
     leaderboard_data = []
     for user, guesses in all_guesses.items():
         score, _ = logic.calculate_score(guesses, actual_results)
-        leaderboard_data.append({"שם": user, "נקודות": score})
+
+        # שליפת הניחוש לגמר
+        predicted_winner = guesses.get("FINAL", "TBD")
+        flag = TEAM_FLAGS.get(predicted_winner, "")
+        winner_display = f"{flag} {predicted_winner}" if predicted_winner != "TBD" else "TBD"
+
+        leaderboard_data.append({
+            "שם": user,
+            "זוכה": winner_display,  # העמודה החדשה
+            "נקודות": score
+        })
 
     if leaderboard_data:
+        # יצירת ה-DataFrame ומיון
         df = pd.DataFrame(leaderboard_data).sort_values(by="נקודות", ascending=False)
+
+        # סידור העמודות: שם, זוכה, נקודות (המיקום הוא האינדקס)
+        df = df[["שם", "זוכה", "נקודות"]]
+
+        # הגדרת אינדקס שמתחיל ב-1 (מיקום)
         df.index = range(1, len(df) + 1)
         df.index.name = "מיקום"
+
         st.sidebar.table(df)
     else:
-        st.sidebar.write("עוד אין ניחושים. תהיו הראשונים!")
+        st.sidebar.write("עוד אין ניחושים.")
 
     # --- טאבים בממשק הראשי ---
     tab_tree, tab_add, tab_admin = st.tabs(["🌳 עץ הטורניר", "✍️ הוסף/עדכן ניחוש", "⚙️ עדכון תוצאות אמת"])
@@ -71,7 +105,7 @@ def main():
             # חיווי תיקון
             if not is_actual_view and correction_node:
                 planned = logic.get_original_planned_winner(m_id, current_display_guesses)
-                match_html += f"<div style='color: #ffaa00; font-size: 0.8em; margin-top:2px;'>⚠️ תוקן (במקור: {planned})</div>"
+                match_html += f"<div style='color: #ffaa00; font-size: 1.4em; margin-top:2px;'>⚠️ תוקן (במקור: {planned})</div>"
 
             # צבעים וסטטוס (כחול ברירת מחדל)
             bg_color, border_color, text_color = "#1976d2", "#1565c0", "white"
@@ -205,18 +239,18 @@ def main():
             st.write(f"### עריכת הניחוש של: **{user_name}**")
             user_current_guesses = all_guesses.get(user_name, {})
             new_guesses = {}
-            st.write("---");
+            st.write("---")
             st.subheader("שלב שמינית הגמר (נעול)")
             for m_id, participants in TEAMS.items():
                 current_guess = user_current_guesses.get(m_id) or participants[0]
                 new_guesses[m_id] = current_guess
                 st.write(
-                    f"**משחק {m_id}:** {participants[0]} - {participants[1]} | הניחוש שלך (נעול): **{current_guess}**")
+                    f"**משחק {ROUND_DICT[m_id]}:** {participants[0]} - {participants[1]} | הניחוש שלך: ** {current_guess}** (נעול)")
 
             eliminated_teams = logic.get_eliminated_teams(actual_results)
             for stage in ["QF", "SF", "FINAL"]:
-                st.write("---");
-                st.subheader(f"שלב ה-{stage}")
+                st.write("---")
+                st.subheader(f"שלב {ROUND_DICT.get(stage, stage)}")
                 stage_matches = [m for m in BRACKET_STRUCTURE if m.startswith(stage)]
                 for m_id in stage_matches:
                     participants = logic.get_participant_teams(m_id, new_guesses, actual_results)
@@ -227,22 +261,23 @@ def main():
                             current_guess = user_current_guesses.get(m_id) or participants[0]
                             new_guesses[m_id] = current_guess
                             st.write(
-                                f"**משחק {m_id}:** {participants[0]} - {participants[1]} | הניחוש שלך (נעול): **{current_guess}**")
+                                f"**משחק {ROUND_DICT[m_id]}:** {participants[0]} - {participants[1]} | הניחוש שלך (נעול): **{current_guess}**")
                         else:
                             idx = participants.index(default_val) if default_val in participants else 0
-                            new_guesses[m_id] = st.radio(f"משחק {m_id}: {participants[0]} - {participants[1]}",
+                            new_guesses[m_id] = st.radio(f"משחק {ROUND_DICT[m_id]}: ",
                                                          participants, index=idx, key=f"edit_{user_name}_{m_id}",
                                                          format_func=lambda
                                                              label: f"{label} (הודחה! ❌)" if label in eliminated_teams else label)
                             if default_val in eliminated_teams: st.warning(
                                 f"שים לב: הניחוש הקיים ({default_val}) הוא של קבוצה שהודחה. עליך לתקן אותו.")
                     else:
-                        st.info(f"משחק {m_id}: מחכה לתוצאות מהשלבים הקודמים כדי להציג אפשרויות...")
+                        st.info(f"משחק {ROUND_DICT[m_id]}: מחכה לתוצאות מהשלבים הקודמים כדי להציג אפשרויות...")
             if st.button("שמור עדכון ניחוש"):
                 if user_name.strip() == "":
                     st.error("חובה להזין שם!")
                 else:
-                    data_manager.save_user_guess(user_name, new_guesses); st.success(
+                    data_manager.save_user_guess(user_name, new_guesses)
+                    st.success(
                         f"הניחוש של {user_name} עודכן בהצלחה!"); st.rerun()
 
     with tab_admin:
@@ -256,17 +291,17 @@ def main():
             if "TBD" not in participants:
                 options = ["טרם נקבע"] + participants
                 current_val = updated_actual.get(m_id, "טרם נקבע")
-                choice = st.selectbox(f"המנצחת الأמתית ב-{m_id}:", options,
+                choice = st.selectbox(f"המנצחת האמיתית ב{ROUND_DICT[m_id]}:", options,
                                       index=options.index(current_val) if current_val in options else 0)
                 if choice != "טרם נקבע": updated_actual[m_id] = choice
         if st.button("עדכן תוצאות אמת"): data_manager.save_actual_results(updated_actual); st.success(
             "התוצאות עודכנו! כל הניקוד חושב מחדש."); st.rerun()
-        st.write("---");
+        st.write("---")
         st.subheader("⚠️ אזור מסוכן")
         if st.button("מחק את כל הניחושים והתוצאות (Reset)"):
             if os.path.exists("user_guesses.json"): os.remove("user_guesses.json")
             if os.path.exists("actual_results.json"): os.remove("actual_results.json")
-            st.warning("כל הנתונים נמחקו. המערכת תתארס עכשיו...");
+            st.warning("כל הנתונים נמחקו. המערכת תתארס עכשיו...")
             st.rerun()
 
 
