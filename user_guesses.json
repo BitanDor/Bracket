@@ -82,7 +82,12 @@
         "QF4": "Arsenal",
         "SF1": "Manchester City",
         "SF2": "Arsenal",
-        "FINAL": "Manchester City"
+        "FINAL": "Manchester City",
+        "corrections_after_R16": {
+            "QF2": "Real Madrid",
+            "SF1": "Liverpool",
+            "FINAL": "Liverpool"
+        }
     },
     "שושה": {
         "R16_M1": "Paris Saint-Germain",
