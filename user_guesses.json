@@ -65,7 +65,13 @@
         "QF4": "Bayer Leverkusen",
         "SF1": "Real Madrid",
         "SF2": "Barcelona",
-        "FINAL": "Real Madrid"
+        "FINAL": "Real Madrid",
+        "corrections_after_R16": {
+            "QF1": "Liverpool",
+            "QF4": "Arsenal"
+        },
+        "corrections_after_QF": {},
+        "corrections_after_SF": {}
     },
     "זיו": {
         "R16_M1": "Paris Saint-Germain",
