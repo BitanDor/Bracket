@@ -3,11 +3,11 @@ import streamlit as st
 import pandas as pd
 import logic
 import data_manager
-from tournaments import ucl_2026_config
+from tournaments import ucl_2026_config, nba_2026_config
 
-# כאן נוסיף תחרויות עתידיות למילון (למשל ה-NBA)
 AVAILABLE_TOURNAMENTS = {
-    ucl_2026_config.ID: ucl_2026_config
+    ucl_2026_config.ID: ucl_2026_config,
+    nba_2026_config.ID: nba_2026_config
 }
 
 
@@ -70,13 +70,18 @@ def main():
             style = "font-weight: bold;" if team_name == is_winner_node else ""
             return f"<span style='{style}'>{flag} {team_name}{prefix_icon}</span>"
 
-        def get_match_box_html(m_id, winner_node, user_eliminated_node, actual_w_node):
+        def get_spacer_html(em_height):
+            return f"<div style='height: {em_height}em;'></div>"
+
+        def get_match_box_html(m_id, winner_node, user_eliminated_node, actual_w_node, is_actual_view, raw_user_obj,
+                               config):
             participants = logic.get_participant_teams(m_id, current_display_guesses, actual_results, config)
             team_a, team_b = participants[0], participants[1]
+
             match_html = f"<div style='line-height: 1.1;'><br>{format_team(team_a, winner_node)}<br><small>vs</small><br>{format_team(team_b, winner_node)}</div>"
 
             is_corrected = False
-            if not is_actual_view:
+            if not is_actual_view and raw_user_obj:
                 _, bucket = logic.get_guess_info(raw_user_obj, m_id, config)
                 if bucket != "BASE":
                     is_corrected = True
@@ -101,47 +106,39 @@ def main():
     {match_html}
     </div>"""
 
-        # שימוש במרווחים שהוגדרו ב-Config לשמירה על העיצוב
+
         bracket_cols = st.columns(config.UI_CONFIG["columns_width"], gap="medium")
 
-        def get_spacer_html(em_height):
-            return f"<div style='height: {em_height}em;'></div>"
+        for idx, stage_key in enumerate(config.STAGES):
+            with bracket_cols[idx]:
+                st.subheader(config.ROUND_DICT.get(stage_key, stage_key))
 
-        # עמודת שמינית
-        with bracket_cols[0]:
-            st.subheader(config.ROUND_DICT.get("R16", "שמינית"))
-            for m_id in list(config.TEAMS.keys()):
-                w_guess = current_display_guesses.get(m_id)
-                a_winner = actual_results.get(m_id)
-                st.markdown(get_match_box_html(m_id, w_guess, eliminated_teams, a_winner), unsafe_allow_html=True)
+                stage_spacers = config.UI_CONFIG["spacers"].get(stage_key, {})
+                if "top" in stage_spacers:
+                    st.markdown(get_spacer_html(stage_spacers["top"]), unsafe_allow_html=True)
 
-        # עמודת רבע
-        with bracket_cols[1]:
-            st.subheader(config.ROUND_DICT.get("QF", "רבע"))
-            st.markdown(get_spacer_html(config.UI_CONFIG["spacers"]["QF"]["top"]), unsafe_allow_html=True)
-            for m_id in [m for m in config.BRACKET_STRUCTURE if m.startswith("QF")]:
-                w_guess = current_display_guesses.get(m_id)
-                a_winner = actual_results.get(m_id)
-                st.markdown(get_match_box_html(m_id, w_guess, eliminated_teams, a_winner), unsafe_allow_html=True)
-                st.markdown(get_spacer_html(config.UI_CONFIG["spacers"]["QF"]["between"]), unsafe_allow_html=True)
+                if idx == 0:
+                    matches_in_stage = list(config.TEAMS.keys())
+                else:
+                    matches_in_stage = [m for m in config.BRACKET_STRUCTURE if m.startswith(stage_key)]
 
-        # עמודת חצי
-        with bracket_cols[2]:
-            st.subheader(config.ROUND_DICT.get("SF", "חצי"))
-            st.markdown(get_spacer_html(config.UI_CONFIG["spacers"]["SF"]["top"]), unsafe_allow_html=True)
-            for m_id in [m for m in config.BRACKET_STRUCTURE if m.startswith("SF")]:
-                w_guess = current_display_guesses.get(m_id)
-                a_winner = actual_results.get(m_id)
-                st.markdown(get_match_box_html(m_id, w_guess, eliminated_teams, a_winner), unsafe_allow_html=True)
-                st.markdown(get_spacer_html(config.UI_CONFIG["spacers"]["SF"]["between"]), unsafe_allow_html=True)
+                for m_id in matches_in_stage:
+                    w_guess = current_display_guesses.get(m_id)
+                    a_winner = actual_results.get(m_id)
 
-        # עמודת גמר
-        with bracket_cols[3]:
-            st.subheader(config.ROUND_DICT.get("FINAL", "גמר"))
-            st.markdown(get_spacer_html(config.UI_CONFIG["spacers"]["FINAL"]["top"]), unsafe_allow_html=True)
-            w_guess = current_display_guesses.get("FINAL")
-            a_winner = actual_results.get("FINAL")
-            st.markdown(get_match_box_html("FINAL", w_guess, eliminated_teams, a_winner), unsafe_allow_html=True)
+                    # קריאה לפונקציה עם 7 פרמטרים בדיוק
+                    st.markdown(get_match_box_html(
+                        m_id,
+                        w_guess,
+                        eliminated_teams,
+                        a_winner,
+                        is_actual_view,
+                        raw_user_obj,
+                        config
+                    ), unsafe_allow_html=True)
+
+                    if "between" in stage_spacers:
+                        st.markdown(get_spacer_html(stage_spacers["between"]), unsafe_allow_html=True)
 
     with tab_add:
         st.header("✍️ ניהול ניחושים")
