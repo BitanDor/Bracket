@@ -22,4 +22,4 @@ BRACKET_STRUCTURE = {
 
 ROUND_POINTS = {"R16": 1, "QF": 2, "SF": 4, "FINAL": 8}
 
-APP_TITLE = "UCL Predictor 2026"
+APP_TITLE = "Bitan's Bracket"

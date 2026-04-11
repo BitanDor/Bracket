@@ -11,12 +11,13 @@ ROUND_DICT.update({f"QF{i}": f"רבע הגמר {i}" for i in range(1, 5)})
 ROUND_DICT.update({f"SF{i}": f"חצי הגמר {i}" for i in range(1, 3)})
 ROUND_DICT["QF"] = "רבע הגמר"
 ROUND_DICT["SF"] = "חצי הגמר"
-ROUND_DICT["FINAL"] = "גמר ליגת האלופות"
+ROUND_DICT["FINAL"] = "גמר"
 
 
 def main():
     st.set_page_config(page_title=APP_TITLE, layout="wide", page_icon="🏆")
-    st.title("🏆 ליגת האלופות: משחק הניחושים של החברים")
+    competition = "UEFA Champions League 2026  🏆"
+    st.title(f"Bitan's Bracket - {competition}")
 
     all_guesses = data_manager.load_all_guesses()
     actual_results = data_manager.load_actual_results()
@@ -53,10 +54,10 @@ def main():
         st.sidebar.write("עוד אין ניחושים.")
 
     # --- טאבים בממשק הראשי ---
-    tab_tree, tab_add, tab_admin = st.tabs(["🌳 עץ הטורניר", "✍️ הוסף/עדכן ניחוש", "⚙️ עדכון תוצאות אמת"])
+    tab_tree, tab_add, tab_admin = st.tabs(["🌳 עץ הטורניר", "✍️ ניהול ניחושים", "⚙️ תוצאות אמת"])
 
     with tab_tree:
-        st.header("מבנה הטורניר")
+        st.header(" 🌳 עץ הטורניר")
         view_user = st.selectbox("בחר חבר כדי לראות את העץ שלו:", ["תוצאות אמת"] + list(all_guesses.keys()))
 
         is_actual_view = (view_user == "תוצאות אמת")
@@ -139,7 +140,7 @@ def main():
 
         # עמודת גמר
         with bracket_cols[3]:
-            st.subheader("גמר ליגת האלופות")
+            st.subheader("גמר")
             st.markdown(get_spacer_html(24), unsafe_allow_html=True)
             w_guess = current_display_guesses.get("FINAL")
             a_winner = actual_results.get("FINAL")
@@ -226,7 +227,7 @@ def main():
                     st.rerun()
 
     with tab_admin:
-        st.header("⚙️ ניהול תוצאות אמת (Admin)")
+        st.header("⚙️ תוצאות אמת (Admin)")
         st.write("עדכן כאן את הקבוצות שבאמת ניצחו במציאות:")
         updated_actual = actual_results.copy()
         for m_id in list(TEAMS.keys()) + list(BRACKET_STRUCTURE.keys()):
@@ -237,7 +238,7 @@ def main():
                 choice = st.selectbox(f"המנצחת האמיתית ב{ROUND_DICT[m_id]}:", options,
                                       index=options.index(current_val) if current_val in options else 0)
                 if choice != "טרם נקבע": updated_actual[m_id] = choice
-        if st.button("עדכן תוצאות אמת"): data_manager.save_actual_results(updated_actual); st.success(
+        if st.button("תוצאות אמת"): data_manager.save_actual_results(updated_actual); st.success(
             "התוצאות עודכנו! כל הניקוד חושב מחדש."); st.rerun()
         st.write("---");
         st.subheader("⚠️ אזור מסוכן")
