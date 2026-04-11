@@ -54,7 +54,7 @@ def main():
 
     with tab_tree:
         st.header(" 🌳 עץ הטורניר")
-        view_user = st.selectbox("בחר חבר כדי לראות את העץ שלו:", ["תוצאות אמת"] + list(all_guesses.keys()))
+        view_user = st.selectbox("בחר משתתף כדי לראות את העץ שלו:", ["תוצאות אמת"] + list(all_guesses.keys()))
 
         is_actual_view = (view_user == "תוצאות אמת")
         raw_user_obj = {} if is_actual_view else all_guesses.get(view_user, {})
@@ -106,17 +106,30 @@ def main():
     {match_html}
     </div>"""
 
+        # --- בדיקה האם יש שלב פליי-אין להפרדה ---
+        has_play_in = config.STAGES[0] == "PLAY_IN"
 
-        bracket_cols = st.columns(config.UI_CONFIG["columns_width"], gap="medium")
+        # קביעת השלבים שיוצגו בעץ המרכזי
+        if has_play_in:
+            main_stages = config.STAGES[1:]
+            start_idx = 1
+        else:
+            main_stages = config.STAGES
+            start_idx = 0
 
-        for idx, stage_key in enumerate(config.STAGES):
-            with bracket_cols[idx]:
+        main_cols_width = config.UI_CONFIG["columns_width"][start_idx:]
+        bracket_cols = st.columns(main_cols_width, gap="medium")
+
+        # --- חלק א': עץ הטורניר המרכזי ---
+        for idx, stage_key in enumerate(main_stages, start=start_idx):
+            with bracket_cols[idx - start_idx]:
                 st.subheader(config.ROUND_DICT.get(stage_key, stage_key))
 
                 stage_spacers = config.UI_CONFIG["spacers"].get(stage_key, {})
                 if "top" in stage_spacers:
                     st.markdown(get_spacer_html(stage_spacers["top"]), unsafe_allow_html=True)
 
+                # החלטה מאיפה למשוך את המשחקים (TEAMS לשלב הראשון בעץ, BRACKET לשאר)
                 if idx == 0:
                     matches_in_stage = list(config.TEAMS.keys())
                 else:
@@ -126,19 +139,36 @@ def main():
                     w_guess = current_display_guesses.get(m_id)
                     a_winner = actual_results.get(m_id)
 
-                    # קריאה לפונקציה עם 7 פרמטרים בדיוק
                     st.markdown(get_match_box_html(
-                        m_id,
-                        w_guess,
-                        eliminated_teams,
-                        a_winner,
-                        is_actual_view,
-                        raw_user_obj,
-                        config
+                        m_id, w_guess, eliminated_teams, a_winner,
+                        is_actual_view, raw_user_obj, config
                     ), unsafe_allow_html=True)
 
                     if "between" in stage_spacers:
                         st.markdown(get_spacer_html(stage_spacers["between"]), unsafe_allow_html=True)
+
+        # --- חלק ב': אזור ה-Play-In (יוצג רק אם קיים ורק למטה) ---
+        if has_play_in:
+            st.write("---")
+            st.header(f"🏀 משחקי ה-{config.ROUND_DICT.get('PLAY_IN', 'Play-In')}")
+
+            play_in_matches = list(config.TEAMS.keys())
+            play_in_finals = [m for m in config.BRACKET_STRUCTURE if m.startswith("PLAY_IN")]
+            all_play_in = play_in_matches + play_in_finals
+
+            pi_cols = st.columns(len(all_play_in))
+            for pi_idx, m_id in enumerate(all_play_in):
+                with pi_cols[pi_idx]:
+                    w_guess = current_display_guesses.get(m_id)
+                    a_winner = actual_results.get(m_id)
+                    st.caption(config.ROUND_DICT.get(m_id, m_id))
+                    st.markdown(get_match_box_html(
+                        m_id, w_guess, eliminated_teams, a_winner,
+                        is_actual_view, raw_user_obj, config
+                    ), unsafe_allow_html=True)
+
+        # --- הפרדה ויזואלית ---
+        st.write("---")
 
     with tab_add:
         st.header("✍️ ניהול ניחושים")

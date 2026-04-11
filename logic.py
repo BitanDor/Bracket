@@ -21,15 +21,39 @@ def get_guess_info(user_obj, m_id, config):
 
 
 def get_participant_teams(match_id, effective_guesses, actual_results, config):
+    """קובעת מי משחק בכל משחק. תומכת במנצחות (W_) ובמפסידות (L_)"""
     base_stage = config.STAGES[0]
     if match_id.startswith(base_stage):
         return config.TEAMS.get(match_id, ["TBD", "TBD"])
 
-    parent_matches = config.BRACKET_STRUCTURE.get(match_id, [])
+    parent_ids = config.BRACKET_STRUCTURE.get(match_id, [])
     participants = []
-    for parent_id in parent_matches:
-        winner = actual_results.get(parent_id) or effective_guesses.get(parent_id)
-        participants.append(winner if winner else "TBD")
+
+    for p_id in parent_ids:
+        target_match = p_id
+        want_loser = False
+
+        # תמיכה בלוגיקת מפסידה (למשל עבור פליי-אין ב-NBA)
+        if p_id.startswith("L_"):
+            target_match = p_id[2:]  # מסיר את ה-_L
+            want_loser = True
+        elif p_id.startswith("W_"):
+            target_match = p_id[2:]  # מסיר את ה-_W (אופציונלי לבהירות)
+
+        winner = actual_results.get(target_match) or effective_guesses.get(target_match)
+
+        if not winner or winner == "TBD":
+            participants.append("TBD")
+        elif not want_loser:
+            participants.append(winner)
+        else:
+            teams_in_target = get_participant_teams(target_match, effective_guesses, actual_results, config)
+            if "TBD" in teams_in_target:
+                participants.append("TBD")
+            else:
+                loser = [t for t in teams_in_target if t != winner]
+                participants.append(loser[0] if loser else "TBD")
+
     return participants
 
 
