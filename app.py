@@ -1,45 +1,41 @@
 # app.py
 import streamlit as st
 import pandas as pd
-from constants import TEAMS, BRACKET_STRUCTURE, APP_TITLE
 import logic
 import data_manager
-import os
+from tournaments import ucl_2026_config
 
-ROUND_DICT = {f"R16_M{i}": f"שמינית הגמר {i}" for i in range(1, 9)}
-ROUND_DICT.update({f"QF{i}": f"רבע הגמר {i}" for i in range(1, 5)})
-ROUND_DICT.update({f"SF{i}": f"חצי הגמר {i}" for i in range(1, 3)})
-ROUND_DICT["QF"] = "רבע הגמר"
-ROUND_DICT["SF"] = "חצי הגמר"
-ROUND_DICT["FINAL"] = "גמר"
+# כאן נוסיף תחרויות עתידיות למילון (למשל ה-NBA)
+AVAILABLE_TOURNAMENTS = {
+    ucl_2026_config.ID: ucl_2026_config
+}
 
 
 def main():
-    st.set_page_config(page_title=APP_TITLE, layout="wide", page_icon="🏆")
-    competition = "UEFA Champions League 2026  🏆"
-    st.title(f"Bitan's Bracket - {competition}")
+    st.set_page_config(page_title="Bitan's Bracket", layout="wide", page_icon="🏆")
 
-    all_guesses = data_manager.load_all_guesses()
-    actual_results = data_manager.load_actual_results()
+    # תפריט בחירת תחרות (ממוקם למעלה)
+    col1, col2 = st.columns([1, 4])
+    with col1:
+        comp_id = st.selectbox("בחר תחרות:", list(AVAILABLE_TOURNAMENTS.keys()),
+                               format_func=lambda x: AVAILABLE_TOURNAMENTS[x].NAME)
+
+    config = AVAILABLE_TOURNAMENTS[comp_id]
+    st.title(f"Bitan's Bracket - {config.NAME} 🏆")
+
+    # טעינת נתונים לתחרות הנבחרת
+    all_guesses = data_manager.load_all_guesses(comp_id)
+    actual_results = data_manager.load_actual_results(comp_id)
 
     # --- sidebar: טבלת ניקוד ---
     st.sidebar.header("📊 טבלת ניקוד")
-
-    TEAM_FLAGS = {
-        "Paris Saint-Germain": "🇫🇷", "Chelsea": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Galatasaray": "🇹🇷",
-        "Liverpool": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "Real Madrid": "🇪🇸", "Manchester City": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-        "Atalanta": "🇮🇹", "Bayern Munich": "🇩🇪", "Newcastle": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-        "Barcelona": "🇪🇸", "Atlético Madrid": "🇪🇸", "Tottenham": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-        "Bodø/Glimt": "🇳🇴", "Sporting CP": "🇵🇹", "Bayer Leverkusen": "🇩🇪", "Arsenal": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
-    }
-
     leaderboard_data = []
     for user, user_obj in all_guesses.items():
-        score, _ = logic.calculate_score(user_obj, actual_results)
-        effective_guesses = logic.get_effective_guesses(user_obj)
+        score, _ = logic.calculate_score(user_obj, actual_results, config)
+        effective_guesses = logic.get_effective_guesses(user_obj, config)
 
         predicted_winner = effective_guesses.get("FINAL", "TBD")
-        flag = TEAM_FLAGS.get(predicted_winner, "")
+        flag = config.TEAM_FLAGS.get(predicted_winner, "")
         winner_display = f"{flag} {predicted_winner}" if predicted_winner != "TBD" else "TBD"
 
         leaderboard_data.append({"שם": user, "זוכה": winner_display, "נקודות": score})
@@ -62,29 +58,29 @@ def main():
 
         is_actual_view = (view_user == "תוצאות אמת")
         raw_user_obj = {} if is_actual_view else all_guesses.get(view_user, {})
-        current_display_guesses = actual_results if is_actual_view else logic.get_effective_guesses(raw_user_obj)
+        current_display_guesses = actual_results if is_actual_view else logic.get_effective_guesses(raw_user_obj,
+                                                                                                    config)
 
-        eliminated_teams = logic.get_eliminated_teams(actual_results)
+        eliminated_teams = logic.get_eliminated_teams(actual_results, config)
 
         def format_team(team_name, is_winner_node):
             if team_name == "TBD": return "<i>TBD</i>"
-            flag = TEAM_FLAGS.get(team_name, "")
+            flag = config.TEAM_FLAGS.get(team_name, "")
             prefix_icon = " 🌟" if team_name == is_winner_node else ""
             style = "font-weight: bold;" if team_name == is_winner_node else ""
             return f"<span style='{style}'>{flag} {team_name}{prefix_icon}</span>"
 
         def get_match_box_html(m_id, winner_node, user_eliminated_node, actual_w_node):
-            participants = logic.get_participant_teams(m_id, current_display_guesses, actual_results)
+            participants = logic.get_participant_teams(m_id, current_display_guesses, actual_results, config)
             team_a, team_b = participants[0], participants[1]
             match_html = f"<div style='line-height: 1.1;'><br>{format_team(team_a, winner_node)}<br><small>vs</small><br>{format_team(team_b, winner_node)}</div>"
 
-            # בדיקת תיקון באמצעות הלוגיקה החדשה
             is_corrected = False
             if not is_actual_view:
-                _, bucket = logic.get_guess_info(raw_user_obj, m_id)
+                _, bucket = logic.get_guess_info(raw_user_obj, m_id, config)
                 if bucket != "BASE":
                     is_corrected = True
-                    original_guess = raw_user_obj.get(m_id, "???")  # מושך את ניחוש הבסיס המקורי לחלוטין
+                    original_guess = raw_user_obj.get(m_id, "???")
                     match_html += f"<div style='color: #ffaa00; font-size: 0.85em; margin-top:4px; font-weight: bold;'>⚠️ תוקן (במקור: {original_guess})</div>"
 
             bg_color, border_color, text_color = "#1976d2", "#1565c0", "white"
@@ -105,43 +101,44 @@ def main():
     {match_html}
     </div>"""
 
-        bracket_cols = st.columns([0.7, 0.7, 0.7, 1], gap="medium")
+        # שימוש במרווחים שהוגדרו ב-Config לשמירה על העיצוב
+        bracket_cols = st.columns(config.UI_CONFIG["columns_width"], gap="medium")
 
         def get_spacer_html(em_height):
             return f"<div style='height: {em_height}em;'></div>"
 
         # עמודת שמינית
         with bracket_cols[0]:
-            st.subheader("שמינית הגמר")
-            for m_id in list(TEAMS.keys()):
+            st.subheader(config.ROUND_DICT.get("R16", "שמינית"))
+            for m_id in list(config.TEAMS.keys()):
                 w_guess = current_display_guesses.get(m_id)
                 a_winner = actual_results.get(m_id)
                 st.markdown(get_match_box_html(m_id, w_guess, eliminated_teams, a_winner), unsafe_allow_html=True)
 
         # עמודת רבע
         with bracket_cols[1]:
-            st.subheader("רבע הגמר")
-            st.markdown(get_spacer_html(3.5), unsafe_allow_html=True)
-            for m_id in [m for m in BRACKET_STRUCTURE if m.startswith("QF")]:
+            st.subheader(config.ROUND_DICT.get("QF", "רבע"))
+            st.markdown(get_spacer_html(config.UI_CONFIG["spacers"]["QF"]["top"]), unsafe_allow_html=True)
+            for m_id in [m for m in config.BRACKET_STRUCTURE if m.startswith("QF")]:
                 w_guess = current_display_guesses.get(m_id)
                 a_winner = actual_results.get(m_id)
                 st.markdown(get_match_box_html(m_id, w_guess, eliminated_teams, a_winner), unsafe_allow_html=True)
-                st.markdown(get_spacer_html(7), unsafe_allow_html=True)
+                st.markdown(get_spacer_html(config.UI_CONFIG["spacers"]["QF"]["between"]), unsafe_allow_html=True)
 
         # עמודת חצי
         with bracket_cols[2]:
-            st.subheader("חצי הגמר")
-            st.markdown(get_spacer_html(10.5), unsafe_allow_html=True)
-            for m_id in [m for m in BRACKET_STRUCTURE if m.startswith("SF")]:
+            st.subheader(config.ROUND_DICT.get("SF", "חצי"))
+            st.markdown(get_spacer_html(config.UI_CONFIG["spacers"]["SF"]["top"]), unsafe_allow_html=True)
+            for m_id in [m for m in config.BRACKET_STRUCTURE if m.startswith("SF")]:
                 w_guess = current_display_guesses.get(m_id)
                 a_winner = actual_results.get(m_id)
                 st.markdown(get_match_box_html(m_id, w_guess, eliminated_teams, a_winner), unsafe_allow_html=True)
-                st.markdown(get_spacer_html(21), unsafe_allow_html=True)
+                st.markdown(get_spacer_html(config.UI_CONFIG["spacers"]["SF"]["between"]), unsafe_allow_html=True)
 
         # עמודת גמר
         with bracket_cols[3]:
-            st.subheader("גמר")
-            st.markdown(get_spacer_html(24), unsafe_allow_html=True)
+            st.subheader(config.ROUND_DICT.get("FINAL", "גמר"))
+            st.markdown(get_spacer_html(config.UI_CONFIG["spacers"]["FINAL"]["top"]), unsafe_allow_html=True)
             w_guess = current_display_guesses.get("FINAL")
             a_winner = actual_results.get("FINAL")
             st.markdown(get_match_box_html("FINAL", w_guess, eliminated_teams, a_winner), unsafe_allow_html=True)
@@ -165,87 +162,90 @@ def main():
         if user_name:
             st.write(f"### עריכת הניחוש של: **{user_name}**")
             user_obj = all_guesses.get(user_name, {})
-            effective_guesses = logic.get_effective_guesses(user_obj)
+            effective_guesses = logic.get_effective_guesses(user_obj, config)
             new_guesses = {}
 
-            st.write("---");
-            st.subheader("שלב שמינית הגמר (נעול)")
-            for m_id, participants in TEAMS.items():
+            base_stage = config.STAGES[0]
+            st.write("---")
+            st.subheader(f"שלב {config.ROUND_DICT.get(base_stage, base_stage)} (נעול)")
+            for m_id, participants in config.TEAMS.items():
                 new_guesses[m_id] = effective_guesses.get(m_id) or participants[0]
                 st.write(
-                    f"**משחק {ROUND_DICT[m_id]}:** {participants[0]} - {participants[1]} | הניחוש שלך: **{new_guesses[m_id]}** (נעול)")
+                    f"**משחק {config.ROUND_DICT.get(m_id, m_id)}:** {participants[0]} - {participants[1]} | הניחוש שלך: **{new_guesses[m_id]}** (נעול)")
 
-            eliminated_teams = logic.get_eliminated_teams(actual_results)
-            for stage in ["QF", "SF", "FINAL"]:
-                st.write("---");
-                st.subheader(f"שלב {ROUND_DICT.get(stage, stage)}")
-                for m_id in [m for m in BRACKET_STRUCTURE if m.startswith(stage)]:
-                    participants = logic.get_participant_teams(m_id, new_guesses, actual_results)
+            eliminated_teams = logic.get_eliminated_teams(actual_results, config)
+
+            for stage in config.STAGES[1:]:
+                st.write("---")
+                st.subheader(f"שלב {config.ROUND_DICT.get(stage, stage)}")
+                for m_id in [m for m in config.BRACKET_STRUCTURE if m.startswith(stage)]:
+                    participants = logic.get_participant_teams(m_id, new_guesses, actual_results, config)
                     if "TBD" not in participants:
                         if actual_results.get(m_id):
                             new_guesses[m_id] = effective_guesses.get(m_id) or participants[0]
                             st.write(
-                                f"**משחק {ROUND_DICT[m_id]}:** {participants[0]} - {participants[1]} | הניחוש שלך (נעול): **{new_guesses[m_id]}**")
+                                f"**משחק {config.ROUND_DICT.get(m_id, m_id)}:** {participants[0]} - {participants[1]} | הניחוש שלך (נעול): **{new_guesses[m_id]}**")
                         else:
                             idx = participants.index(effective_guesses.get(m_id)) if effective_guesses.get(
                                 m_id) in participants else 0
-                            new_guesses[m_id] = st.radio(f"משחק {ROUND_DICT[m_id]}: ", participants, index=idx,
+                            new_guesses[m_id] = st.radio(f"משחק {config.ROUND_DICT.get(m_id, m_id)}: ", participants,
+                                                         index=idx,
                                                          key=f"edit_{user_name}_{m_id}", format_func=lambda
                                     l: f"{l} (הודחה! ❌)" if l in eliminated_teams else l)
                             if effective_guesses.get(m_id) in eliminated_teams: st.warning(
                                 "שים לב: הניחוש הקיים הוא של קבוצה שהודחה. עליך לתקן אותו.")
                     else:
-                        st.info(f"משחק {ROUND_DICT[m_id]}: מחכה לתוצאות מהשלבים הקודמים...")
+                        st.info(f"משחק {config.ROUND_DICT.get(m_id, m_id)}: מחכה לתוצאות מהשלבים הקודמים...")
 
             if st.button("שמור עדכון ניחוש"):
                 if user_name.strip() == "":
                     st.error("חובה להזין שם!")
                 else:
-                    # זיהוי השלב הנוכחי ליצירת ההיסטוריה כפי שהצעת
-                    has_sf = any(k.startswith("SF") for k in actual_results)
-                    has_qf = any(k.startswith("QF") for k in actual_results)
-                    has_r16 = any(k.startswith("R16") for k in actual_results)
+                    # זיהוי דינמי של השלב למילון התיקונים המדויק
+                    active_bucket = "base"
+                    for stage in reversed(config.STAGES[:-1]):
+                        if any(k.startswith(stage) for k in actual_results):
+                            active_bucket = f"corrections_after_{stage}"
+                            break
 
-                    active_bucket = "corrections_after_SF" if has_sf else (
-                        "corrections_after_QF" if has_qf else ("corrections_after_R16" if has_r16 else "base"))
-
-                    # יצירת המבנה במידה ולא קיים
-                    for b in ["corrections_after_R16", "corrections_after_QF", "corrections_after_SF"]:
-                        if b not in user_obj: user_obj[b] = {}
+                    for stage in config.STAGES[:-1]:
+                        b_name = f"corrections_after_{stage}"
+                        if b_name not in user_obj: user_obj[b_name] = {}
 
                     if active_bucket == "base":
                         for m, v in new_guesses.items(): user_obj[m] = v
                     else:
-                        # שמירת הדלתא בלבד
                         for m, v in new_guesses.items():
-                            if m.startswith("R16"): continue
+                            if m.startswith(base_stage): continue
                             if effective_guesses.get(m) != v:
                                 user_obj[active_bucket][m] = v
 
-                    data_manager.save_user_guess(user_name, user_obj)
-                    st.success(f"הניחוש של {user_name} עודכן בהצלחה!");
+                    data_manager.save_user_guess(comp_id, user_name, user_obj)
+                    st.success(f"הניחוש של {user_name} עודכן בהצלחה!")
                     st.rerun()
 
     with tab_admin:
         st.header("⚙️ תוצאות אמת (Admin)")
         st.write("עדכן כאן את הקבוצות שבאמת ניצחו במציאות:")
         updated_actual = actual_results.copy()
-        for m_id in list(TEAMS.keys()) + list(BRACKET_STRUCTURE.keys()):
-            participants = logic.get_participant_teams(m_id, {}, updated_actual)
+        for m_id in list(config.TEAMS.keys()) + list(config.BRACKET_STRUCTURE.keys()):
+            participants = logic.get_participant_teams(m_id, {}, updated_actual, config)
             if "TBD" not in participants:
                 options = ["טרם נקבע"] + participants
                 current_val = updated_actual.get(m_id, "טרם נקבע")
-                choice = st.selectbox(f"המנצחת האמיתית ב{ROUND_DICT[m_id]}:", options,
+                choice = st.selectbox(f"המנצחת האמיתית ב{config.ROUND_DICT.get(m_id, m_id)}:", options,
                                       index=options.index(current_val) if current_val in options else 0)
                 if choice != "טרם נקבע": updated_actual[m_id] = choice
-        if st.button("תוצאות אמת"): data_manager.save_actual_results(updated_actual); st.success(
-            "התוצאות עודכנו! כל הניקוד חושב מחדש."); st.rerun()
-        st.write("---");
+        if st.button("תוצאות אמת"):
+            data_manager.save_actual_results(comp_id, updated_actual)
+            st.success("התוצאות עודכנו! כל הניקוד חושב מחדש.")
+            st.rerun()
+
+        st.write("---")
         st.subheader("⚠️ אזור מסוכן")
         if st.button("מחק את כל הניחושים והתוצאות (Reset)"):
-            if os.path.exists("user_guesses.json"): os.remove("user_guesses.json")
-            if os.path.exists("actual_results.json"): os.remove("actual_results.json")
-            st.warning("כל הנתונים נמחקו. המערכת תתארס עכשיו...");
+            data_manager.delete_all_data(comp_id)
+            st.warning("כל הנתונים נמחקו. המערכת תתארס עכשיו...")
             st.rerun()
 
 

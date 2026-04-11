@@ -1,12 +1,13 @@
 import json
 import os
 
-# שמות הקבצים שבהם נשמור את המידע
-GUESSES_FILE = "user_guesses.json"
-RESULTS_FILE = "actual_results.json"
+def get_file_path(competition_id, filename):
+    """מייצר נתיב לתיקיית התחרות ומוודא שהיא קיימת"""
+    dir_path = os.path.join("data", competition_id)
+    os.makedirs(dir_path, exist_ok=True)
+    return os.path.join(dir_path, filename)
 
 def _load_json(file_path, default_value):
-    """פונקציית עזר לטעינת קובץ JSON בבטחה"""
     if not os.path.exists(file_path):
         return default_value
     try:
@@ -16,34 +17,27 @@ def _load_json(file_path, default_value):
         return default_value
 
 def _save_json(file_path, data):
-    """פונקציית עזר לשמירת מידע לקובץ JSON"""
     with open(file_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
 
-def save_user_guess(user_name, guesses):
-    """
-    שומר ניחוש של משתמש.
-    אם המשתמש כבר קיים, הניחוש שלו יתעדכן.
-    """
-    all_guesses = _load_json(GUESSES_FILE, {})
+def load_all_guesses(comp_id):
+    return _load_json(get_file_path(comp_id, "user_guesses.json"), {})
+
+def save_user_guess(comp_id, user_name, guesses):
+    path = get_file_path(comp_id, "user_guesses.json")
+    all_guesses = _load_json(path, {})
     all_guesses[user_name] = guesses
-    _save_json(GUESSES_FILE, all_guesses)
+    _save_json(path, all_guesses)
 
-def load_all_guesses():
-    """טוען את כל הניחושים של כל המשתמשים"""
-    return _load_json(GUESSES_FILE, {})
+def load_actual_results(comp_id):
+    return _load_json(get_file_path(comp_id, "actual_results.json"), {})
 
-def save_actual_results(results):
-    """עדכון תוצאות האמת של הטורניר (על ידי המנהל)"""
-    _save_json(RESULTS_FILE, results)
+def save_actual_results(comp_id, results):
+    _save_json(get_file_path(comp_id, "actual_results.json"), results)
 
-def load_actual_results():
-    """טוען את תוצאות האמת המעודכנות"""
-    return _load_json(RESULTS_FILE, {})
-
-def delete_user(user_name):
-    """מחיקת משתמש מהטבלה (למקרה של טעויות בשם)"""
-    all_guesses = _load_json(GUESSES_FILE, {})
-    if user_name in all_guesses:
-        del all_guesses[user_name]
-        _save_json(GUESSES_FILE, all_guesses)
+def delete_all_data(comp_id):
+    """פונקציית עזר חדשה לאיפוס תחרות ספציפית"""
+    g_path = get_file_path(comp_id, "user_guesses.json")
+    r_path = get_file_path(comp_id, "actual_results.json")
+    if os.path.exists(g_path): os.remove(g_path)
+    if os.path.exists(r_path): os.remove(r_path)
