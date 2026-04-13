@@ -4,14 +4,14 @@ ID = "nba_2026"
 NAME = "NBA Playoffs 2026"
 STAGES = ["PLAY_IN", "R1", "CONF_SEMIS", "CONF_FINALS", "FINALS"]
 
-# שלב הבסיס: משחקי פליי-אין
+# שלב הבסיס בלבד: משחקי פליי-אין
 TEAMS = {
     # מזרח
-    "PLAY_IN_E_7vs8": ["East Team #7", "East Team #8"],
-    "PLAY_IN_E_9vs10": ["East Team #9", "East Team #10"],
+    "PLAY_IN_E_7vs8": ["Philadelphia 76ers", "Orlando Magic"],
+    "PLAY_IN_E_9vs10": ["Charlotte Hornets", "Miami Heat"],
     # מערב
-    "PLAY_IN_W_7vs8": ["West Team #7", "West Team #8"],
-    "PLAY_IN_W_9vs10": ["West Team #9", "West Team #10"]
+    "PLAY_IN_W_7vs8": ["Phoenix Suns", "Portland Trail Blazers"],
+    "PLAY_IN_W_9vs10": ["LA Clippers", "Golden State Warriors"]
 }
 
 BRACKET_STRUCTURE = {
@@ -20,24 +20,24 @@ BRACKET_STRUCTURE = {
     "PLAY_IN_W_FOR_8": ["L_PLAY_IN_W_7vs8", "PLAY_IN_W_9vs10"],
 
     # סיבוב ראשון - מזרח
-    "R1_E1": ["East Team #1", "PLAY_IN_E_FOR_8"],
-    "R1_E2": ["East Team #2", "PLAY_IN_E_7vs8"],
-    "R1_E3": ["East Team #3", "East Team #6"],
-    "R1_E4": ["East Team #4", "East Team #5"],
+    "R1_E1": ["Detroit Pistons", "PLAY_IN_E_FOR_8"],
+    "R1_E2": ["Boston Celtics", "PLAY_IN_E_7vs8"],
+    "R1_E3": ["NY Knicks", "Atlanta Hawks"],
+    "R1_E4": ["Cleveland Cavaliers", "Toronto Raptors"],
 
     # סיבוב ראשון - מערב
-    "R1_W1": ["West Team #1", "PLAY_IN_W_FOR_8"],
-    "R1_W2": ["West Team #2", "PLAY_IN_W_7vs8"],
-    "R1_W3": ["West Team #3", "West Team #6"],
-    "R1_W4": ["West Team #4", "West Team #5"],
+    "R1_W1": ["OKC Thunder", "PLAY_IN_W_FOR_8"],
+    "R1_W2": ["SA Spurs", "PLAY_IN_W_7vs8"],
+    "R1_W3": ["Denver Nuggets", "Minnesota Timberwolves"],
+    "R1_W4": ["LA Lakers", "Houston Rockets"],
 
-    # חצי גמר אזורי (Conference Semis)
+    # חצי גמר אזורי
     "CONF_SEMIS_E1": ["R1_E1", "R1_E4"],
     "CONF_SEMIS_E2": ["R1_E2", "R1_E3"],
     "CONF_SEMIS_W1": ["R1_W1", "R1_W4"],
     "CONF_SEMIS_W2": ["R1_W2", "R1_W3"],
 
-    # גמר אזורי (Conference Finals)
+    # גמר אזורי
     "CONF_FINALS_E": ["CONF_SEMIS_E1", "CONF_SEMIS_E2"],
     "CONF_FINALS_W": ["CONF_SEMIS_W1", "CONF_SEMIS_W2"],
 
@@ -52,6 +52,7 @@ ROUND_DICT = {
     "PLAY_IN_W_7vs8": "מערב: קרב על סיד 7", "PLAY_IN_W_FOR_8": "מערב: קרב על סיד 8"
 }
 
+# (שאר הקובץ ללא שינוי...)
 POINTS_MAP = {
     "FINALS": {"BASE": 16, "PLAY_IN": 8, "R1": 4, "CONF_SEMIS": 2, "CONF_FINALS": 1},
     "CONF_FINALS": {"BASE": 8, "PLAY_IN": 4, "R1": 2, "CONF_SEMIS": 1},
@@ -60,15 +61,15 @@ POINTS_MAP = {
     "PLAY_IN": {"BASE": 1}
 }
 
-TEAM_FLAGS = {} # ניתן להוסיף לוגואים של קבוצות NBA כאן
+TEAM_FLAGS = {}
 
 UI_CONFIG = {
     "columns_width": [0.8, 0.8, 0.8, 0.8, 1],
     "spacers": {
         "PLAY_IN": {"top": 0, "between": 3},
         "R1": {"top": 1.5, "between": 3},
-        "CONF_SEMIS": {"top": 5.5, "between": 11},
-        "CONF_FINALS": {"top": 12, "between": 24},
-        "FINALS": {"top": 28}
+        "CONF_SEMIS": {"top": 6.5, "between": 12.5},
+        "CONF_FINALS": {"top": 15, "between": 32},
+        "FINALS": {"top": 36}
     }
 }
