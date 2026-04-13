@@ -76,18 +76,25 @@ def calculate_score(user_obj, actual_results, config):
 
     for m_id in all_matches:
         actual_winner = actual_results.get(m_id)
-        if not actual_winner: continue
-
+        if not actual_winner or actual_winner == "טרם נקבע":
+            continue
         guess_val, bucket = get_guess_info(user_obj, m_id, config)
-
         if guess_val == actual_winner:
-            match_type = m_id.split('_')[0] if '_' in m_id else m_id
-            for stage in config.STAGES:
-                if stage in match_type: match_type = stage
+            match_type = None
+            for stage in reversed(config.STAGES):
+                if stage in m_id:
+                    match_type = stage
+                    break
+            if not match_type:
+                if "FINAL" in config.STAGES:
+                    match_type = "FINAL"
+                elif "FINALS" in config.STAGES:
+                    match_type = "FINALS"
 
-            points = config.POINTS_MAP.get(match_type, {}).get(bucket, 0)
-            total_score += points
-            breakdown[m_id] = points
+            if match_type:
+                points = config.POINTS_MAP.get(match_type, {}).get(bucket, 0)
+                total_score += points
+                breakdown[m_id] = points
 
     return total_score, breakdown
 

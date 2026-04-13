@@ -177,73 +177,102 @@ def main():
 
         if tournament_started:
             st.warning("הטורניר כבר התחיל! לא ניתן להוסיף משתתפים חדשים. ניתן רק לעדכן ניחושים קיימים.")
-            user_name = st.selectbox("בחר משתתף לעדכון:", all_users) if all_users else None
+            user_name = st.selectbox("בחר משתתף לעדכון:", all_users, key="user_select_update") if all_users else None
         else:
-            mode = st.radio("בחר פעולה:", ["משתתף חדש", "עדכון משתתף קיים"])
+            mode = st.radio("בחר פעולה:", ["משתתף חדש", "עדכון משתתף קיים"], key="mode_radio")
             if mode == "משתתף חדש":
-                user_name = st.text_input("הכנס שם משתתף חדש:")
-                if user_name in all_users: st.error("השם כבר קיים."); user_name = None
+                user_name = st.text_input("הכנס שם משתתף חדש:", key="new_user_input")
+                if user_name in all_users:
+                    st.error("השם כבר קיים.")
+                    user_name = None
             else:
-                user_name = st.selectbox("בחר משתתף לעדכון:", all_users)
+                user_name = st.selectbox("בחר משתתף לעדכון:", all_users, key="user_select_edit")
 
         if user_name:
             st.write(f"### עריכת הניחוש של: **{user_name}**")
             user_obj = all_guesses.get(user_name, {})
+            # טעינת הניחושים התקפים כרגע כבסיס לעריכה
             effective_guesses = logic.get_effective_guesses(user_obj, config)
             new_guesses = {}
 
-            base_stage = config.STAGES[0]
-            st.write("---")
-            st.subheader(f"שלב {config.ROUND_DICT.get(base_stage, base_stage)} (נעול)")
-            for m_id, participants in config.TEAMS.items():
-                new_guesses[m_id] = effective_guesses.get(m_id) or participants[0]
-                st.write(
-                    f"**משחק {config.ROUND_DICT.get(m_id, m_id)}:** {participants[0]} - {participants[1]} | הניחוש שלך: **{new_guesses[m_id]}** (נעול)")
-
             eliminated_teams = logic.get_eliminated_teams(actual_results, config)
 
-            for stage in config.STAGES[1:]:
+            # מעבר על כל השלבים בטורניר לפי הסדר
+            for idx, stage in enumerate(config.STAGES):
                 st.write("---")
                 st.subheader(f"שלב {config.ROUND_DICT.get(stage, stage)}")
-                for m_id in [m for m in config.BRACKET_STRUCTURE if m.startswith(stage)]:
-                    participants = logic.get_participant_teams(m_id, new_guesses, actual_results, config)
-                    if "TBD" not in participants:
-                        if actual_results.get(m_id):
-                            new_guesses[m_id] = effective_guesses.get(m_id) or participants[0]
-                            st.write(
-                                f"**משחק {config.ROUND_DICT.get(m_id, m_id)}:** {participants[0]} - {participants[1]} | הניחוש שלך (נעול): **{new_guesses[m_id]}**")
-                        else:
-                            idx = participants.index(effective_guesses.get(m_id)) if effective_guesses.get(
-                                m_id) in participants else 0
-                            new_guesses[m_id] = st.radio(f"משחק {config.ROUND_DICT.get(m_id, m_id)}: ", participants,
-                                                         index=idx,
-                                                         key=f"edit_{user_name}_{m_id}", format_func=lambda
-                                    l: f"{l} (הודחה! ❌)" if l in eliminated_teams else l)
-                            if effective_guesses.get(m_id) in eliminated_teams: st.warning(
-                                "שים לב: הניחוש הקיים הוא של קבוצה שהודחה. עליך לתקן אותו.")
-                    else:
-                        st.info(f"משחק {config.ROUND_DICT.get(m_id, m_id)}: מחכה לתוצאות מהשלבים הקודמים...")
 
-            if st.button("שמור עדכון ניחוש"):
+                # מציאת כל המשחקים השייכים לשלב הזה
+                if idx == 0:
+                    # בשלב הראשון לוקחים את המשחקים מ-TEAMS
+                    stage_matches = list(config.TEAMS.keys())
+                else:
+                    # בשלבים הבאים לוקחים מתוך ה-BRACKET_STRUCTURE
+                    stage_matches = [m for m in config.BRACKET_STRUCTURE if m.startswith(stage)]
+
+                # ב-NBA, משחקי הפליי-אין על סיד 8 נמצאים ב-BRACKET (כי הם תלויים במשחקים קודמים)
+                # אז אם אנחנו בשלב הפליי-אין, נוסיף גם אותם
+                if stage == "PLAY_IN" and idx == 0:
+                    stage_matches += [m for m in config.BRACKET_STRUCTURE if m.startswith("PLAY_IN")]
+
+                for m_id in stage_matches:
+                    participants = logic.get_participant_teams(m_id, new_guesses, actual_results, config)
+
+                    # הצגת המשחק רק אם יש משתתפים (לא TBD)
+                    if "TBD" not in participants:
+                        actual_winner = actual_results.get(m_id)
+                        current_guess = effective_guesses.get(m_id)
+
+                        # אם יש תוצאת אמת - השדה נעול
+                        if actual_winner:
+                            new_guesses[m_id] = current_guess if current_guess else actual_winner
+                            st.write(
+                                f"**{config.ROUND_DICT.get(m_id, m_id)}:** {participants[0]} vs {participants[1]} | תוצאת אמת: **{actual_winner}** (נעול)")
+                        else:
+                            # בחירת מנצחת - כאן התיקון! השתמשנו ב-st.radio במקום st.write
+                            default_idx = participants.index(current_guess) if current_guess in participants else 0
+
+                            label = config.ROUND_DICT.get(m_id, f"משחק {m_id}")
+                            new_guesses[m_id] = st.radio(
+                                f"בחרו מנצחת - {label}:",
+                                participants,
+                                index=default_idx,
+                                key=f"radio_{user_name}_{m_id}",
+                                format_func=lambda l: f"{l} (הודחה! ❌)" if l in eliminated_teams else l
+                            )
+
+                            if current_guess in eliminated_teams:
+                                st.warning(
+                                    f"שים לב: הקבוצה שבחרת ({current_guess}) הודחה מהטורניר במציאות. עליך לתקן את הניחוש.")
+                    else:
+                        st.info(f"**{config.ROUND_DICT.get(m_id, m_id)}:** מחכה לתוצאות מהשלבים הקודמים...")
+
+            if st.button("שמור עדכון ניחוש", key="save_guesses_btn"):
                 if user_name.strip() == "":
                     st.error("חובה להזין שם!")
                 else:
-                    # זיהוי דינמי של השלב למילון התיקונים המדויק
+                    # לוגיקת ה-Buckets (תיקונים)
                     active_bucket = "base"
                     for stage in reversed(config.STAGES[:-1]):
                         if any(k.startswith(stage) for k in actual_results):
                             active_bucket = f"corrections_after_{stage}"
                             break
 
+                    # יצירת מילוני התיקונים אם אינם קיימים
                     for stage in config.STAGES[:-1]:
                         b_name = f"corrections_after_{stage}"
                         if b_name not in user_obj: user_obj[b_name] = {}
 
                     if active_bucket == "base":
-                        for m, v in new_guesses.items(): user_obj[m] = v
-                    else:
+                        # בשלב הבסיס פשוט דורסים את הערכים בשורש האובייקט
                         for m, v in new_guesses.items():
-                            if m.startswith(base_stage): continue
+                            user_obj[m] = v
+                    else:
+                        # אם הטורניר התחיל, שומרים רק שינויים בתוך ה-Bucket המתאים
+                        for m, v in new_guesses.items():
+                            # שלב הבסיס המוחלט (למשל פליי-אין) תמיד נעול לתיקונים לאחר שהתחיל
+                            if m in config.TEAMS: continue
+
                             if effective_guesses.get(m) != v:
                                 user_obj[active_bucket][m] = v
 
