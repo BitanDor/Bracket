@@ -1,3 +1,5 @@
+# TO EXECUTE: streamlit run app.py
+
 import json
 import os
 

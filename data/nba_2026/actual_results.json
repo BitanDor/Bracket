@@ -1,23 +1,6 @@
 {
-    "PLAY_IN_1_E_7vs8": "Philadelphia 76ers",
-    "PLAY_IN_1_E_9vs10": "Miami Heat",
+    "PLAY_IN_1_E_7vs8": "Orlando Magic",
+    "PLAY_IN_1_E_9vs10": "Charlotte Hornets",
     "PLAY_IN_1_W_7vs8": "Portland Trail Blazers",
-    "PLAY_IN_1_W_9vs10": "LA Clippers",
-    "PLAY_IN_2_E_FOR_8": "Miami Heat",
-    "PLAY_IN_2_W_FOR_8": "LA Clippers",
-    "R1_E1": "Miami Heat",
-    "R1_E2": "Philadelphia 76ers",
-    "R1_E3": "NY Knicks",
-    "R1_E4": "Cleveland Cavaliers",
-    "R1_W1": "OKC Thunder",
-    "R1_W2": "SA Spurs",
-    "R1_W3": "Denver Nuggets",
-    "R1_W4": "LA Lakers",
-    "CONF_SEMIS_E1": "Miami Heat",
-    "CONF_SEMIS_E2": "NY Knicks",
-    "CONF_SEMIS_W1": "OKC Thunder",
-    "CONF_SEMIS_W2": "SA Spurs",
-    "CONF_FINALS_E": "Miami Heat",
-    "CONF_FINALS_W": "OKC Thunder",
-    "FINALS": "OKC Thunder"
+    "PLAY_IN_1_W_9vs10": "LA Clippers"
 }

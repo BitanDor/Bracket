@@ -50,17 +50,19 @@ ROUND_DICT = {
     "CONF_FINALS": "גמר אזורי",
     "FINALS": "גמר ה-NBA",
     "PLAY_IN_1_E_7vs8": "מזרח: קרב על סיד 7",
-    "PLAY_IN_2_E_FOR_8": "מזרח: קרב על סיד 8",
+    "PLAY_IN_1_E_9vs10": "מזרח: 9 נגד 10",
     "PLAY_IN_1_W_7vs8": "מערב: קרב על סיד 7",
+    "PLAY_IN_1_W_9vs10": "מערב: 9 נגד 10",
+    "PLAY_IN_2_E_FOR_8": "מזרח: קרב על סיד 8",
     "PLAY_IN_2_W_FOR_8": "מערב: קרב על סיד 8"
 }
 
 POINTS_MAP = {
-    "FINALS":      {"BASE": 32, "PLAY_IN_1": 16, "PLAY_IN_2": 8, "R1": 4, "CONF_SEMIS": 2, "CONF_FINALS": 1},
-    "CONF_FINALS": {"BASE": 16, "PLAY_IN_1": 8,  "PLAY_IN_2": 4, "R1": 2, "CONF_SEMIS": 1},
-    "CONF_SEMIS":  {"BASE": 8, "PLAY_IN_1": 4,   "PLAY_IN_2": 2, "R1": 1},
-    "R1":          {"BASE": 4, "PLAY_IN_1": 2,   "PLAY_IN_2": 1},
-    "PLAY_IN_2":   {"BASE": 2, "PLAY_IN_1": 1},
+    "FINALS":      {"BASE": 16, "PLAY_IN_1": 8, "PLAY_IN_2": 8, "R1": 4, "CONF_SEMIS": 2, "CONF_FINALS": 1},
+    "CONF_FINALS": {"BASE": 8, "PLAY_IN_1": 4,  "PLAY_IN_2": 4, "R1": 2, "CONF_SEMIS": 1},
+    "CONF_SEMIS":  {"BASE": 4, "PLAY_IN_1": 2,   "PLAY_IN_2": 2, "R1": 1},
+    "R1":          {"BASE": 2, "PLAY_IN_1": 1,   "PLAY_IN_2": 1},
+    "PLAY_IN_2":   {"BASE": 1, "PLAY_IN_1": 1},
     "PLAY_IN_1":   {"BASE": 1}
 }
 
