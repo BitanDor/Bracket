@@ -61,7 +61,31 @@ POINTS_MAP = {
     "PLAY_IN": {"BASE": 1}
 }
 
-TEAM_FLAGS = {}
+TEAM_FLAGS = {
+    # מזרח
+    "Philadelphia 76ers": "🔔",
+    "Orlando Magic": "🪄",
+    "Charlotte Hornets": "🐝",
+    "Miami Heat": "🔥",
+    "Detroit Pistons": "⚙️",
+    "Boston Celtics": "🍀",
+    "NY Knicks": "🗽",
+    "Atlanta Hawks": "🦅",
+    "Cleveland Cavaliers": "⚔️",
+    "Toronto Raptors": "🦖",
+
+    # מערב
+    "Phoenix Suns": "☀️",
+    "Portland Trail Blazers": "🌲",
+    "LA Clippers": "⛵",
+    "Golden State Warriors": "🌉",
+    "OKC Thunder": "⚡",
+    "SA Spurs": "🤠",
+    "Denver Nuggets": "⛏️",
+    "Minnesota Timberwolves": "🐺",
+    "LA Lakers": "🟣🟡",
+    "Houston Rockets": "🚀"
+}
 
 UI_CONFIG = {
     "columns_width": [0.8, 0.8, 0.8, 0.8, 1],
