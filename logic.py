@@ -79,6 +79,10 @@ def calculate_score(user_obj, actual_results, config):
 
 
 def get_participant_teams(match_id, effective_guesses, actual_results, config):
+    """
+    קובעת מי משתתף במשחק.
+    מבצעת בדיקה רקורסיבית כדי לוודא שקבוצות "מנצחות" אכן יכלו להשתתף בשלב זה.
+    """
     if match_id in config.TEAMS:
         return config.TEAMS[match_id]
 
@@ -95,24 +99,33 @@ def get_participant_teams(match_id, effective_guesses, actual_results, config):
                 target_match = p_id[2:]
 
             if target_match in config.TEAMS or target_match in config.BRACKET_STRUCTURE:
+                # 1. עדיפות לתוצאת אמת
                 res_actual = actual_results.get(target_match)
                 if res_actual and res_actual != NOT_DETERMINED:
                     winner = res_actual
                 else:
+                    # 2. אם אין תוצאה, לוקחים את הניחוש
                     winner = effective_guesses.get(target_match)
 
+                # --- התיקון הקריטי: אימות המנצחת מול משתתפי המשחק הקודם ---
                 if not winner or winner == NOT_DETERMINED:
                     participants.append(NOT_DETERMINED)
-                elif not want_loser:
-                    participants.append(winner)
                 else:
-                    p_teams = get_participant_teams(target_match, effective_guesses, actual_results, config)
-                    if NOT_DETERMINED in p_teams:
-                        participants.append(NOT_DETERMINED)
+                    # בדיקה רקורסיבית: האם הקבוצה הזו בכלל יכלה להשתתף במשחק הקודם?
+                    parent_participants = get_participant_teams(target_match, effective_guesses, actual_results, config)
+
+                    if winner in parent_participants:
+                        # אם הקבוצה חוקית, היא ממשיכה הלאה (או המפסידה שלה)
+                        if not want_loser:
+                            participants.append(winner)
+                        else:
+                            loser = [t for t in parent_participants if t != winner]
+                            participants.append(loser[0] if loser else NOT_DETERMINED)
                     else:
-                        loser = [t for t in p_teams if t != winner]
-                        participants.append(loser[0] if loser else NOT_DETERMINED)
+                        # אם הקבוצה לא חוקית (הודחה קודם), המשבצת הופכת ל-TBD
+                        participants.append(NOT_DETERMINED)
             else:
+                # שם קבוצה קבוע (למשל סיד 1)
                 participants.append(p_id)
         return participants
     return [NOT_DETERMINED, NOT_DETERMINED]
