@@ -1,0 +1,80 @@
+{
+    "בדיקה1": {
+        "corrections_after_PLAY_IN_1": {
+            "PLAY_IN_2_W_FOR_8": "LA Clippers"
+        },
+        "corrections_after_PLAY_IN_2": {},
+        "corrections_after_R1": {
+            "CONF_SEMIS_E1": "Cleveland Cavaliers",
+            "CONF_SEMIS_E2": "NY Knicks",
+            "CONF_SEMIS_W2": "Denver Nuggets",
+            "CONF_FINALS_E": "NY Knicks",
+            "CONF_FINALS_W": "Denver Nuggets",
+            "FINALS": "Denver Nuggets"
+        },
+        "corrections_after_CONF_SEMIS": {
+            "CONF_FINALS_W": "OKC Thunder",
+            "FINALS": "OKC Thunder"
+        },
+        "corrections_after_CONF_FINALS": {},
+        "PLAY_IN_1_E_7vs8": "Philadelphia 76ers",
+        "PLAY_IN_1_E_9vs10": "Miami Heat",
+        "PLAY_IN_1_W_7vs8": "Portland Trail Blazers",
+        "PLAY_IN_1_W_9vs10": "Golden State Warriors",
+        "PLAY_IN_2_E_FOR_8": "Miami Heat",
+        "PLAY_IN_2_W_FOR_8": "Golden State Warriors",
+        "R1_E1": "Detroit Pistons",
+        "R1_E2": "Boston Celtics",
+        "R1_E3": "Atlanta Hawks",
+        "R1_E4": "Cleveland Cavaliers",
+        "R1_W1": "OKC Thunder",
+        "R1_W2": "Portland Trail Blazers",
+        "R1_W3": "Minnesota Timberwolves",
+        "R1_W4": "LA Lakers",
+        "CONF_SEMIS_E1": "Detroit Pistons",
+        "CONF_SEMIS_E2": "Boston Celtics",
+        "CONF_SEMIS_W1": "LA Lakers",
+        "CONF_SEMIS_W2": "Portland Trail Blazers",
+        "CONF_FINALS_E": "Detroit Pistons",
+        "CONF_FINALS_W": "Portland Trail Blazers",
+        "FINALS": "Portland Trail Blazers"
+    },
+    "בדיקה2": {
+        "corrections_after_PLAY_IN_1": {
+            "PLAY_IN_2_E_FOR_8": "Miami Heat",
+            "PLAY_IN_2_W_FOR_8": "LA Clippers",
+            "R1_W1": "OKC Thunder",
+            "CONF_SEMIS_W1": "OKC Thunder",
+            "CONF_FINALS_W": "OKC Thunder"
+        },
+        "corrections_after_PLAY_IN_2": {},
+        "corrections_after_R1": {
+            "CONF_SEMIS_E1": "Cleveland Cavaliers"
+        },
+        "corrections_after_CONF_SEMIS": {},
+        "corrections_after_CONF_FINALS": {
+            "FINALS": "Miami Heat"
+        },
+        "PLAY_IN_1_E_7vs8": "Philadelphia 76ers",
+        "PLAY_IN_1_E_9vs10": "Charlotte Hornets",
+        "PLAY_IN_1_W_7vs8": "Phoenix Suns",
+        "PLAY_IN_1_W_9vs10": "LA Clippers",
+        "PLAY_IN_2_E_FOR_8": "Orlando Magic",
+        "PLAY_IN_2_W_FOR_8": "Portland Trail Blazers",
+        "R1_E1": "Detroit Pistons",
+        "R1_E2": "Boston Celtics",
+        "R1_E3": "NY Knicks",
+        "R1_E4": "Cleveland Cavaliers",
+        "R1_W1": "Portland Trail Blazers",
+        "R1_W2": "SA Spurs",
+        "R1_W3": "Denver Nuggets",
+        "R1_W4": "LA Lakers",
+        "CONF_SEMIS_E1": "Detroit Pistons",
+        "CONF_SEMIS_E2": "NY Knicks",
+        "CONF_SEMIS_W1": "Portland Trail Blazers",
+        "CONF_SEMIS_W2": "SA Spurs",
+        "CONF_FINALS_E": "NY Knicks",
+        "CONF_FINALS_W": "Portland Trail Blazers",
+        "FINALS": "NY Knicks"
+    }
+}
