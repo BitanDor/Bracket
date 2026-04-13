@@ -18,7 +18,7 @@ def render_add_tab(all_guesses, actual_results, config, comp_id):
     if user_name:
         user_obj = all_guesses.get(user_name, {})
         effective_guesses = logic.get_effective_guesses(user_obj, config)
-        new_guesses = {}
+        new_guesses = effective_guesses.copy()
 
         for idx, stage in enumerate(config.STAGES):
             st.write("---")
@@ -28,32 +28,31 @@ def render_add_tab(all_guesses, actual_results, config, comp_id):
                                                                         m.startswith(stage)]
 
             for m_id in stage_matches:
+                actual_winner = actual_results.get(m_id)
+                current_guess = effective_guesses.get(m_id)
+
+                # 1. בדיקה ראשונה: האם המשחק כבר הוכרע ע"י האדמין?
+                if actual_winner and actual_winner != logic.NOT_DETERMINED:
+                    new_guesses[m_id] = current_guess or actual_winner
+                    guess_info = f" (Your guess: {current_guess})" if current_guess else ""
+                    st.write(f"**{config.ROUND_DICT.get(m_id, m_id)}:** True result: **{actual_winner}**{guess_info} 🔒")
+                    continue
+
+                # 2. אם לא הוכרע, מחשבים מי המשתתפים לפי הניחושים של המשתמש
                 participants = logic.get_participant_teams(m_id, new_guesses, actual_results, config)
 
                 if logic.NOT_DETERMINED not in participants:
-                    current_guess = effective_guesses.get(m_id)
-                    actual_winner = actual_results.get(m_id)
+                    # בדיקת היתכנות הניחוש הקיים
+                    if current_guess and current_guess != logic.NOT_DETERMINED and current_guess not in participants:
+                        st.error(
+                            f"⚠️ **Fix required:** You guessed**{current_guess}** wins, but the game is between **{participants[0]}**  and **{participants[1]}**.")
 
-                    # 1. טיפול במשחק סגור (עם תוצאת אמת)
-                    if actual_winner and actual_winner != logic.NOT_DETERMINED:
-                        new_guesses[m_id] = current_guess or actual_winner
-                        # הצגת תוצאת האמת והניחוש המקורי (בסוגריים)
-                        guess_info = f" (הניחוש שלך: {current_guess})" if current_guess else ""
-                        st.write(
-                            f"**{config.ROUND_DICT.get(m_id, m_id)}:** תוצאת אמת: **{actual_winner}**{guess_info} 🔒")
-
-                    else:
-                        # 2. טיפול במשחק עתידי - בדיקת היתכנות הניחוש
-                        if current_guess and current_guess != logic.NOT_DETERMINED and current_guess not in participants:
-                            st.error(
-                                f"⚠️ **ניחוש דורש תיקון:** ניחשת ש-**{current_guess}** תנצח, אך לפי תוצאות האמת/הניחושים הקודמים, המשחק הוא בין **{participants[0]}** ל-**{participants[1]}**.")
-
-                        # רדיו לבחירת המנצחת
-                        default_idx = participants.index(current_guess) if current_guess in participants else 0
-                        new_guesses[m_id] = st.radio(f"מנצחת - {config.ROUND_DICT.get(m_id, m_id)}:",
-                                                     participants, index=default_idx, key=f"r_{user_name}_{m_id}")
+                    default_idx = participants.index(current_guess) if current_guess in participants else 0
+                    chosen = st.radio(f"winner - {config.ROUND_DICT.get(m_id, m_id)}:",
+                                      participants, index=default_idx, key=f"r_{user_name}_{m_id}")
+                    new_guesses[m_id] = chosen
                 else:
-                    st.info(f"{config.ROUND_DICT.get(m_id, m_id)}: מחכה לתוצאות מהשלבים הקודמים...")
+                    st.info(f"{config.ROUND_DICT.get(m_id, m_id)}: מחכה לניחושים מהשלבים הקודמים...")
 
         if st.button("שמור ניחוש"):
             active_bucket = "base"
@@ -63,17 +62,12 @@ def render_add_tab(all_guesses, actual_results, config, comp_id):
                     break
 
             for m, v in new_guesses.items():
-                # לוגיקה אחידה לכל המשחקים:
-                # אם הטורניר לא התחיל, שומרים ב-BASE.
-                # אם התחיל, שומרים בבאקט הפעיל רק אם יש שינוי.
                 if active_bucket == "base":
                     user_obj[m] = v
-                else:
-                    if effective_guesses.get(m) != v:
-                        bucket_key = f"active_bucket_{active_bucket}"  # למניעת התנגשות שמות
-                        if active_bucket not in user_obj: user_obj[active_bucket] = {}
-                        user_obj[active_bucket][m] = v
+                elif effective_guesses.get(m) != v:
+                    if active_bucket not in user_obj: user_obj[active_bucket] = {}
+                    user_obj[active_bucket][m] = v
 
             data_manager.save_user_guess(comp_id, user_name, user_obj)
-            st.success("נשמר!")
+            st.success("הניחוש עודכן בהצלחה!")
             st.rerun()

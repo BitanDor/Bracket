@@ -53,7 +53,7 @@ def render_tree_tab(all_guesses, actual_results, config):
     # הצגת פליי-אין למטה בנפרד
     if preliminary_stages:
         st.write("---")
-        st.header(f"🏀 משחקי ה-Play-In")
+        st.header(f"🏀 Play-In")
         all_pi = list(config.TEAMS.keys()) + [m for m in config.BRACKET_STRUCTURE if m.startswith("PLAY_IN")]
         pi_cols = st.columns(len(all_pi))
         for i, m_id in enumerate(all_pi):

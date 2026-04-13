@@ -3,7 +3,7 @@ import logic
 
 def format_team(team_name, winner_node, config):
     # תרגום לצורכי תצוגה בלבד
-    if team_name == logic.NOT_DETERMINED: return "<i>טרם נקבע</i>"
+    if team_name == logic.NOT_DETERMINED: return "<i>TBD</i>"
     flag = config.TEAM_FLAGS.get(team_name, "")
     style = "font-weight: bold;" if team_name == winner_node else ""
     star = " 🌟" if team_name == winner_node else ""
@@ -27,7 +27,7 @@ def get_match_box_html(m_id, winner_node, is_actual_view, raw_user_obj, config, 
         # א. האם זה תיקון? (כל מה שהוא לא BASE)
         if bucket != "BASE":
             bg_color, border_color, text_color = "#1e3a8a", "#3b82f6", "#ffaa00"  # כחול כהה
-            status_msg = f"<div style='color: #ffaa00; font-size: 0.85em; margin-top:4px; font-weight: bold;'>⚠️ תוקן. הניחוש הקודם: {prev_val}</div>"
+            status_msg = f"<div style='color: #ffaa00; font-size: 0.85em; margin-top:4px; font-weight: bold;'>⚠️ Corrected. Prev: {prev_val}</div>"
 
         # ב. בדיקה האם המשחק הסתיים (דריסת צבעים לירוק/אדום)
         if actual_winner and actual_winner != logic.NOT_DETERMINED:
@@ -39,7 +39,7 @@ def get_match_box_html(m_id, winner_node, is_actual_view, raw_user_obj, config, 
             # ג. משחק עתידי - בדיקת היתכנות
             if winner_node != logic.NOT_DETERMINED and winner_node not in participants:
                 bg_color, border_color = "#1a1a1a", "#444"
-                status_msg = f"<div style='color: #ff4b4b; font-size: 0.8em; line-height: 1;'>❌ הודחה/לא משתתפת - דורש תיקון<br><small>(ניחשת: {winner_node})</small></div>"
+                status_msg = f"<div style='color: #ff4b4b; font-size: 0.8em; line-height: 1;'>❌ fix required <br><small>(You guessed:: {winner_node})</small></div>"
 
     return f"""<div style="background-color: {bg_color}; color: {text_color}; padding: 3px; border-radius: 3px; border: 1px solid {border_color}; margin-bottom: 1em; min-height: 6em; overflow: hidden; text-align: right;">
         {match_body}{status_msg}</div>"""

@@ -80,8 +80,11 @@ def get_participant_teams(match_id, effective_guesses, actual_results, config):
                 target_match = p_id[2:]
 
             if target_match in config.TEAMS or target_match in config.BRACKET_STRUCTURE:
-                # שימוש בקבוע במקום בעברית
-                winner = actual_results.get(target_match) or effective_guesses.get(target_match)
+                res_actual = actual_results.get(target_match)
+                if res_actual and res_actual != NOT_DETERMINED:
+                    winner = res_actual
+                else:
+                    winner = effective_guesses.get(target_match)
 
                 if not winner or winner == NOT_DETERMINED:
                     participants.append(NOT_DETERMINED)
@@ -92,7 +95,6 @@ def get_participant_teams(match_id, effective_guesses, actual_results, config):
                     if NOT_DETERMINED in p_teams:
                         participants.append(NOT_DETERMINED)
                     else:
-                        # השוואה בטוחה בין שמות קבוצות (באנגלית)
                         loser = [t for t in p_teams if t != winner]
                         participants.append(loser[0] if loser else NOT_DETERMINED)
             else:
