@@ -3,6 +3,15 @@
 import json
 import os
 
+def load_ai_cache(comp_id):
+    """טוען את המטמון (JSON שמכיל שתי מחרוזות)"""
+    return _load_json(get_file_path(comp_id, "ai_rules_cache.json"), {})
+
+def save_ai_cache(comp_id, cache_data):
+    """שומר את המטמון"""
+    _save_json(get_file_path(comp_id, "ai_rules_cache.json"), cache_data)
+
+
 def get_file_path(competition_id, filename):
     """מייצר נתיב לתיקיית התחרות ומוודא שהיא קיימת"""
     dir_path = os.path.join("data", competition_id)

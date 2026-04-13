@@ -7,6 +7,7 @@ from admin_tab import render_admin_tab
 from tree_tab import render_tree_tab
 from add_tab import render_add_tab
 from sidebar import render_sidebar
+from tab_rules import render_rules_tab
 
 # רישום התחרויות הזמינות
 AVAILABLE_TOURNAMENTS = {
@@ -35,7 +36,12 @@ def main():
     render_sidebar(all_guesses, actual_results, config)
 
     # --- 4. טאבים בממשק הראשי ---
-    tab_tree, tab_add, tab_admin = st.tabs(["🌳 עץ הטורניר", "✍️ ניהול ניחושים", "⚙️ תוצאות אמת"])
+    tab_tree, tab_add, tab_admin, tab_rules = st.tabs([
+        "🌳 עץ הטורניר",
+        "✍️ ניהול ניחושים",
+        "⚙️ תוצאות אמת",
+        "📜 תקנון"
+    ])
 
     with tab_tree:
         render_tree_tab(all_guesses, actual_results, config)
@@ -45,6 +51,9 @@ def main():
 
     with tab_admin:
         render_admin_tab(actual_results, config, comp_id)
+
+    with tab_rules:
+        render_rules_tab(config, actual_results)
 
 
 if __name__ == "__main__":
