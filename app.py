@@ -106,17 +106,10 @@ def main():
     {match_html}
     </div>"""
 
-        # --- בדיקה האם יש שלב פליי-אין להפרדה ---
-        has_play_in = config.STAGES[0] == "PLAY_IN"
-
-        # קביעת השלבים שיוצגו בעץ המרכזי
-        if has_play_in:
-            main_stages = config.STAGES[1:]
-            start_idx = 1
-        else:
-            main_stages = config.STAGES
-            start_idx = 0
-
+        preliminary_stages = [s for s in config.STAGES if s.startswith("PLAY_IN")]
+        has_preliminary = len(preliminary_stages) > 0
+        main_stages = [s for s in config.STAGES if not s.startswith("PLAY_IN")]
+        start_idx = len(preliminary_stages)
         main_cols_width = config.UI_CONFIG["columns_width"][start_idx:]
         bracket_cols = st.columns(main_cols_width, gap="medium")
 
@@ -148,7 +141,7 @@ def main():
                         st.markdown(get_spacer_html(stage_spacers["between"]), unsafe_allow_html=True)
 
         # --- חלק ב': אזור ה-Play-In (יוצג רק אם קיים ורק למטה) ---
-        if has_play_in:
+        if has_preliminary:
             st.write("---")
             st.header(f"🏀 משחקי ה-{config.ROUND_DICT.get('PLAY_IN', 'Play-In')}")
 
