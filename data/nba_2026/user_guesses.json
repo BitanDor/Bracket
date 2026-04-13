@@ -23,6 +23,14 @@
         "FINALS": "Portland Trail Blazers",
         "corrections_after_R1": {
             "PLAY_IN_2_E_FOR_8": "Miami Heat"
+        },
+        "corrections_after_CONF_SEMIS": {
+            "CONF_SEMIS_W2": "SA Spurs",
+            "CONF_FINALS_W": "SA Spurs",
+            "FINALS": "SA Spurs"
+        },
+        "corrections_after_CONF_FINALS": {
+            "CONF_FINALS_E": "Boston Celtics"
         }
     }
 }

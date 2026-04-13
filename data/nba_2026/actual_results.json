@@ -13,8 +13,11 @@
     "R1_W4": "LA Lakers",
     "R1_E1": "Detroit Pistons",
     "R1_W1": "OKC Thunder",
-    "CONF_SEMIS_E1": "TBD",
-    "CONF_SEMIS_E2": "TBD",
-    "CONF_SEMIS_W1": "TBD",
-    "CONF_SEMIS_W2": "TBD"
+    "CONF_SEMIS_E1": "Toronto Raptors",
+    "CONF_SEMIS_E2": "Boston Celtics",
+    "CONF_SEMIS_W1": "OKC Thunder",
+    "CONF_SEMIS_W2": "SA Spurs",
+    "CONF_FINALS_E": "Boston Celtics",
+    "CONF_FINALS_W": "SA Spurs",
+    "FINALS": "SA Spurs"
 }
