@@ -2,6 +2,7 @@
 
 NOT_DETERMINED = "TBD"
 
+
 def get_effective_guesses(user_obj, config):
     effective = {k: v for k, v in user_obj.items() if not isinstance(v, dict)}
     for stage in config.STAGES[:-1]:
@@ -12,14 +13,11 @@ def get_effective_guesses(user_obj, config):
 
 
 def get_guess_info(user_obj, m_id, config):
-    """מחזירה: (ניחוש נוכחי, שלב התיקון האחרון, ניחוש קודם לצורך תצוגה)"""
     current_val = None
     last_bucket_stage = "BASE"
     previous_val = None
-
     found_current = False
 
-    # עוברים על הבאקטים מהמאוחר למוקדם
     for stage in reversed(config.STAGES[:-1]):
         bucket = f"corrections_after_{stage}"
         if m_id in user_obj.get(bucket, {}):
@@ -28,14 +26,11 @@ def get_guess_info(user_obj, m_id, config):
                 last_bucket_stage = stage
                 found_current = True
             else:
-                # מצאנו את הערך שהיה בבאקט הקודם בזמן
                 previous_val = user_obj[bucket][m_id]
                 break
 
-    # אם לא נמצא תיקון, הניחוש הנוכחי הוא ה-BASE
     if not found_current:
         current_val = user_obj.get(m_id)
-    # אם נמצא תיקון אבל לא נמצא תיקון קודם לו, הניחוש הקודם הוא ה-BASE
     elif previous_val is None:
         previous_val = user_obj.get(m_id)
 
@@ -48,9 +43,10 @@ def calculate_score(user_obj, actual_results, config):
 
     for m_id in all_matches:
         actual_winner = actual_results.get(m_id)
-        if not actual_winner or actual_winner == NOT_DETERMINED: continue
+        # שימוש בקבוע אנגלי בלבד
+        if not actual_winner or actual_winner == NOT_DETERMINED:
+            continue
 
-        # עדכון הקריאה (התעלמות מהערך השלישי לצורך ניקוד)
         guess_val, bucket, _ = get_guess_info(user_obj, m_id, config)
 
         if guess_val == actual_winner:
@@ -59,7 +55,26 @@ def calculate_score(user_obj, actual_results, config):
                 match_type = "FINALS" if "FINALS" in config.STAGES else "FINAL"
 
             if match_type:
-                total_score += config.POINTS_MAP.get(match_type, {}).get(bucket, 0)
+                stage_points_map = config.POINTS_MAP.get(match_type, {})
+
+                # --- לוגיקת ניקוד חסינה ---
+                if bucket in stage_points_map:
+                    total_score += stage_points_map[bucket]
+                else:
+                    # אם התיקון בוצע בשלב שלא מופיע במפה (תיקון מאוחר)
+                    # ניקח את הניקוד הנמוך ביותר שהוגדר עבור אותו שלב
+                    if bucket == "BASE":
+                        total_score += stage_points_map.get("BASE", 0)
+                    else:
+                        # מחפשים את התיקון האחרון שהוגדר במפה עבור השלב הזה
+                        found_pts = 0
+                        for s in config.STAGES:
+                            if s in stage_points_map:
+                                found_pts = stage_points_map[s]
+                            if s == bucket:  # הגענו לשלב שבו בוצע התיקון
+                                break
+                        total_score += found_pts
+
     return total_score, {}
 
 

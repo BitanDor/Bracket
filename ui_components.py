@@ -1,4 +1,4 @@
-# ui_components.py
+# TO EXECUTE: streamlit run app.py
 import logic
 
 def format_team(team_name, winner_node, config):

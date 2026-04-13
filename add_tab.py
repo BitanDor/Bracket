@@ -1,3 +1,5 @@
+# TO EXECUTE: streamlit run app.py
+
 import streamlit as st
 import logic
 import data_manager

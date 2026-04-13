@@ -1,4 +1,4 @@
-# tournaments/nba_2026_config.py
+# TO EXECUTE: streamlit run app.py
 
 ID = "nba_2026"
 NAME = "NBA Playoffs 2026"
