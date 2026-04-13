@@ -12,11 +12,55 @@ def get_effective_guesses(user_obj, config):
 
 
 def get_guess_info(user_obj, m_id, config):
+    """מחזירה: (ניחוש נוכחי, שלב התיקון האחרון, ניחוש קודם לצורך תצוגה)"""
+    current_val = None
+    last_bucket_stage = "BASE"
+    previous_val = None
+
+    found_current = False
+
+    # עוברים על הבאקטים מהמאוחר למוקדם
     for stage in reversed(config.STAGES[:-1]):
         bucket = f"corrections_after_{stage}"
         if m_id in user_obj.get(bucket, {}):
-            return user_obj[bucket][m_id], stage
-    return user_obj.get(m_id), "BASE"
+            if not found_current:
+                current_val = user_obj[bucket][m_id]
+                last_bucket_stage = stage
+                found_current = True
+            else:
+                # מצאנו את הערך שהיה בבאקט הקודם בזמן
+                previous_val = user_obj[bucket][m_id]
+                break
+
+    # אם לא נמצא תיקון, הניחוש הנוכחי הוא ה-BASE
+    if not found_current:
+        current_val = user_obj.get(m_id)
+    # אם נמצא תיקון אבל לא נמצא תיקון קודם לו, הניחוש הקודם הוא ה-BASE
+    elif previous_val is None:
+        previous_val = user_obj.get(m_id)
+
+    return current_val, last_bucket_stage, previous_val
+
+
+def calculate_score(user_obj, actual_results, config):
+    total_score = 0
+    all_matches = list(config.TEAMS.keys()) + list(config.BRACKET_STRUCTURE.keys())
+
+    for m_id in all_matches:
+        actual_winner = actual_results.get(m_id)
+        if not actual_winner or actual_winner == NOT_DETERMINED: continue
+
+        # עדכון הקריאה (התעלמות מהערך השלישי לצורך ניקוד)
+        guess_val, bucket, _ = get_guess_info(user_obj, m_id, config)
+
+        if guess_val == actual_winner:
+            match_type = next((s for s in reversed(config.STAGES) if s in m_id), None)
+            if not match_type and ("FINAL" in m_id or "FINALS" in m_id):
+                match_type = "FINALS" if "FINALS" in config.STAGES else "FINAL"
+
+            if match_type:
+                total_score += config.POINTS_MAP.get(match_type, {}).get(bucket, 0)
+    return total_score, {}
 
 
 def get_participant_teams(match_id, effective_guesses, actual_results, config):
@@ -55,24 +99,3 @@ def get_participant_teams(match_id, effective_guesses, actual_results, config):
                 participants.append(p_id)
         return participants
     return [NOT_DETERMINED, NOT_DETERMINED]
-
-
-def calculate_score(user_obj, actual_results, config):
-    total_score = 0
-    all_matches = list(config.TEAMS.keys()) + list(config.BRACKET_STRUCTURE.keys())
-
-    for m_id in all_matches:
-        actual_winner = actual_results.get(m_id)
-        # שימוש בקבוע
-        if not actual_winner or actual_winner == NOT_DETERMINED:
-            continue
-
-        guess_val, bucket = get_guess_info(user_obj, m_id, config)
-        if guess_val == actual_winner:
-            match_type = next((s for s in reversed(config.STAGES) if s in m_id), None)
-            if not match_type and ("FINAL" in m_id or "FINALS" in m_id):
-                match_type = "FINALS" if "FINALS" in config.STAGES else "FINAL"
-
-            if match_type:
-                total_score += config.POINTS_MAP.get(match_type, {}).get(bucket, 0)
-    return total_score, {}
