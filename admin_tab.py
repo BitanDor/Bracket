@@ -21,13 +21,16 @@ def render_admin_tab(actual_results, config, comp_id):
 
     if st.button("עדכן תוצאות"):
         data_manager.save_actual_results(comp_id, updated_actual)
-        with st.spinner("Gemini מנתח את התוצאות ומכין פרשנות..."):
+        with st.spinner("Gemini generates commentary..."):
             # טעינת נתונים טריים לצורך הפרשנות
             all_guesses = data_manager.load_all_guesses(comp_id)
-            ai_commentary.update_tournament_commentary(comp_id, config, all_guesses, updated_actual)
-
-        st.success("התוצאות והפרשנות עודכנו!")
-        st.rerun()
+            success = ai_commentary.update_tournament_commentary(comp_id, config, all_guesses, updated_actual)
+        if success:
+            st.success("התוצאות והפרשנות עודכנו בהצלחה!")
+        else:
+            # אם ה-AI נכשל, אנחנו לא "מלכלכים" את ההיסטוריה בהודעות זהות
+            st.warning("התוצאות עודכנו, אך הפרשן כרגע לא זמין. נסה שוב בעדכון הבא.")
+            st.rerun()
 
     # --- Secure Reset Section (English) ---
     st.write("---")

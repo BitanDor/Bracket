@@ -21,7 +21,7 @@ def update_tournament_commentary(comp_id, config, all_guesses, actual_results):
 
     # 2. בניית הפרומפט לפי הדרישות הספציפיות שלך
     prompt = f"""
-    אתה פרשן ספורט מקצועי ושנון בטורניר הבראקט של 'Bitan's Bracket'.
+    אתה פרשן ספורט מקצועי ושנון בטורניר הבראקט שלנו.
     לפניך טבלת הניקוד העדכנית ותוצאות האמת האחרונות.
 
     טבלת ניקוד:
@@ -33,7 +33,7 @@ def update_tournament_commentary(comp_id, config, all_guesses, actual_results):
     הוראות קריטיות:
     - כתוב בטון ספורטיבי, מזמין ומעט עוקצני/מלהיב.
     - תן רק את התוכן להטמעה באתר, בלי הקדמות כמו "הנה הפרשנות".
-    - אל תשלב עברית ואנגלית באותו משפט.
+    תכתוב את כל התגובה רק בעברית. בלי אנגלית.
     - אל תשתמש במשפטים ארוכים מדי - תרד שורה לעיתים קרובות.
     """
 
@@ -42,7 +42,7 @@ def update_tournament_commentary(comp_id, config, all_guesses, actual_results):
 
     try:
         response = client.models.generate_content(
-            model="gemini-2.0-flash",  #
+            model="gemini-2.5-flash",  #
             contents=prompt
         )
         ai_text = response.text

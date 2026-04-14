@@ -57,8 +57,14 @@ def save_actual_results(comp_id, results):
     _save_json(get_file_path(comp_id, "actual_results.json"), results)
 
 def delete_all_data(comp_id):
-    """פונקציית עזר חדשה לאיפוס תחרות ספציפית"""
-    g_path = get_file_path(comp_id, "user_guesses.json")
-    r_path = get_file_path(comp_id, "actual_results.json")
-    if os.path.exists(g_path): os.remove(g_path)
-    if os.path.exists(r_path): os.remove(r_path)
+    """מוחק את כל הקבצים של טורניר מסוים, כולל היסטוריית הפרשן"""
+    files_to_delete = [
+        "actual_results.json",
+        "user_guesses.json",
+        "ai_rules_cache.json",
+        "ai_commentary_history.json" 
+    ]
+    for filename in files_to_delete:
+        path = get_file_path(comp_id, filename)
+        if os.path.exists(path):
+            os.remove(path)
