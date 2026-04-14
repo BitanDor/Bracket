@@ -4,20 +4,50 @@ import logic
 import data_manager
 import ai_commentary
 
+
 def render_admin_tab(actual_results, config, comp_id):
     st.header("⚙️ ניהול (Admin)")
     updated_actual = actual_results.copy()
     all_possible_matches = list(config.TEAMS.keys()) + list(config.BRACKET_STRUCTURE.keys())
 
+    # בדיקה האם הטורניר תומך בתוצאה מדויקת
+    exact_enabled = getattr(config, "IS_EXACT_ENABLED", False)
+
     for m_id in all_possible_matches:
         participants = logic.get_participant_teams(m_id, {}, updated_actual, config)
+
         if logic.NOT_DETERMINED not in participants:
+            # שימוש בשכבת הנרמול כדי לשלוף את המצב הקיים מה-JSON
+            raw_current = updated_actual.get(m_id, logic.NOT_DETERMINED)
+            current_winner = logic.get_winner_name(raw_current)
+            current_score = logic.get_winner_result(raw_current)
+
+            # 1. בחירת מנצחת
             options = [logic.NOT_DETERMINED] + participants
-            current = updated_actual.get(m_id, logic.NOT_DETERMINED)
-            choice = st.selectbox(f"מנצחת ב-{config.ROUND_DICT.get(m_id, m_id)}:", options,
-                                  index=options.index(current) if current in options else 0,
-                                  format_func=lambda x: "טרם נקבע" if x == logic.NOT_DETERMINED else x)
-            updated_actual[m_id] = choice
+            choice = st.selectbox(
+                f"מנצחת ב-{config.ROUND_DICT.get(m_id, m_id)}:",
+                options,
+                index=options.index(current_winner) if current_winner in options else 0,
+                format_func=lambda x: "טרם נקבע" if x == logic.NOT_DETERMINED else x,
+                key=f"admin_win_{m_id}"
+            )
+
+            # 2. בחירת תוצאה (רק אם נבחרה מנצחת ואופציית Exact פעילה)
+            if exact_enabled and choice != logic.NOT_DETERMINED:
+                exact_options = getattr(config, "EXACT_OPTIONS", [4, 5, 6, 7])
+                # שימוש ב-st.radio אופקי כדי לחסוך מקום
+                score_choice = st.radio(
+                    f"תוצאת סדרה ({choice}):",
+                    exact_options,
+                    index=exact_options.index(current_score) if current_score in exact_options else 0,
+                    horizontal=True,
+                    key=f"admin_score_{m_id}"
+                )
+                # שמירה כמערך: [שם קבוצה, תוצאה]
+                updated_actual[m_id] = [choice, score_choice]
+            else:
+                # שמירה רגילה (עבור UCL או אם טרם נקבעה מנצחת)
+                updated_actual[m_id] = choice
 
     if st.button("עדכן תוצאות"):
         data_manager.save_actual_results(comp_id, updated_actual)

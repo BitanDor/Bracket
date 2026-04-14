@@ -2,6 +2,10 @@
 
 ID = "nba_2026"
 NAME = "NBA Playoffs 2026"
+
+IS_EXACT_ENABLED = True
+EXACT_OPTIONS = [4, 5, 6, 7]
+
 STAGES = ["PLAY_IN_1", "PLAY_IN_2", "R1", "CONF_SEMIS", "CONF_FINALS", "FINALS"]
 
 TEAMS = {

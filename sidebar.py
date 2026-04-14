@@ -11,10 +11,12 @@ def render_sidebar(all_guesses, actual_results, config):
         score, _ = logic.calculate_score(user_obj, actual_results, config)
         effective_guesses = logic.get_effective_guesses(user_obj, config)
 
-        # זיהוי הזוכה (תואם ל-UCL ול-NBA)
-        winner = effective_guesses.get("FINAL") or effective_guesses.get("FINALS", logic.NOT_DETERMINED)
-        flag = config.TEAM_FLAGS.get(winner, "")
-        winner_display = f"{flag} {winner}" if winner != logic.NOT_DETERMINED else "טרם נקבע"
+        # שליפת ניחוש הזוכה ונרמול השם
+        winner_raw = effective_guesses.get("FINAL") or effective_guesses.get("FINALS", logic.NOT_DETERMINED)
+        winner_name = logic.get_winner_name(winner_raw)
+
+        flag = config.TEAM_FLAGS.get(winner_name, "")
+        winner_display = f"{flag} {winner_name}" if winner_name != logic.NOT_DETERMINED else "טרם נקבע"
 
         leaderboard_data.append({"שם": user, "זוכה": winner_display, "נקודות": score})
 

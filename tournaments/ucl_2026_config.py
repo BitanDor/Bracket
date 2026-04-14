@@ -3,6 +3,8 @@
 ID = "ucl_2026"
 NAME = "UEFA Champions League 2026"
 
+IS_EXACT_ENABLED = False
+
 # סדר השלבים בטורניר (משמש את הלוגיקה והניקוד הגנריים)
 STAGES = ["R16", "QF", "SF", "FINAL"]
 
