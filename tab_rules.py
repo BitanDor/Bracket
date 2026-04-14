@@ -43,9 +43,11 @@ def get_ai_scoring_table(points_map, round_dict):
             model="gemini-2.5-flash",
             contents=prompt
         )
-        return response.text
-    except Exception as e:
-        return f"⚠️ שגיאה בחיבור ל-Gemini: {str(e)}"
+        if response.text:
+            return response.text
+        return None
+    except:
+        return None
 
 
 def render_rules_tab(config, actual_results):
@@ -76,11 +78,14 @@ def render_rules_tab(config, actual_results):
     if str(cached_points_map) != str(recent_points_map):
         with st.spinner("Gemini מחשב ומעצב את טבלת הניקוד..."):
                 ai_table = get_ai_scoring_table(recent_points_map, config.ROUND_DICT)
-                cache_data = {
-                    "points_map": recent_points_map,
-                    "response": ai_table,
-                }
-                save_ai_cache(config.ID, cache_data)
+                if ai_table:
+                    cache_data = {
+                        "points_map": recent_points_map,
+                        "response": ai_table,
+                    }
+                    save_ai_cache(config.ID, cache_data)
+                else:
+                    ai_table = "⚠️ שגיאה זמנית בחיבור ל-AI. נסה שוב בעוד רגע."
     else:
         ai_table = cached_response
     st.markdown(ai_table)

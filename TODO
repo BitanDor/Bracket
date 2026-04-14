@@ -1,0 +1,9 @@
+- AI text commentating recent changes in score board after each scores update
+- User pwd protection  - generated when creating the user, required for guess update
+- pwd protection for admin panel (inserting true results, deleting results, etc)
+- online deployment
+
+- overall code improvement to avoid parsing texts names for matches - create a Match class and a Team object
+- access with google id
+- ability to access as a new admin, create tournament instance, and share link with friends that enables them connect and guess
+- pull true results from web
