@@ -4,7 +4,7 @@ import logic
 import data_manager
 
 def render_admin_tab(actual_results, config, comp_id):
-    st.header("⚙️ תוצאות אמת (Admin)")
+    st.header("⚙️ ניהול (Admin)")
     updated_actual = actual_results.copy()
     all_possible_matches = list(config.TEAMS.keys()) + list(config.BRACKET_STRUCTURE.keys())
 
