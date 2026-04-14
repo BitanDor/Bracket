@@ -2,6 +2,7 @@ import secrets
 import streamlit as st
 import logic
 import data_manager
+import ai_commentary
 
 def render_admin_tab(actual_results, config, comp_id):
     st.header("⚙️ ניהול (Admin)")
@@ -20,7 +21,12 @@ def render_admin_tab(actual_results, config, comp_id):
 
     if st.button("עדכן תוצאות"):
         data_manager.save_actual_results(comp_id, updated_actual)
-        st.success("עודכן!")
+        with st.spinner("Gemini מנתח את התוצאות ומכין פרשנות..."):
+            # טעינת נתונים טריים לצורך הפרשנות
+            all_guesses = data_manager.load_all_guesses(comp_id)
+            ai_commentary.update_tournament_commentary(comp_id, config, all_guesses, updated_actual)
+
+        st.success("התוצאות והפרשנות עודכנו!")
         st.rerun()
 
     # --- Secure Reset Section (English) ---

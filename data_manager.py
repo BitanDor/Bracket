@@ -3,6 +3,16 @@
 import json
 import os
 
+# data_manager.py
+
+def load_commentary_cache(comp_id):
+    """טוען את רשימת הפרשנויות מהקובץ"""
+    return _load_json(get_file_path(comp_id, "ai_commentary_history.json"), [])
+
+def save_commentary_cache(comp_id, history):
+    """שומר את רשימת הפרשנויות המעודכנת"""
+    _save_json(get_file_path(comp_id, "ai_commentary_history.json"), history)
+
 def load_ai_cache(comp_id):
     """טוען את המטמון (JSON שמכיל שתי מחרוזות)"""
     return _load_json(get_file_path(comp_id, "ai_rules_cache.json"), {})

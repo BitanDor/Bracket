@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import logic
+import data_manager
 
 
 def render_sidebar(all_guesses, actual_results, config):
@@ -24,3 +25,18 @@ def render_sidebar(all_guesses, actual_results, config):
         st.sidebar.table(df)
     else:
         st.sidebar.write("עוד אין ניחושים.")
+
+    st.sidebar.markdown("---")
+    st.sidebar.subheader("🎙️ פינת הפרשן")
+
+    history = data_manager.load_commentary_cache(config.ID)
+
+    if not history:
+        st.sidebar.write("הפרשן נח כרגע. פרשנות תופיע לאחר עדכון התוצאות הבא.")
+
+    for entry in history:
+        # הצגת הטקסט
+        st.sidebar.info(entry['text'])
+        # הצגת התאריך מתחת
+        st.sidebar.caption(f"({entry['timestamp']})")
+        st.sidebar.markdown("---")
