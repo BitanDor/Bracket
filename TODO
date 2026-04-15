@@ -1,4 +1,5 @@
 - time stamp after AI generated comment
+- exact guess\result display in UI
 - AI text commentating recent changes in score board after each scores update
 - User pwd protection  - generated when creating the user, required for guess update
 - pwd protection for admin panel (inserting true results, deleting results, etc)
