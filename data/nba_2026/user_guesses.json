@@ -170,5 +170,91 @@
             "OKC Thunder",
             5
         ]
+    },
+    "מאור": {
+        "PLAY_IN_1_E_7vs8": [
+            "Philadelphia 76ers",
+            4
+        ],
+        "PLAY_IN_1_E_9vs10": [
+            "Miami Heat",
+            4
+        ],
+        "PLAY_IN_1_W_7vs8": [
+            "Portland Trail Blazers",
+            4
+        ],
+        "PLAY_IN_1_W_9vs10": [
+            "LA Clippers",
+            4
+        ],
+        "PLAY_IN_2_E_FOR_8": [
+            "Orlando Magic",
+            4
+        ],
+        "PLAY_IN_2_W_FOR_8": [
+            "LA Clippers",
+            4
+        ],
+        "R1_E1": [
+            "Detroit Pistons",
+            6
+        ],
+        "R1_E2": [
+            "Boston Celtics",
+            7
+        ],
+        "R1_E3": [
+            "NY Knicks",
+            6
+        ],
+        "R1_E4": [
+            "Cleveland Cavaliers",
+            7
+        ],
+        "R1_W1": [
+            "OKC Thunder",
+            5
+        ],
+        "R1_W2": [
+            "SA Spurs",
+            6
+        ],
+        "R1_W3": [
+            "Denver Nuggets",
+            6
+        ],
+        "R1_W4": [
+            "Houston Rockets",
+            7
+        ],
+        "CONF_SEMIS_E1": [
+            "Detroit Pistons",
+            5
+        ],
+        "CONF_SEMIS_E2": [
+            "Boston Celtics",
+            6
+        ],
+        "CONF_SEMIS_W1": [
+            "Houston Rockets",
+            6
+        ],
+        "CONF_SEMIS_W2": [
+            "SA Spurs",
+            5
+        ],
+        "CONF_FINALS_E": [
+            "Detroit Pistons",
+            7
+        ],
+        "CONF_FINALS_W": [
+            "SA Spurs",
+            6
+        ],
+        "FINALS": [
+            "Detroit Pistons",
+            6
+        ]
     }
 }
