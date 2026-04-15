@@ -46,9 +46,8 @@ def update_tournament_commentary(comp_id, config, all_guesses, actual_results):
             contents=prompt
         )
         ai_text = response.text
-    except Exception:
-        # במקרה של שגיאה - הודעה גנרית כפי שביקשת
-        ai_text = "התוצאות עודכנו! המאבק על הפסגה מתחמם."
+    except Exception as e:
+        ai_text = f"ERROR: {e}"
 
     # 3. שמירה להיסטוריה עם תאריך
     history = data_manager.load_commentary_cache(comp_id)

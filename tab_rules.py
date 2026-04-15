@@ -3,6 +3,7 @@ import streamlit as st
 from google import genai
 import os
 from data_manager import load_ai_cache, save_ai_cache
+from datetime import datetime
 
 
 # פונקציה לקבלת טבלת ניקוד מעוצבת בעזרת Gemini
@@ -58,11 +59,10 @@ def get_ai_scoring_table(points_map, round_dict):
             model="gemini-2.5-flash",
             contents=prompt
         )
-        if response.text:
-            return response.text
-        return None
-    except:
-        return None
+        ai_text = response.text
+    except Exception as e:
+        ai_text = f"ERROR: {e}"
+    return ai_text
 
 
 def render_rules_tab(config, actual_results):
@@ -93,10 +93,12 @@ def render_rules_tab(config, actual_results):
     if str(cached_points_map) != str(recent_points_map):
         with st.spinner("Gemini מחשב ומעצב את טבלת הניקוד..."):
                 ai_table = get_ai_scoring_table(recent_points_map, config.ROUND_DICT)
-                if ai_table:
+                valid_response = not ai_table.startswith("ERROR:")
+                if valid_response:
                     cache_data = {
                         "points_map": recent_points_map,
                         "response": ai_table,
+                        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M")
                     }
                     save_ai_cache(config.ID, cache_data)
                 else:
@@ -104,3 +106,24 @@ def render_rules_tab(config, actual_results):
     else:
         ai_table = cached_response
     st.markdown(ai_table)
+
+    timestamp = rules_cache.get("timestamp")
+    if timestamp:
+        st.caption(f"Generated on: {timestamp}")
+
+    st.write("---")
+    if st.button("Regenerate AI explanation"):
+        with st.spinner("Gemini is regenerating the rules..."):
+            new_ai_table = get_ai_scoring_table(recent_points_map, config.ROUND_DICT)
+
+            if new_ai_table:
+                cache_data = {
+                    "points_map": recent_points_map,
+                    "response": new_ai_table,
+                    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M")
+                }
+                save_ai_cache(config.ID, cache_data)
+                st.success("Explanation regenerated successfully!")
+                st.rerun()
+            else:
+                st.error("Failed to regenerate explanation. Please try again later.")
