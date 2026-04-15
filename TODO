@@ -1,6 +1,5 @@
-- time stamp after AI generated comment
 - exact guess\result display in UI
-- AI text commentating recent changes in score board after each scores update
+- commentator regenerate recent button
 - User pwd protection  - generated when creating the user, required for guess update
 - pwd protection for admin panel (inserting true results, deleting results, etc)
 - online deployment
@@ -9,4 +8,4 @@
 - access with google id
 - ability to access as a new admin, create tournament instance, and share link with friends that enables them connect and guess
 - pull true results from web
-- deeper guesses - exact score
+- deeper guesses - exact score for soccer (draw and exact result)
