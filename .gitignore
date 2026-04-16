@@ -1,0 +1,11 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Streamlit folders
+.streamlit/
+
+# Local data (optional - decide if you want to sync JSONs or not)
+# data/
