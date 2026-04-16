@@ -4,7 +4,6 @@ from google import genai
 import logic
 import data_manager
 from datetime import datetime
-import os
 
 
 def update_tournament_commentary(comp_id, config, all_guesses, actual_results):
