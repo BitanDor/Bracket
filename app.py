@@ -2,7 +2,7 @@
 import streamlit as st
 import streamlit_authenticator as stauth
 import data_manager
-import tournaments  # טעינת החבילה החדשה
+import tournaments
 
 
 def main():

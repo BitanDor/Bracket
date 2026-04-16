@@ -1,7 +1,6 @@
 # tab_rules.py
 import streamlit as st
 from google import genai
-import os
 from data_manager import load_ai_cache, save_ai_cache
 from datetime import datetime
 
