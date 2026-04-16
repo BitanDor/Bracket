@@ -1,29 +1,27 @@
-# TO EXECUTE: streamlit run app.py
-
 import json
 import os
 
-# data_manager.py
+def load_users():
+    path = os.path.join("data", "users_auth.json")
+    return _load_json(path, {"usernames": {}})
+
+def save_users(users_data):
+    path = os.path.join("data", "users_auth.json")
+    _save_json(path, users_data)
 
 def load_commentary_cache(comp_id):
-    """טוען את רשימת הפרשנויות מהקובץ"""
     return _load_json(get_file_path(comp_id, "ai_commentary_history.json"), [])
 
 def save_commentary_cache(comp_id, history):
-    """שומר את רשימת הפרשנויות המעודכנת"""
     _save_json(get_file_path(comp_id, "ai_commentary_history.json"), history)
 
 def load_ai_cache(comp_id):
-    """טוען את המטמון (JSON שמכיל שתי מחרוזות)"""
     return _load_json(get_file_path(comp_id, "ai_rules_cache.json"), {})
 
 def save_ai_cache(comp_id, cache_data):
-    """שומר את המטמון"""
     _save_json(get_file_path(comp_id, "ai_rules_cache.json"), cache_data)
 
-
 def get_file_path(competition_id, filename):
-    """מייצר נתיב לתיקיית התחרות ומוודא שהיא קיימת"""
     dir_path = os.path.join("data", competition_id)
     os.makedirs(dir_path, exist_ok=True)
     return os.path.join(dir_path, filename)
@@ -57,12 +55,12 @@ def save_actual_results(comp_id, results):
     _save_json(get_file_path(comp_id, "actual_results.json"), results)
 
 def delete_all_data(comp_id):
-    """מוחק את כל הקבצים של טורניר מסוים, כולל היסטוריית הפרשן"""
     files_to_delete = [
         "actual_results.json",
         "user_guesses.json",
         "ai_rules_cache.json",
-        "ai_commentary_history.json" 
+        "ai_commentary_history.json",
+        "users_auth.json"
     ]
     for filename in files_to_delete:
         path = get_file_path(comp_id, filename)

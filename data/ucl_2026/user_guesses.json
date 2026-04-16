@@ -1,5 +1,5 @@
 {
-    "דור": {
+    "Dor": {
         "R16_M1": "Paris Saint-Germain",
         "R16_M2": "Liverpool",
         "R16_M3": "Manchester City",
@@ -16,7 +16,7 @@
         "SF2": "Arsenal",
         "FINAL": "Bayern Munich"
     },
-    "אלון": {
+    "Alon": {
         "R16_M1": "Paris Saint-Germain",
         "R16_M2": "Liverpool",
         "R16_M3": "Real Madrid",
@@ -37,7 +37,7 @@
             "FINAL": "Bayern Munich"
         }
     },
-    "ניר": {
+    "Nir": {
         "R16_M1": "Paris Saint-Germain",
         "R16_M2": "Liverpool",
         "R16_M3": "Manchester City",
@@ -58,7 +58,7 @@
             "FINAL": "Paris Saint-Germain"
         }
     },
-    "גליה": {
+    "Galya": {
         "R16_M1": "Chelsea",
         "R16_M2": "Galatasaray",
         "R16_M3": "Real Madrid",
@@ -81,7 +81,7 @@
         "corrections_after_QF": {},
         "corrections_after_SF": {}
     },
-    "זיו": {
+    "Ziv": {
         "R16_M1": "Paris Saint-Germain",
         "R16_M2": "Liverpool",
         "R16_M3": "Manchester City",
@@ -103,7 +103,7 @@
             "FINAL": "Liverpool"
         }
     },
-    "שושה": {
+    "Shusha": {
         "R16_M1": "Paris Saint-Germain",
         "R16_M2": "Liverpool",
         "R16_M3": "Real Madrid",
