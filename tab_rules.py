@@ -65,7 +65,7 @@ def get_ai_scoring_table(points_map, round_dict):
     return ai_text
 
 
-def render_rules_tab(config, actual_results):
+def render_rules_tab(config, actual_results, user_role='guest'):
     st.header("📜 כללי הטורניר")
 
     # 1. הרשמה
@@ -112,18 +112,19 @@ def render_rules_tab(config, actual_results):
         st.caption(f"Generated on: {timestamp}")
 
     st.write("---")
-    if st.button("Regenerate AI explanation"):
-        with st.spinner("Gemini is regenerating the rules..."):
-            new_ai_table = get_ai_scoring_table(recent_points_map, config.ROUND_DICT)
+    if user_role == "admin":
+        if st.button("Regenerate AI explanation"):
+            with st.spinner("Gemini is regenerating the rules..."):
+                new_ai_table = get_ai_scoring_table(recent_points_map, config.ROUND_DICT)
 
-            if new_ai_table:
-                cache_data = {
-                    "points_map": recent_points_map,
-                    "response": new_ai_table,
-                    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M")
-                }
-                save_ai_cache(config.ID, cache_data)
-                st.success("Explanation regenerated successfully!")
-                st.rerun()
-            else:
-                st.error("Failed to regenerate explanation. Please try again later.")
+                if new_ai_table:
+                    cache_data = {
+                        "points_map": recent_points_map,
+                        "response": new_ai_table,
+                        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M")
+                    }
+                    save_ai_cache(config.ID, cache_data)
+                    st.success("Explanation regenerated successfully!")
+                    st.rerun()
+                else:
+                    st.error("Failed to regenerate explanation. Please try again later.")

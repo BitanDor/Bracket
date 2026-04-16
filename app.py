@@ -68,8 +68,9 @@ def main():
                 render_admin_tab(actual_results, config, comp_id)
 
     with tabs[-1]:
+        user_role = users_auth['usernames'][username].get('role', 'user') if auth_status else 'guest'
         from tab_rules import render_rules_tab
-        render_rules_tab(config, actual_results)
+        render_rules_tab(config, actual_results, user_role)
 
     # --- 7. סיידבר ---
     with st.sidebar:
