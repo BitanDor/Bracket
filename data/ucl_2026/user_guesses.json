@@ -52,7 +52,11 @@
         "QF4": "Arsenal",
         "SF1": "Liverpool",
         "SF2": "Arsenal",
-        "FINAL": "Liverpool"
+        "FINAL": "Liverpool",
+        "corrections_after_SF": {
+            "SF1": "Paris Saint-Germain",
+            "FINAL": "Paris Saint-Germain"
+        }
     },
     "גליה": {
         "R16_M1": "Chelsea",
