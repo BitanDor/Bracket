@@ -10,7 +10,7 @@ from datetime import datetime
 @st.cache_data
 def get_ai_scoring_table(points_map, round_dict):
     # שליפת המפתח מ-Streamlit Secrets או ממשתנה סביבה
-    api_key = st.secrets.get("GEMINI_API_KEY") or os.environ.get("GEMINI_API_KEY")
+    api_key = st.secrets["GEMINI_API_KEY"]
 
     if not api_key:
         return "⚠️ שגיאה: לא הוגדר GEMINI_API_KEY במערכת. לא ניתן להפיק את טבלת הניקוד בעזרת AI."

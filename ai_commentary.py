@@ -37,7 +37,7 @@ def update_tournament_commentary(comp_id, config, all_guesses, actual_results):
     - אל תשתמש במשפטים ארוכים מדי - תרד שורה לעיתים קרובות.
     """
 
-    api_key = st.secrets.get("GEMINI_API_KEY") or os.environ.get("GEMINI_API_KEY")
+    api_key = st.secrets["GEMINI_API_KEY"]
     client = genai.Client(api_key=api_key)
 
     try:

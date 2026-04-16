@@ -29,7 +29,7 @@ def main():
     authenticator = stauth.Authenticate(
         users_auth,
         "bracket_global_cookie",  # עוגייה אחת לכל האתר
-        "global_signature_key",
+        st.secrets["AUTH_SIGNATURE_KEY"],
         cookie_expiry_days=30
     )
 
