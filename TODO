@@ -1,13 +1,13 @@
 - exact guess\result display in UI
-- commentator regenerate recent button
-- User pwd protection  - generated when creating the user, required for guess update
-- pwd protection for admin panel (inserting true results, deleting results, etc)
-- online deployment
+- commentator regenerate recent button for admin only
+
+
 - World cup 2026 tournament structure (groups, knockout stages, etc)
+
 - overall code improvement to avoid parsing texts names for matches - create a Match class and a Team object
 - access with google id
-- ability to access as a new admin, create tournament instance, and share link with friends that enables them connect and guess
-- pull true results from web
+- ability to access as a new admin, create tournament bracket instance, and share link with friends that enables them connect and guess
+- pull true results from web automatically and update the scores accordingly
 - deeper guesses - exact score for soccer (draw and exact result)
 - a list of all impossible guesses by user and stage/game and sending alerts to the user to change them before the game starts
 
