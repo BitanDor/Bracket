@@ -31,7 +31,11 @@
         "QF4": "Arsenal",
         "SF1": "Real Madrid",
         "SF2": "Arsenal",
-        "FINAL": "Real Madrid"
+        "FINAL": "Real Madrid",
+        "corrections_after_SF": {
+            "SF1": "Bayern Munich",
+            "FINAL": "Bayern Munich"
+        }
     },
     "ניר": {
         "R16_M1": "Paris Saint-Germain",

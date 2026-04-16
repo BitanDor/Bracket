@@ -9,3 +9,15 @@
 - ability to access as a new admin, create tournament instance, and share link with friends that enables them connect and guess
 - pull true results from web
 - deeper guesses - exact score for soccer (draw and exact result)
+- a list of all impossible guesses by user and stage/game and sending alerts to the user to change them before the game starts
+
+- The entire setting should change:
+The website should have two modes - authenticated and non-authenticated.
+In the non-authenticated mode, users can only view the results and the guesses of other users in other brackets.
+In the authenticated mode, users can make their own guesses, view their own guess history, and access the admin panel if they have admin privileges.
+Tournament structure should be defined in a way that allows for easy updates and changes, such as adding or removing teams, changing the tournament format, etc.
+This can be achieved by creating a flexible data model for the tournament and implementing an admin interface for managing it.
+The tournament should have stages, games, and teams as separate entities, with clear relationships between them.
+The guessing system should be designed to allow for different types of guesses, such as predicting the winner, predicting the exact score, etc.
+
+

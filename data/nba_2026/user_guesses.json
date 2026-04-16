@@ -83,7 +83,13 @@
         "FINALS": [
             "OKC Thunder",
             4
-        ]
+        ],
+        "corrections_after_R1": {
+            "PLAY_IN_2_W_FOR_8": [
+                "Golden State Warriors",
+                4
+            ]
+        }
     },
     "דור": {
         "PLAY_IN_1_E_7vs8": [
@@ -172,7 +178,7 @@
         ],
         "corrections_after_R1": {
             "PLAY_IN_2_E_FOR_8": [
-                "Philadelphia 76ers",
+                "Charlotte Hornets",
                 4
             ]
         }
@@ -261,7 +267,13 @@
         "FINALS": [
             "Detroit Pistons",
             6
-        ]
+        ],
+        "corrections_after_R1": {
+            "PLAY_IN_2_W_FOR_8": [
+                "Golden State Warriors",
+                4
+            ]
+        }
     },
     "ניר": {
         "PLAY_IN_1_E_7vs8": [
