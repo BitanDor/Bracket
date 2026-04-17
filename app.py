@@ -6,7 +6,7 @@ import tournaments
 
 
 def main():
-    st.set_page_config(page_title="Bitan's Bracket", layout="wide", page_icon="🏆")
+    st.set_page_config(page_title="Bracket Master", layout="wide", page_icon="🏆")
 
     # --- 1. טעינה דינמית של כל הטורנירים הזמינים ---
     AVAILABLE_TOURNAMENTS = tournaments.load_all_configs()
@@ -40,7 +40,7 @@ def main():
     name = st.session_state.get("name")
 
     # --- 5. ניהול טאבים והרשאות ---
-    st.title(f"Bitan's Bracket - {config.NAME} 🏆")
+    st.title(f"Bracket Master at {config.NAME} 🏆")
 
     tabs_labels = ["🌳 עץ הטורניר", "📜 תקנון"]
     if auth_status:
