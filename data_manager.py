@@ -11,15 +11,20 @@ def get_client() -> Client:
 def load_users():
     supabase = get_client()
     res = supabase.table("users_auth").select("credentials").eq("id", "global").maybe_single().execute()
-    # בדיקה כפולה: האם res קיים והאם יש בו data
     return res.data['credentials'] if res and res.data else {"usernames": {}}
+
+@st.cache_data(ttl=60)
+def get_uid_to_name_map():
+    users_data = load_users()
+    usernames = users_data.get("usernames", {})
+    return {details.get("uid"): name for name, details in usernames.items()}
 
 @st.cache_data(ttl=60)
 def load_all_guesses(comp_id):
     supabase = get_client()
-    res = supabase.table("user_guesses").select("username, guesses").eq("comp_id", comp_id).execute()
+    res = supabase.table("user_guesses").select("user_id, guesses").eq("comp_id", comp_id).execute()
     if res and res.data:
-        return {item['username']: item['guesses'] for item in res.data}
+        return {item['user_id']: item['guesses'] for item in res.data if item['user_id']}
     return {}
 
 @st.cache_data(ttl=60)
@@ -45,14 +50,14 @@ def save_users(users_data):
     data = {"id": "global", "credentials": users_data}
     supabase.table("users_auth").upsert(data, on_conflict="id").execute()
 
-def save_user_guess(comp_id, user_name, guesses):
+def save_user_guess(comp_id, user_id, guesses):
     supabase = get_client()
     data = {
         "comp_id": comp_id,
-        "username": user_name,
+        "user_id": user_id,
         "guesses": guesses
     }
-    supabase.table("user_guesses").upsert(data, on_conflict="comp_id,username").execute()
+    supabase.table("user_guesses").upsert(data, on_conflict="comp_id,user_id").execute()
     st.cache_data.clear()
 
 def save_actual_results(comp_id, results):

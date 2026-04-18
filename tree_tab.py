@@ -3,9 +3,13 @@ import logic
 import ui_components
 
 
-def render_tree_tab(all_guesses, actual_results, config):
+def render_tree_tab(all_guesses, actual_results, config, uid_to_name):
     st.header(" 🌳 עץ הטורניר")
-    view_user = st.selectbox("בחר משתתף כדי לראות את העץ שלו:", ["תוצאות אמת"] + list(all_guesses.keys()))
+    view_user = st.selectbox(
+        "בחר משתתף כדי לראות את העץ שלו:",
+        ["תוצאות אמת"] + list(all_guesses.keys()),
+        format_func=lambda x: uid_to_name.get(x, x) if x != "תוצאות אמת" else x
+    )
 
     is_actual_view = (view_user == "תוצאות אמת")
     raw_user_obj = {} if is_actual_view else all_guesses.get(view_user, {})

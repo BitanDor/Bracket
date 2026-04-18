@@ -39,6 +39,13 @@ def main():
     username = st.session_state.get("username")
     name = st.session_state.get("name")
 
+    if auth_status:
+        user_info = users_auth["usernames"].get(username)
+        if user_info:
+            st.session_state["user_id"] = user_info["uid"]
+
+    uid_to_name = data_manager.get_uid_to_name_map()
+
     # --- 5. ניהול טאבים והרשאות ---
     st.title(f"Bracket Master at {config.NAME} 🏆")
 
@@ -54,13 +61,13 @@ def main():
     # --- 6. רינדור טאבים ---
     with tabs[0]:
         from tree_tab import render_tree_tab
-        render_tree_tab(all_guesses, actual_results, config)
+        render_tree_tab(all_guesses, actual_results, config, uid_to_name)
 
     if auth_status:
         user_role = users_auth['usernames'][username].get('role', 'user')
         with tabs[1]:
             from add_tab import render_add_tab
-            render_add_tab(all_guesses, actual_results, config, comp_id, username, user_role)
+            render_add_tab(all_guesses, actual_results, config, comp_id, st.session_state["user_id"], user_role, name)
 
         if user_role == "admin":
             with tabs[2]:
@@ -82,7 +89,7 @@ def main():
 
         st.write("---")
         from sidebar import render_sidebar
-        render_sidebar(all_guesses, actual_results, config)
+        render_sidebar(all_guesses, actual_results, config, uid_to_name)
 
 
 if __name__ == "__main__":

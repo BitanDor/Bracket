@@ -1,4 +1,6 @@
-# migrate.py
+# migration script to move data sources from local JSON files to the Supabase DB cloud
+# Executed successfully on 16.4.26
+
 import json
 import os
 import data_manager
@@ -7,14 +9,14 @@ def migrate_all():
     print("🚀 מתחיל מיגרציה מלאה ל-Supabase...")
 
     # 1. העלאת משתמשים (קובץ גלובלי)
-    if os.path.exists("data/users_auth.json"):
-        with open("data/users_auth.json", "r", encoding="utf-8") as f:
+    if os.path.exists("../data/users_auth.json"):
+        with open("../data/users_auth.json", "r", encoding="utf-8") as f:
             data_manager.save_users(json.load(f))
             print("✅ משתמשים הועלו.")
 
     # 2. סריקת תיקיות הטורנירים
-    for item in os.listdir("data"):
-        item_path = os.path.join("data", item)
+    for item in os.listdir("../data"):
+        item_path = os.path.join("../data", item)
         if os.path.isdir(item_path):
             comp_id = item
             print(f"\n📦 מעבד טורניר: {comp_id}")
