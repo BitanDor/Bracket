@@ -42,7 +42,7 @@ def main():
     if auth_status:
         user_info = users_auth["usernames"].get(username)
         if user_info:
-            st.session_state["user_id"] = user_info["uid"]
+            st.session_state["user_id"] = user_info["user_id"]
 
     uid_to_name = data_manager.get_uid_to_name_map()
 
