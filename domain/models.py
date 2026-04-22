@@ -8,56 +8,50 @@ from typing import TypeAlias
 import uuid6 # we use uuid6.uuid7()
 
 userId: TypeAlias = uuid6.UUID
+teamId: TypeAlias = uuid6.UUID
 stageId: TypeAlias = uuid6.UUID
 matchID: TypeAlias = uuid6.UUID
 tournamentId: TypeAlias = uuid6.UUID
-teamId: TypeAlias = uuid6.UUID
-privateBracketId = uuid6.UUID
+matchId: TypeAlias = uuid6.UUID
+privateBracketId: TypeAlias = uuid6.UUID
 
-singleMatchScore = Tuple[int, int]
-
-UserBracketGuess = Dict[matchID, Union[FinalScore, DetailedScore]]
-
-NINTY_MINUTES = "ninty_minutes"
-FIRST_MATCH_NINTY_MINUTES = "first_match_ninty_minutes"
-RETURN_LEG_NINTY_MINUTES = "return_leg_ninty_minutes"
-OVER_TIME = "over_time"
-PENALTIES = "penalties"
-
-class StageType(Enum):
-    GROUP_STAGE = "group stage" # to be presented in the UI as a table with scores
-    PLAYOFF_STAGE = "playoff stage" # to be presented in the UI as a playoff tree
-    PLAY_IN_STAGE = "play-in stage" # to be presented in the UI as a separate playoff tree, possibly with a special
-    # structure like the NBA Play In stage, or UCL primary stage (before the group stage starts)
-
-class FinalScore(Enum):
-    HOME_WIN = "home win"
-    DRAW = "draw"
-    AWAY_WIN = "away win"
-
-class PossibleFinalScore(Enum):
-    WINNER_LOSER = "win, lose" # note that the loser may also advance!
-    WIN_DRAW_LOSS = "win, draw, lose"
-
-class DetailedScore(Enum):
-    SOCCER_SINGLE_NON_DECISIVE_MATCH = singleMatchScore
-    SOCCER_SINGLE_DECISIVE_MATCH = {
-        NINTY_MINUTES: singleMatchScore,
-        OVER_TIME: singleMatchScore,
-        PENALTIES: singleMatchScore
-    }
-    SOCCER_HOME_AND_AWAY_DECISIVE_MATCH = {
-        FIRST_MATCH_NINTY_MINUTES: singleMatchScore,
-        RETURN_LEG_NINTY_MINUTES: singleMatchScore,
-        OVER_TIME: singleMatchScore,
-        PENALTIES: singleMatchScore
-    }
-    BASKETBALL_SERIES = singleMatchScore
-
-class UserRole(Enum):
+class UserRole(str, Enum):
     REGULAR = "regular"
     ADMIN = "admin"
 
+class StageType(str, Enum):
+    GROUP_STAGE = "group stage"  # to be presented in the UI as a table with scores
+    PLAYOFF_STAGE = "playoff stage"  # to be presented in the UI as a playoff tree
+    PLAY_IN_STAGE = "play-in stage"  # to be presented in the UI as a separate playoff tree, possibly with a special
+    # structure like the NBA Play In stage, or UCL primary stage (before the group stage starts)
+
+class FinalScore(Enum):
+    HOME_WIN = "1"
+    DRAW = "X"
+    AWAY_WIN = "2"
+    PENDING = "TBD"
+
+class SingleMatchScore(BaseModel):
+    home: int
+    away: int
+
+class DecisiveMatchScore(BaseModel):
+    regular_time: SingleMatchScore
+    extra_time: Optional[SingleMatchScore] = None
+    penalties: Optional[SingleMatchScore] = None
+
+class HomeAndAwayScore(BaseModel):
+    leg1: SingleMatchScore
+    leg2: SingleMatchScore
+    extra_time: Optional[SingleMatchScore] = None
+    penalties: Optional[SingleMatchScore] = None
+
+class BasketballSeriesScore(BaseModel):
+    home_wins: int
+    away_wins: int
+    total_games: int
+
+DetailedScore = Union[SingleMatchScore, DecisiveMatchScore, HomeAndAwayScore, BasketballSeriesScore]
 
 class Team(BaseModel):
     team_id: teamId
@@ -83,6 +77,19 @@ class Team(BaseModel):
         if team_image_file_location is not None:
             self.team_image_file_location = team_image_file_location
 
+
+class Match(BaseModel):
+    match_id: matchId
+    home_team_id: Optional[teamId] = None
+    away_team_id: Optional[teamId] = None
+    scheduled_time: datetime
+    outcome: FinalScore = FinalScore.PENDING
+    detailed_score: Optional[DetailedScore] = None
+    stage_id: stageId
+
+class UserBracketGuess(BaseModel):
+    tournament_id: tournamentId
+    guesses: Dict[matchId, matchDataGuess]
 
 class Stage(BaseModel):
     stage_id: stageId
@@ -132,15 +139,6 @@ class TournamentPrivateBracket(BaseModel):
     tournament_private_bracket_manager_user_id: userId
     tournament_private_bracket_whatsapp_group_connection_details: str
     tournament_private_bracket_leaderboard = Dict[userId , int]  # TODO: also store the guessed tournament winner
-
-
-class Match(BaseModel):
-    match_id: matchID
-    match_home_team: teamId
-    match_away_team: teamId
-    match_scheduled_time: datetime
-    match_final_score: PossibleFinalScore
-    match_detailed_score: DetailedScore
 
 
 class Tournament(BaseModel):
