@@ -54,12 +54,11 @@ class BasketballSeriesScore(BaseModel):
 
 DetailedScore = Union[NonDecisiveMatchScore, DecisiveMatchScore, HomeAndAwayScore, BasketballSeriesScore]
 
-class DetailedScoreType(DetailedScore, Enum):
-    NON_DECISIVE_MATCH = NonDecisiveMatchScore
-    DECISIVE_MATCH = DecisiveMatchScore
-    HOME_AND_AWAY_MATCH = HomeAndAwayScore
-    BASKETBALL_SERIES = BasketballSeriesScore
-
+class DetailedScoreType(str, Enum):
+    NON_DECISIVE = "non_decisive"
+    DECISIVE = "decisive"
+    HOME_AWAY = "home_away"
+    SERIES = "series"
 
 class MatchGuessData(BaseModel):
     score: MatchScore
