@@ -1,0 +1,254 @@
+{
+    "019dbbf7-f21a-737a-85aa-a0bcddb853af": {
+        "team_id": "019dbbf7-f21a-737a-85aa-a0bcddb853af",
+        "team_name": "Philadelphia 76ers",
+        "team_emoji": "🔔",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/philadelphia_76ers.png"
+    },
+    "019dbbf7-f21b-7dee-af90-f3f6b395123f": {
+        "team_id": "019dbbf7-f21b-7dee-af90-f3f6b395123f",
+        "team_name": "Orlando Magic",
+        "team_emoji": "🪄",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/orlando_magic.png"
+    },
+    "019dbbf7-f21c-756b-9673-7f389fc1658b": {
+        "team_id": "019dbbf7-f21c-756b-9673-7f389fc1658b",
+        "team_name": "Charlotte Hornets",
+        "team_emoji": "🐝",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/charlotte_hornets.png"
+    },
+    "019dbbf7-f21d-7e35-bb97-3c0ebc7bbeb3": {
+        "team_id": "019dbbf7-f21d-7e35-bb97-3c0ebc7bbeb3",
+        "team_name": "Miami Heat",
+        "team_emoji": "🔥",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/miami_heat.png"
+    },
+    "019dbbf7-f21e-7026-81e9-e778f2b9e3f0": {
+        "team_id": "019dbbf7-f21e-7026-81e9-e778f2b9e3f0",
+        "team_name": "Detroit Pistons",
+        "team_emoji": "⚙️",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/detroit_pistons.png"
+    },
+    "019dbbf7-f21f-73b6-b727-8594c5f492b0": {
+        "team_id": "019dbbf7-f21f-73b6-b727-8594c5f492b0",
+        "team_name": "Boston Celtics",
+        "team_emoji": "🍀",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/boston_celtics.png"
+    },
+    "019dbbf7-f220-7e2f-806d-606f33f15101": {
+        "team_id": "019dbbf7-f220-7e2f-806d-606f33f15101",
+        "team_name": "NY Knicks",
+        "team_emoji": "🗽",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/ny_knicks.png"
+    },
+    "019dbbf7-f221-7543-aa11-81c0265a5d4a": {
+        "team_id": "019dbbf7-f221-7543-aa11-81c0265a5d4a",
+        "team_name": "Atlanta Hawks",
+        "team_emoji": "🦅",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/atlanta_hawks.png"
+    },
+    "019dbbf7-f222-7b08-8149-e379818b8444": {
+        "team_id": "019dbbf7-f222-7b08-8149-e379818b8444",
+        "team_name": "Cleveland Cavaliers",
+        "team_emoji": "⚔️",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/cleveland_cavaliers.png"
+    },
+    "019dbbf7-f223-786c-8f06-a75b21b937f7": {
+        "team_id": "019dbbf7-f223-786c-8f06-a75b21b937f7",
+        "team_name": "Toronto Raptors",
+        "team_emoji": "🦖",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/toronto_raptors.png"
+    },
+    "019dbbf7-f224-72f7-bbf6-2457af0c0470": {
+        "team_id": "019dbbf7-f224-72f7-bbf6-2457af0c0470",
+        "team_name": "Phoenix Suns",
+        "team_emoji": "☀️",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/phoenix_suns.png"
+    },
+    "019dbbf7-f225-7636-9865-836891b791ba": {
+        "team_id": "019dbbf7-f225-7636-9865-836891b791ba",
+        "team_name": "Portland Trail Blazers",
+        "team_emoji": "🌲",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/portland_trail_blazers.png"
+    },
+    "019dbbf7-f226-79b5-9775-4b0dd5f9d64b": {
+        "team_id": "019dbbf7-f226-79b5-9775-4b0dd5f9d64b",
+        "team_name": "LA Clippers",
+        "team_emoji": "⛵",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/la_clippers.png"
+    },
+    "019dbbf7-f227-7258-bc8c-c28b0a288e08": {
+        "team_id": "019dbbf7-f227-7258-bc8c-c28b0a288e08",
+        "team_name": "Golden State Warriors",
+        "team_emoji": "🌉",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/golden_state_warriors.png"
+    },
+    "019dbbf7-f228-767a-8f7a-0edd3bb23117": {
+        "team_id": "019dbbf7-f228-767a-8f7a-0edd3bb23117",
+        "team_name": "OKC Thunder",
+        "team_emoji": "⚡",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/okc_thunder.png"
+    },
+    "019dbbf7-f229-7bd2-8472-c00c8845d248": {
+        "team_id": "019dbbf7-f229-7bd2-8472-c00c8845d248",
+        "team_name": "SA Spurs",
+        "team_emoji": "🤠",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/sa_spurs.png"
+    },
+    "019dbbf7-f22a-7216-90d2-361cb042a9ae": {
+        "team_id": "019dbbf7-f22a-7216-90d2-361cb042a9ae",
+        "team_name": "Denver Nuggets",
+        "team_emoji": "⛏️",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/denver_nuggets.png"
+    },
+    "019dbbf7-f22b-78a1-af13-18fbaafb7366": {
+        "team_id": "019dbbf7-f22b-78a1-af13-18fbaafb7366",
+        "team_name": "Minnesota Timberwolves",
+        "team_emoji": "🐺",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/minnesota_timberwolves.png"
+    },
+    "019dbbf7-f22c-7c64-bccc-466ee15273b4": {
+        "team_id": "019dbbf7-f22c-7c64-bccc-466ee15273b4",
+        "team_name": "LA Lakers",
+        "team_emoji": "🟣🟡",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/la_lakers.png"
+    },
+    "019dbbf7-f22d-779b-97b5-3df730c140ec": {
+        "team_id": "019dbbf7-f22d-779b-97b5-3df730c140ec",
+        "team_name": "Houston Rockets",
+        "team_emoji": "🚀",
+        "team_national_flag": "🇺🇸",
+        "team_image_file_location": "assets/teams/nba/houston_rockets.png"
+    },
+    "019dbbf7-f22e-7a0e-8d6a-735b7662d44a": {
+        "team_id": "019dbbf7-f22e-7a0e-8d6a-735b7662d44a",
+        "team_name": "Paris Saint-Germain",
+        "team_emoji": "⚽",
+        "team_national_flag": "🇫🇷",
+        "team_image_file_location": "assets/teams/ucl/paris_saint-germain.png"
+    },
+    "019dbbf7-f22f-781a-91d6-d22c94006e98": {
+        "team_id": "019dbbf7-f22f-781a-91d6-d22c94006e98",
+        "team_name": "Chelsea",
+        "team_emoji": "⚽",
+        "team_national_flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "team_image_file_location": "assets/teams/ucl/chelsea.png"
+    },
+    "019dbbf7-f230-712b-a6d3-cb7728fdc2ca": {
+        "team_id": "019dbbf7-f230-712b-a6d3-cb7728fdc2ca",
+        "team_name": "Galatasaray",
+        "team_emoji": "⚽",
+        "team_national_flag": "🇹🇷",
+        "team_image_file_location": "assets/teams/ucl/galatasaray.png"
+    },
+    "019dbbf7-f231-7b74-94ad-1ae6915dd39b": {
+        "team_id": "019dbbf7-f231-7b74-94ad-1ae6915dd39b",
+        "team_name": "Liverpool",
+        "team_emoji": "⚽",
+        "team_national_flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "team_image_file_location": "assets/teams/ucl/liverpool.png"
+    },
+    "019dbbf7-f232-7268-8dcd-3f6623d9294f": {
+        "team_id": "019dbbf7-f232-7268-8dcd-3f6623d9294f",
+        "team_name": "Real Madrid",
+        "team_emoji": "⚽",
+        "team_national_flag": "🇪🇸",
+        "team_image_file_location": "assets/teams/ucl/real_madrid.png"
+    },
+    "019dbbf7-f233-7d63-a879-5b6b65715902": {
+        "team_id": "019dbbf7-f233-7d63-a879-5b6b65715902",
+        "team_name": "Manchester City",
+        "team_emoji": "⚽",
+        "team_national_flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "team_image_file_location": "assets/teams/ucl/manchester_city.png"
+    },
+    "019dbbf7-f234-77e3-9090-44d32f87d5e0": {
+        "team_id": "019dbbf7-f234-77e3-9090-44d32f87d5e0",
+        "team_name": "Atalanta",
+        "team_emoji": "⚽",
+        "team_national_flag": "🇮🇹",
+        "team_image_file_location": "assets/teams/ucl/atalanta.png"
+    },
+    "019dbbf7-f235-731a-aa63-21c676333e55": {
+        "team_id": "019dbbf7-f235-731a-aa63-21c676333e55",
+        "team_name": "Bayern Munich",
+        "team_emoji": "⚽",
+        "team_national_flag": "🇩🇪",
+        "team_image_file_location": "assets/teams/ucl/bayern_munich.png"
+    },
+    "019dbbf7-f236-7515-8bf9-066229476b46": {
+        "team_id": "019dbbf7-f236-7515-8bf9-066229476b46",
+        "team_name": "Newcastle",
+        "team_emoji": "⚽",
+        "team_national_flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "team_image_file_location": "assets/teams/ucl/newcastle.png"
+    },
+    "019dbbf7-f237-79e6-b9a7-182f3056417f": {
+        "team_id": "019dbbf7-f237-79e6-b9a7-182f3056417f",
+        "team_name": "Barcelona",
+        "team_emoji": "⚽",
+        "team_national_flag": "🇪🇸",
+        "team_image_file_location": "assets/teams/ucl/barcelona.png"
+    },
+    "019dbbf7-f238-70c3-a22c-216cd8f16f06": {
+        "team_id": "019dbbf7-f238-70c3-a22c-216cd8f16f06",
+        "team_name": "Atlético Madrid",
+        "team_emoji": "⚽",
+        "team_national_flag": "🇪🇸",
+        "team_image_file_location": "assets/teams/ucl/atlético_madrid.png"
+    },
+    "019dbbf7-f239-7b4a-81e7-d123c8cc945c": {
+        "team_id": "019dbbf7-f239-7b4a-81e7-d123c8cc945c",
+        "team_name": "Tottenham",
+        "team_emoji": "⚽",
+        "team_national_flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "team_image_file_location": "assets/teams/ucl/tottenham.png"
+    },
+    "019dbbf7-f23a-7bdb-8f0b-f8f059a55885": {
+        "team_id": "019dbbf7-f23a-7bdb-8f0b-f8f059a55885",
+        "team_name": "Bodø/Glimt",
+        "team_emoji": "⚽",
+        "team_national_flag": "🇳🇴",
+        "team_image_file_location": "assets/teams/ucl/bodø/glimt.png"
+    },
+    "019dbbf7-f23b-7341-acac-d1c350aceee1": {
+        "team_id": "019dbbf7-f23b-7341-acac-d1c350aceee1",
+        "team_name": "Sporting CP",
+        "team_emoji": "⚽",
+        "team_national_flag": "🇵🇹",
+        "team_image_file_location": "assets/teams/ucl/sporting_cp.png"
+    },
+    "019dbbf7-f23c-7cb2-a16f-033f5565b0dc": {
+        "team_id": "019dbbf7-f23c-7cb2-a16f-033f5565b0dc",
+        "team_name": "Bayer Leverkusen",
+        "team_emoji": "⚽",
+        "team_national_flag": "🇩🇪",
+        "team_image_file_location": "assets/teams/ucl/bayer_leverkusen.png"
+    },
+    "019dbbf7-f23d-7d2b-9943-863b596c8ea1": {
+        "team_id": "019dbbf7-f23d-7d2b-9943-863b596c8ea1",
+        "team_name": "Arsenal",
+        "team_emoji": "⚽",
+        "team_national_flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        "team_image_file_location": "assets/teams/ucl/arsenal.png"
+    }
+}
