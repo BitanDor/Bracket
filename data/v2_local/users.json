@@ -1,0 +1,109 @@
+{
+    "019dbbe0-fb88-7250-9bd3-2eb71bbbd15b": {
+        "user_id": "019dbbe0-fb88-7250-9bd3-2eb71bbbd15b",
+        "username": "Dor",
+        "first_name": "Dor",
+        "last_name": "",
+        "email": "dor@example.com",
+        "hashed_password": "$2b$12$Pll9dVSkL3Tw7APIzirudOFHDgrfgPTmWqqFMcqQwt41k.6X/smli",
+        "role": "admin",
+        "active_tournaments": {
+            "019dbbe0-fb86-771f-8c54-c3f07108f0b4": {},
+            "019dbbe0-fb87-7065-96f5-b4e509a4aa74": {}
+        },
+        "past_tournaments": {}
+    },
+    "019dbbe0-fb89-771d-a82f-051e9a671af1": {
+        "user_id": "019dbbe0-fb89-771d-a82f-051e9a671af1",
+        "username": "Alon",
+        "first_name": "Alon",
+        "last_name": "",
+        "email": "alon@example.com",
+        "hashed_password": "$2b$12$UQKRVmBxwHJH6ml.doZvHuh.Ci/NMAjQIXTO.S7AUsGHSp3xrtJp2",
+        "role": "regular",
+        "active_tournaments": {
+            "019dbbe0-fb86-771f-8c54-c3f07108f0b4": {},
+            "019dbbe0-fb87-7065-96f5-b4e509a4aa74": {}
+        },
+        "past_tournaments": {}
+    },
+    "019dbbe0-fb8a-7a4a-a36b-8962a82dbc39": {
+        "user_id": "019dbbe0-fb8a-7a4a-a36b-8962a82dbc39",
+        "username": "Nir",
+        "first_name": "Nir",
+        "last_name": "",
+        "email": "nir@example.com",
+        "hashed_password": "$2b$12$yx/QUTupt15yKKHaP5yLE.D.MRB1QZshOqGPF.jcFkk9wJ5tesY0y",
+        "role": "regular",
+        "active_tournaments": {
+            "019dbbe0-fb86-771f-8c54-c3f07108f0b4": {},
+            "019dbbe0-fb87-7065-96f5-b4e509a4aa74": {}
+        },
+        "past_tournaments": {}
+    },
+    "019dbbe0-fb8b-7dd7-b9ce-fdb8e560af94": {
+        "user_id": "019dbbe0-fb8b-7dd7-b9ce-fdb8e560af94",
+        "username": "Maor",
+        "first_name": "Maor",
+        "last_name": "",
+        "email": "maor@example.com",
+        "hashed_password": "$2b$12$RPMQTL4rNPKnKA/5jaJ9eeb9IJIRkUkAI2T9wpp0hA2/WRrR34vxm",
+        "role": "regular",
+        "active_tournaments": {
+            "019dbbe0-fb87-7065-96f5-b4e509a4aa74": {}
+        },
+        "past_tournaments": {}
+    },
+    "019dbbe0-fb8c-7279-910d-5c2774126752": {
+        "user_id": "019dbbe0-fb8c-7279-910d-5c2774126752",
+        "username": "Shusha",
+        "first_name": "Shusha",
+        "last_name": "",
+        "email": "shusha@example.com",
+        "hashed_password": "$2b$12$F0E2BLO3XhvtntnCfBjeK.wiJfEogNUxpO7BBJRWzjzs8kpaHdura",
+        "role": "regular",
+        "active_tournaments": {
+            "019dbbe0-fb86-771f-8c54-c3f07108f0b4": {}
+        },
+        "past_tournaments": {}
+    },
+    "019dbbe0-fb8d-737a-90f0-b9c93fe9d076": {
+        "user_id": "019dbbe0-fb8d-737a-90f0-b9c93fe9d076",
+        "username": "Ziv",
+        "first_name": "Ziv",
+        "last_name": "",
+        "email": "ziv@example.com",
+        "hashed_password": "$2b$12$P.Byr7GVRNLR/K84XbAtj.0GoEmZXSaezPHSW6aIGg3dxi2Zt2Fd2",
+        "role": "regular",
+        "active_tournaments": {
+            "019dbbe0-fb86-771f-8c54-c3f07108f0b4": {}
+        },
+        "past_tournaments": {}
+    },
+    "019dbbe0-fb8e-7982-871f-951b96334895": {
+        "user_id": "019dbbe0-fb8e-7982-871f-951b96334895",
+        "username": "Galya",
+        "first_name": "Galya",
+        "last_name": "",
+        "email": "galya@example.com",
+        "hashed_password": "$2b$12$6GxOkb376CTVXsLXMNZ/VeRJbNVpK8Yxvp.SiyGgmxHYfXlYMSJFO",
+        "role": "regular",
+        "active_tournaments": {
+            "019dbbe0-fb86-771f-8c54-c3f07108f0b4": {}
+        },
+        "past_tournaments": {}
+    },
+    "019dbbe0-fb8f-708a-b02c-f9badf3cf381": {
+        "user_id": "019dbbe0-fb8f-708a-b02c-f9badf3cf381",
+        "username": "Bob",
+        "first_name": "Bob",
+        "last_name": "",
+        "email": "bob@example.com",
+        "hashed_password": "$2b$12$i81v2QFq2RhvmyAc6se0TOuf5.n0O0f8CB5QUgH4hKHps4pFn6MsO",
+        "role": "regular",
+        "active_tournaments": {
+            "019dbbe0-fb86-771f-8c54-c3f07108f0b4": {}
+        },
+        "past_tournaments": {}
+    }
+}

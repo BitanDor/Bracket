@@ -2,7 +2,7 @@ from enum import Enum
 from datetime import datetime
 from typing import TypeAlias, Tuple, Dict, List, Optional, Union
 import uuid6 # we use uuid6.uuid7()
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field, EmailStr, ConfigDict
 # TODO: use Field to specify rules regarding data validation, e.g., for email format, password strength, etc.
 
 userId: TypeAlias = uuid6.UUID
@@ -68,6 +68,7 @@ class MatchGuessData(BaseModel):
 UserBracketGuess: TypeAlias = Dict[matchId, MatchGuessData]
 
 class Team(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
     team_id: teamId
     team_name: str
     team_emoji: str
@@ -82,6 +83,7 @@ class Team(BaseModel):
                 setattr(self, key, value)
 
 class Stage(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
     stage_id: stageId
     stage_name: str
     stage_type: StageType
@@ -89,17 +91,18 @@ class Stage(BaseModel):
 
 
 class Match(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
     match_id: matchId
     home_team_id: Optional[teamId] = None
     away_team_id: Optional[teamId] = None
     scheduled_time: datetime
     stage_id: stageId
-
     score: MatchScore = MatchScore.PENDING
     detailed_score: Optional[DetailedScore] = None
     has_ended: bool = False
 
 class PrivateBracket(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
     bracket_id: privateBracketId
     tournament_id: tournamentId
     join_link: str
@@ -110,6 +113,7 @@ class PrivateBracket(BaseModel):
 
 
 class User(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
     user_id: userId
     username: str # Must be unique
     first_name: str
@@ -129,6 +133,7 @@ class User(BaseModel):
 
 
 class Tournament(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
     tournament_id: tournamentId
     tournament_name: str
     participating_teams: List[teamId]
