@@ -60,6 +60,30 @@ class DetailedScoreType(str, Enum):
     HOME_AWAY = "home_away"
     SERIES = "series"
 
+class SourceType(str, Enum):
+    MATCH = "match"
+    TABLE = "table"
+
+class SelectionRule(str, Enum):
+    WINNER = "winner"
+    LOSER = "loser"
+    RANK_1 = "rank_1"
+    RANK_2 = "rank_2"
+    RANK_3 = "rank_3"
+    RANK_4 = "rank_4"
+    RANK_5 = "rank_5"
+    RANK_6 = "rank_6"
+    RANK_7 = "rank_7"
+    RANK_8 = "rank_8"
+
+# --- Updated Wiring Models ---
+class DependencySource(BaseModel):
+    """Defines where a team in a match slot comes from (Match or Stage Table)"""
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    source_id: Union[matchId, stageId]
+    source_type: SourceType
+    rule: SelectionRule
+
 class MatchGuessData(BaseModel):
     score: MatchScore
     detailed_score: Optional[DetailedScore] = None
