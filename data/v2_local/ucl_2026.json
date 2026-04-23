@@ -1,0 +1,202 @@
+{
+    "tournament_id": "019dbbe0-fb86-771f-8c54-c3f07108f0b4",
+    "tournament_name": "UEFA Champions League 2026",
+    "participating_teams": [
+        "019dbbf7-f22e-7a0e-8d6a-735b7662d44a",
+        "019dbbf7-f22f-781a-91d6-d22c94006e98",
+        "019dbbf7-f230-712b-a6d3-cb7728fdc2ca",
+        "019dbbf7-f231-7b74-94ad-1ae6915dd39b",
+        "019dbbf7-f232-7268-8dcd-3f6623d9294f",
+        "019dbbf7-f233-7d63-a879-5b6b65715902",
+        "019dbbf7-f234-77e3-9090-44d32f87d5e0",
+        "019dbbf7-f235-731a-aa63-21c676333e55",
+        "019dbbf7-f236-7515-8bf9-066229476b46",
+        "019dbbf7-f237-79e6-b9a7-182f3056417f",
+        "019dbbf7-f238-70c3-a22c-216cd8f16f06",
+        "019dbbf7-f239-7b4a-81e7-d123c8cc945c",
+        "019dbbf7-f23a-7bdb-8f0b-f8f059a55885",
+        "019dbbf7-f23b-7341-acac-d1c350aceee1",
+        "019dbbf7-f23c-7cb2-a16f-033f5565b0dc",
+        "019dbbf7-f23d-7d2b-9943-863b596c8ea1"
+    ],
+    "stages": [
+        {
+            "stage_id": "019dbc1b-f28b-7fe7-a511-ceae03ef701c",
+            "stage_name": "R16",
+            "stage_type": "playoff stage",
+            "stage_possible_detailed_score": "home_away"
+        },
+        {
+            "stage_id": "019dbc1b-f28c-7a4c-970e-4471e7a804f4",
+            "stage_name": "QF",
+            "stage_type": "playoff stage",
+            "stage_possible_detailed_score": "home_away"
+        },
+        {
+            "stage_id": "019dbc1b-f28d-7147-9a14-50f9ad243904",
+            "stage_name": "SF",
+            "stage_type": "playoff stage",
+            "stage_possible_detailed_score": "home_away"
+        },
+        {
+            "stage_id": "019dbc1b-f28e-74b6-8f11-445161a2217f",
+            "stage_name": "FINAL",
+            "stage_type": "playoff stage",
+            "stage_possible_detailed_score": "decisive"
+        }
+    ],
+    "matches": [
+        {
+            "match_id": "019dbc1b-f28f-7999-821a-5d29451e5ba3",
+            "home_team_id": "019dbbf7-f22e-7a0e-8d6a-735b7662d44a",
+            "away_team_id": "019dbbf7-f22f-781a-91d6-d22c94006e98",
+            "scheduled_time": "2026-04-23T23:50:41.402495",
+            "stage_id": "019dbc1b-f28b-7fe7-a511-ceae03ef701c",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f290-7c37-842b-b42d88b9977a",
+            "home_team_id": "019dbbf7-f230-712b-a6d3-cb7728fdc2ca",
+            "away_team_id": "019dbbf7-f231-7b74-94ad-1ae6915dd39b",
+            "scheduled_time": "2026-04-23T23:50:41.402505",
+            "stage_id": "019dbc1b-f28b-7fe7-a511-ceae03ef701c",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f291-7193-8e65-dec69d088447",
+            "home_team_id": "019dbbf7-f232-7268-8dcd-3f6623d9294f",
+            "away_team_id": "019dbbf7-f233-7d63-a879-5b6b65715902",
+            "scheduled_time": "2026-04-23T23:50:41.402511",
+            "stage_id": "019dbc1b-f28b-7fe7-a511-ceae03ef701c",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f292-7957-800d-5866a9ce3180",
+            "home_team_id": "019dbbf7-f234-77e3-9090-44d32f87d5e0",
+            "away_team_id": "019dbbf7-f235-731a-aa63-21c676333e55",
+            "scheduled_time": "2026-04-23T23:50:41.402524",
+            "stage_id": "019dbc1b-f28b-7fe7-a511-ceae03ef701c",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f293-71de-8bc1-461513efe18b",
+            "home_team_id": "019dbbf7-f236-7515-8bf9-066229476b46",
+            "away_team_id": "019dbbf7-f237-79e6-b9a7-182f3056417f",
+            "scheduled_time": "2026-04-23T23:50:41.402529",
+            "stage_id": "019dbc1b-f28b-7fe7-a511-ceae03ef701c",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f294-7a7a-9213-bba235a38584",
+            "home_team_id": "019dbbf7-f238-70c3-a22c-216cd8f16f06",
+            "away_team_id": "019dbbf7-f239-7b4a-81e7-d123c8cc945c",
+            "scheduled_time": "2026-04-23T23:50:41.402535",
+            "stage_id": "019dbc1b-f28b-7fe7-a511-ceae03ef701c",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f295-7abe-aa6f-a4775e7784f3",
+            "home_team_id": "019dbbf7-f23a-7bdb-8f0b-f8f059a55885",
+            "away_team_id": "019dbbf7-f23b-7341-acac-d1c350aceee1",
+            "scheduled_time": "2026-04-23T23:50:41.402540",
+            "stage_id": "019dbc1b-f28b-7fe7-a511-ceae03ef701c",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f296-7784-8784-4b45d935c4b4",
+            "home_team_id": "019dbbf7-f23c-7cb2-a16f-033f5565b0dc",
+            "away_team_id": "019dbbf7-f23d-7d2b-9943-863b596c8ea1",
+            "scheduled_time": "2026-04-23T23:50:41.402545",
+            "stage_id": "019dbc1b-f28b-7fe7-a511-ceae03ef701c",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f297-7462-8b83-db5493694d97",
+            "home_team_id": null,
+            "away_team_id": null,
+            "scheduled_time": "2026-04-23T23:50:41.402549",
+            "stage_id": "019dbc1b-f28c-7a4c-970e-4471e7a804f4",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f298-7f1c-8718-fee55cb6aa7d",
+            "home_team_id": null,
+            "away_team_id": null,
+            "scheduled_time": "2026-04-23T23:50:41.402552",
+            "stage_id": "019dbc1b-f28c-7a4c-970e-4471e7a804f4",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f299-76b0-a287-f44e2fb0b3a8",
+            "home_team_id": null,
+            "away_team_id": null,
+            "scheduled_time": "2026-04-23T23:50:41.402556",
+            "stage_id": "019dbc1b-f28c-7a4c-970e-4471e7a804f4",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f29a-705c-b58e-4de4676ad6d8",
+            "home_team_id": null,
+            "away_team_id": null,
+            "scheduled_time": "2026-04-23T23:50:41.402559",
+            "stage_id": "019dbc1b-f28c-7a4c-970e-4471e7a804f4",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f29b-71ac-a7d9-59f2fdd57651",
+            "home_team_id": null,
+            "away_team_id": null,
+            "scheduled_time": "2026-04-23T23:50:41.402563",
+            "stage_id": "019dbc1b-f28d-7147-9a14-50f9ad243904",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f29c-79d8-a1f0-2558667a7b77",
+            "home_team_id": null,
+            "away_team_id": null,
+            "scheduled_time": "2026-04-23T23:50:41.402566",
+            "stage_id": "019dbc1b-f28d-7147-9a14-50f9ad243904",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        },
+        {
+            "match_id": "019dbc1b-f29d-71dc-aa11-2e40b9375f97",
+            "home_team_id": null,
+            "away_team_id": null,
+            "scheduled_time": "2026-04-23T23:50:41.402570",
+            "stage_id": "019dbc1b-f28e-74b6-8f11-445161a2217f",
+            "score": "TBD",
+            "detailed_score": null,
+            "has_ended": false
+        }
+    ],
+    "participating_users": [],
+    "private_brackets": []
+}

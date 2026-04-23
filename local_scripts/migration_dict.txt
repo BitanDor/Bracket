@@ -3,3 +3,4 @@
 002 - change uid to user id in supabase user table (19.4)
 003 - create v2 users local JSON (23.4)
 004 - create v2 teams local JSON (23.4)
+005 - create v2 tournaments local JSON (24.4)

@@ -1,3 +1,5 @@
+# executed 23.4 to create teams in the system (local)
+
 import json
 import uuid6
 from domain.models import Team
