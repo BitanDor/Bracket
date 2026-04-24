@@ -11,7 +11,7 @@ matchId: TypeAlias = uuid6.UUID
 teamId: TypeAlias = uuid6.UUID
 tournamentId: TypeAlias = uuid6.UUID
 privateBracketId: TypeAlias = uuid6.UUID
-
+groupId: TypeAlias = uuid6.UUID
 SingleMatchScore: TypeAlias = Tuple[int, int]
 
 class StageType(str, Enum):
@@ -62,7 +62,7 @@ class DetailedScoreType(str, Enum):
 
 class SourceType(str, Enum):
     MATCH = "match"
-    TABLE = "table"
+    GROUP = "group"
 
 class SelectionRule(str, Enum):
     WINNER = "winner"
@@ -70,19 +70,25 @@ class SelectionRule(str, Enum):
     RANK_1 = "rank_1"
     RANK_2 = "rank_2"
     RANK_3 = "rank_3"
-    RANK_4 = "rank_4"
-    RANK_5 = "rank_5"
-    RANK_6 = "rank_6"
-    RANK_7 = "rank_7"
-    RANK_8 = "rank_8"
+    LAMBDA = "lambda" # for more complex selection rules that don't fit the above categories,
+    # e.g., "best 4th place teams across all groups" - in this case, the actual logic will be implemented
+    # in the Tournament.update_true_results_and_process() method, and the rule will be identified by a unique
+    # string key that is used to trigger the correct logic branch.
 
 # --- Updated Wiring Models ---
 class DependencySource(BaseModel):
     """Defines where a team in a match slot comes from (Match or Stage Table)"""
     model_config = ConfigDict(arbitrary_types_allowed=True)
-    source_id: Union[matchId, stageId]
+    source_id: Union[matchId, groupId]
     source_type: SourceType
     rule: SelectionRule
+
+class DependencyTarget(BaseModel):
+    """Output: Where do I send my results?"""
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    target_id: Union[matchId, groupId]
+    # 'home', 'away' for matches, or 'group_member' for groups
+    target_slot: str
 
 class MatchGuessData(BaseModel):
     score: MatchScore
@@ -106,6 +112,15 @@ class Team(BaseModel):
             if hasattr(self, key) and value is not None:
                 setattr(self, key, value)
 
+class TeamStats(BaseModel):
+    games_played: int = 0
+    won: int = 0
+    draw: int = 0
+    lost: int = 0
+    goals_for: int = 0
+    goals_against: int = 0
+    points: int = 0
+
 class Stage(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
     stage_id: stageId
@@ -114,6 +129,18 @@ class Stage(BaseModel):
     stage_possible_detailed_score: DetailedScoreType
 
 
+class Group(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    group_id: groupId
+    stage_id: stageId
+    group_name: str
+    participating_teams: List[teamId] = []
+    team_stats: Dict[teamId, TeamStats] = {}
+    member_matches: List[matchId] = [] # The matches that feed this group's stats
+    input_sources: List[DependencySource] = [] # Who feeds this group's team list
+    output_targets: List[DependencyTarget] = [] # Where do my ranked teams go
+    has_ended: bool = False
+
 class Match(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
     match_id: matchId
@@ -121,9 +148,13 @@ class Match(BaseModel):
     away_team_id: Optional[teamId] = None
     scheduled_time: datetime
     stage_id: stageId
+    home_source: Optional[DependencySource] = None
+    away_source: Optional[DependencySource] = None
+    output_targets: List[DependencyTarget] = []
     score: MatchScore = MatchScore.PENDING
     detailed_score: Optional[DetailedScore] = None
     has_ended: bool = False
+
 
 class PrivateBracket(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
@@ -162,7 +193,8 @@ class Tournament(BaseModel):
     tournament_name: str
     participating_teams: List[teamId]
     stages: List[Stage]
-    matches: list[Match]
+    groups: List[Group] = []
+    matches: List[Match]
     participating_users: set[userId]
     private_brackets: list[privateBracketId]
     def store_to_database(self):
