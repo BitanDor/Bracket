@@ -25,37 +25,37 @@
     ],
     "stages": [
         {
-            "stage_id": "019dbfd1-84d0-744f-90a7-c2350239c098",
+            "stage_id": "019dbffa-98e3-7238-8951-8553aee8083b",
             "stage_name": "PLAY_IN_1",
             "stage_type": "play-in stage",
             "stage_possible_detailed_score": "series"
         },
         {
-            "stage_id": "019dbfd1-84d1-7adb-875a-06262b9664b2",
+            "stage_id": "019dbffa-98e4-7f15-8798-c11f5a4f2ad6",
             "stage_name": "PLAY_IN_2",
             "stage_type": "play-in stage",
             "stage_possible_detailed_score": "series"
         },
         {
-            "stage_id": "019dbfd1-84d2-784f-80dc-1223a7527302",
+            "stage_id": "019dbffa-98e5-7453-9cc3-aadb2679e475",
             "stage_name": "R1",
             "stage_type": "playoff stage",
             "stage_possible_detailed_score": "series"
         },
         {
-            "stage_id": "019dbfd1-84d3-7308-9878-6d30f6192d5e",
+            "stage_id": "019dbffa-98e6-7779-b5f0-ae0f9cf38587",
             "stage_name": "CONF_SEMIS",
             "stage_type": "playoff stage",
             "stage_possible_detailed_score": "series"
         },
         {
-            "stage_id": "019dbfd1-84d4-7cd7-95c3-db2f32333554",
+            "stage_id": "019dbffa-98e7-7c1c-9096-41bc7fdee4b0",
             "stage_name": "CONF_FINALS",
             "stage_type": "playoff stage",
             "stage_possible_detailed_score": "series"
         },
         {
-            "stage_id": "019dbfd1-84d5-7672-80d4-2da9bb6974fb",
+            "stage_id": "019dbffa-98e8-7445-9764-7473d823a61b",
             "stage_name": "FINALS",
             "stage_type": "playoff stage",
             "stage_possible_detailed_score": "series"
@@ -64,21 +64,23 @@
     "groups": [],
     "matches": [
         {
-            "match_id": "019dbfd1-84d6-795b-a158-a452dd16e60b",
+            "match_id": "019dbffa-98e9-78ce-b135-4a9c12d0fa50",
             "home_team_id": "019dbbf7-f21a-737a-85aa-a0bcddb853af",
             "away_team_id": "019dbbf7-f21b-7dee-af90-f3f6b395123f",
-            "scheduled_time": "2026-04-24T17:07:52.528611",
-            "stage_id": "019dbfd1-84d0-744f-90a7-c2350239c098",
+            "scheduled_time": "2026-04-24T17:52:44.643281",
+            "stage_id": "019dbffa-98e3-7238-8951-8553aee8083b",
             "home_source": null,
             "away_source": null,
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84da-7740-acd8-b5471020d313",
-                    "target_slot": "home"
+                    "target_id": "019dbffa-98ed-796d-9b12-98060bbd2341",
+                    "target_slot": "home",
+                    "rule": "loser"
                 },
                 {
-                    "target_id": "019dbfd1-84dd-7432-b992-8083f37299fd",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98f0-7d80-acba-bec7df294254",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -86,17 +88,18 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84d7-76e7-b94f-9ca9f9c27b23",
+            "match_id": "019dbffa-98ea-7ab1-818a-97b1d8720578",
             "home_team_id": "019dbbf7-f21c-756b-9673-7f389fc1658b",
             "away_team_id": "019dbbf7-f21d-7e35-bb97-3c0ebc7bbeb3",
-            "scheduled_time": "2026-04-24T17:07:52.528653",
-            "stage_id": "019dbfd1-84d0-744f-90a7-c2350239c098",
+            "scheduled_time": "2026-04-24T17:52:44.643302",
+            "stage_id": "019dbffa-98e3-7238-8951-8553aee8083b",
             "home_source": null,
             "away_source": null,
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84da-7740-acd8-b5471020d313",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98ed-796d-9b12-98060bbd2341",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -104,21 +107,23 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84d8-73e1-a448-b32550be2525",
+            "match_id": "019dbffa-98eb-7dc6-aad8-df7b48bfd9ba",
             "home_team_id": "019dbbf7-f224-72f7-bbf6-2457af0c0470",
             "away_team_id": "019dbbf7-f225-7636-9865-836891b791ba",
-            "scheduled_time": "2026-04-24T17:07:52.528669",
-            "stage_id": "019dbfd1-84d0-744f-90a7-c2350239c098",
+            "scheduled_time": "2026-04-24T17:52:44.643310",
+            "stage_id": "019dbffa-98e3-7238-8951-8553aee8083b",
             "home_source": null,
             "away_source": null,
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84db-71e1-adf8-b40f23b4fd9f",
-                    "target_slot": "home"
+                    "target_id": "019dbffa-98ee-7b86-96dc-c8517001185a",
+                    "target_slot": "home",
+                    "rule": "loser"
                 },
                 {
-                    "target_id": "019dbfd1-84e1-7da0-8b20-e99a53e27545",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98f4-7c2a-844e-f8e6ee035325",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -126,17 +131,18 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84d9-7827-ba65-62e2c3990068",
+            "match_id": "019dbffa-98ec-78e9-b830-89048a83b9cf",
             "home_team_id": "019dbbf7-f226-79b5-9775-4b0dd5f9d64b",
             "away_team_id": "019dbbf7-f227-7258-bc8c-c28b0a288e08",
-            "scheduled_time": "2026-04-24T17:07:52.528683",
-            "stage_id": "019dbfd1-84d0-744f-90a7-c2350239c098",
+            "scheduled_time": "2026-04-24T17:52:44.643316",
+            "stage_id": "019dbffa-98e3-7238-8951-8553aee8083b",
             "home_source": null,
             "away_source": null,
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84db-71e1-adf8-b40f23b4fd9f",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98ee-7b86-96dc-c8517001185a",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -144,25 +150,26 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84da-7740-acd8-b5471020d313",
+            "match_id": "019dbffa-98ed-796d-9b12-98060bbd2341",
             "home_team_id": null,
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528694",
-            "stage_id": "019dbfd1-84d1-7adb-875a-06262b9664b2",
+            "scheduled_time": "2026-04-24T17:52:44.643321",
+            "stage_id": "019dbffa-98e4-7f15-8798-c11f5a4f2ad6",
             "home_source": {
-                "source_id": "019dbfd1-84d6-795b-a158-a452dd16e60b",
+                "source_id": "019dbffa-98e9-78ce-b135-4a9c12d0fa50",
                 "source_type": "match",
                 "rule": "loser"
             },
             "away_source": {
-                "source_id": "019dbfd1-84d7-76e7-b94f-9ca9f9c27b23",
+                "source_id": "019dbffa-98ea-7ab1-818a-97b1d8720578",
                 "source_type": "match",
                 "rule": "winner"
             },
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84dc-74fc-befe-8bffcf7a8abf",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98ef-7cb0-9382-3305923c7b9e",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -170,25 +177,26 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84db-71e1-adf8-b40f23b4fd9f",
+            "match_id": "019dbffa-98ee-7b86-96dc-c8517001185a",
             "home_team_id": null,
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528705",
-            "stage_id": "019dbfd1-84d1-7adb-875a-06262b9664b2",
+            "scheduled_time": "2026-04-24T17:52:44.643326",
+            "stage_id": "019dbffa-98e4-7f15-8798-c11f5a4f2ad6",
             "home_source": {
-                "source_id": "019dbfd1-84d8-73e1-a448-b32550be2525",
+                "source_id": "019dbffa-98eb-7dc6-aad8-df7b48bfd9ba",
                 "source_type": "match",
                 "rule": "loser"
             },
             "away_source": {
-                "source_id": "019dbfd1-84d9-7827-ba65-62e2c3990068",
+                "source_id": "019dbffa-98ec-78e9-b830-89048a83b9cf",
                 "source_type": "match",
                 "rule": "winner"
             },
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e0-773a-bce2-40192c984244",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98f3-7003-bab7-dabbc855cf03",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -196,21 +204,22 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84dc-74fc-befe-8bffcf7a8abf",
+            "match_id": "019dbffa-98ef-7cb0-9382-3305923c7b9e",
             "home_team_id": "019dbbf7-f21e-7026-81e9-e778f2b9e3f0",
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528716",
-            "stage_id": "019dbfd1-84d2-784f-80dc-1223a7527302",
+            "scheduled_time": "2026-04-24T17:52:44.643332",
+            "stage_id": "019dbffa-98e5-7453-9cc3-aadb2679e475",
             "home_source": null,
             "away_source": {
-                "source_id": "019dbfd1-84da-7740-acd8-b5471020d313",
+                "source_id": "019dbffa-98ed-796d-9b12-98060bbd2341",
                 "source_type": "match",
                 "rule": "winner"
             },
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e4-7620-84f8-a454eda588a2",
-                    "target_slot": "home"
+                    "target_id": "019dbffa-98f7-75e3-93fa-8c446987c39a",
+                    "target_slot": "home",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -218,21 +227,22 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84dd-7432-b992-8083f37299fd",
+            "match_id": "019dbffa-98f0-7d80-acba-bec7df294254",
             "home_team_id": "019dbbf7-f21f-73b6-b727-8594c5f492b0",
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528727",
-            "stage_id": "019dbfd1-84d2-784f-80dc-1223a7527302",
+            "scheduled_time": "2026-04-24T17:52:44.643339",
+            "stage_id": "019dbffa-98e5-7453-9cc3-aadb2679e475",
             "home_source": null,
             "away_source": {
-                "source_id": "019dbfd1-84d6-795b-a158-a452dd16e60b",
+                "source_id": "019dbffa-98e9-78ce-b135-4a9c12d0fa50",
                 "source_type": "match",
                 "rule": "winner"
             },
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e5-7a53-aa80-56eff5e174b7",
-                    "target_slot": "home"
+                    "target_id": "019dbffa-98f8-7d91-a9f8-d521bef9d262",
+                    "target_slot": "home",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -240,17 +250,18 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84de-76c2-b4c1-9f7e67b8ebeb",
+            "match_id": "019dbffa-98f1-7c0e-97e1-e2da9bd82075",
             "home_team_id": "019dbbf7-f220-7e2f-806d-606f33f15101",
             "away_team_id": "019dbbf7-f221-7543-aa11-81c0265a5d4a",
-            "scheduled_time": "2026-04-24T17:07:52.528741",
-            "stage_id": "019dbfd1-84d2-784f-80dc-1223a7527302",
+            "scheduled_time": "2026-04-24T17:52:44.643347",
+            "stage_id": "019dbffa-98e5-7453-9cc3-aadb2679e475",
             "home_source": null,
             "away_source": null,
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e5-7a53-aa80-56eff5e174b7",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98f8-7d91-a9f8-d521bef9d262",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -258,17 +269,18 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84df-7f63-88aa-e21109326d28",
+            "match_id": "019dbffa-98f2-76e4-82df-1afa655d24fc",
             "home_team_id": "019dbbf7-f222-7b08-8149-e379818b8444",
             "away_team_id": "019dbbf7-f223-786c-8f06-a75b21b937f7",
-            "scheduled_time": "2026-04-24T17:07:52.528757",
-            "stage_id": "019dbfd1-84d2-784f-80dc-1223a7527302",
+            "scheduled_time": "2026-04-24T17:52:44.643353",
+            "stage_id": "019dbffa-98e5-7453-9cc3-aadb2679e475",
             "home_source": null,
             "away_source": null,
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e4-7620-84f8-a454eda588a2",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98f7-75e3-93fa-8c446987c39a",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -276,21 +288,22 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84e0-773a-bce2-40192c984244",
+            "match_id": "019dbffa-98f3-7003-bab7-dabbc855cf03",
             "home_team_id": "019dbbf7-f228-767a-8f7a-0edd3bb23117",
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528767",
-            "stage_id": "019dbfd1-84d2-784f-80dc-1223a7527302",
+            "scheduled_time": "2026-04-24T17:52:44.643362",
+            "stage_id": "019dbffa-98e5-7453-9cc3-aadb2679e475",
             "home_source": null,
             "away_source": {
-                "source_id": "019dbfd1-84db-71e1-adf8-b40f23b4fd9f",
+                "source_id": "019dbffa-98ee-7b86-96dc-c8517001185a",
                 "source_type": "match",
                 "rule": "winner"
             },
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e6-70ed-93d9-4bd8297318e2",
-                    "target_slot": "home"
+                    "target_id": "019dbffa-98f9-70a7-8d86-efd4b0869fe2",
+                    "target_slot": "home",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -298,21 +311,22 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84e1-7da0-8b20-e99a53e27545",
+            "match_id": "019dbffa-98f4-7c2a-844e-f8e6ee035325",
             "home_team_id": "019dbbf7-f229-7bd2-8472-c00c8845d248",
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528777",
-            "stage_id": "019dbfd1-84d2-784f-80dc-1223a7527302",
+            "scheduled_time": "2026-04-24T17:52:44.643367",
+            "stage_id": "019dbffa-98e5-7453-9cc3-aadb2679e475",
             "home_source": null,
             "away_source": {
-                "source_id": "019dbfd1-84d8-73e1-a448-b32550be2525",
+                "source_id": "019dbffa-98eb-7dc6-aad8-df7b48bfd9ba",
                 "source_type": "match",
                 "rule": "winner"
             },
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e7-7ba6-9959-ed502186e96a",
-                    "target_slot": "home"
+                    "target_id": "019dbffa-98fa-7da2-8244-5ea521baa47b",
+                    "target_slot": "home",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -320,17 +334,18 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84e2-7c0e-bd6b-5d84c917ebfc",
+            "match_id": "019dbffa-98f5-7291-b838-1a08df65f0e0",
             "home_team_id": "019dbbf7-f22a-7216-90d2-361cb042a9ae",
             "away_team_id": "019dbbf7-f22b-78a1-af13-18fbaafb7366",
-            "scheduled_time": "2026-04-24T17:07:52.528792",
-            "stage_id": "019dbfd1-84d2-784f-80dc-1223a7527302",
+            "scheduled_time": "2026-04-24T17:52:44.643373",
+            "stage_id": "019dbffa-98e5-7453-9cc3-aadb2679e475",
             "home_source": null,
             "away_source": null,
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e7-7ba6-9959-ed502186e96a",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98fa-7da2-8244-5ea521baa47b",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -338,17 +353,18 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84e3-7a3a-8151-db4a87923775",
+            "match_id": "019dbffa-98f6-7064-887a-70d099a763ce",
             "home_team_id": "019dbbf7-f22c-7c64-bccc-466ee15273b4",
             "away_team_id": "019dbbf7-f22d-779b-97b5-3df730c140ec",
-            "scheduled_time": "2026-04-24T17:07:52.528805",
-            "stage_id": "019dbfd1-84d2-784f-80dc-1223a7527302",
+            "scheduled_time": "2026-04-24T17:52:44.643378",
+            "stage_id": "019dbffa-98e5-7453-9cc3-aadb2679e475",
             "home_source": null,
             "away_source": null,
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e6-70ed-93d9-4bd8297318e2",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98f9-70a7-8d86-efd4b0869fe2",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -356,25 +372,26 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84e4-7620-84f8-a454eda588a2",
+            "match_id": "019dbffa-98f7-75e3-93fa-8c446987c39a",
             "home_team_id": null,
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528815",
-            "stage_id": "019dbfd1-84d3-7308-9878-6d30f6192d5e",
+            "scheduled_time": "2026-04-24T17:52:44.643383",
+            "stage_id": "019dbffa-98e6-7779-b5f0-ae0f9cf38587",
             "home_source": {
-                "source_id": "019dbfd1-84dc-74fc-befe-8bffcf7a8abf",
+                "source_id": "019dbffa-98ef-7cb0-9382-3305923c7b9e",
                 "source_type": "match",
                 "rule": "winner"
             },
             "away_source": {
-                "source_id": "019dbfd1-84df-7f63-88aa-e21109326d28",
+                "source_id": "019dbffa-98f2-76e4-82df-1afa655d24fc",
                 "source_type": "match",
                 "rule": "winner"
             },
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e8-7a9c-86dc-2f90b8138877",
-                    "target_slot": "home"
+                    "target_id": "019dbffa-98fb-7a6b-8572-b8fbc4b8677b",
+                    "target_slot": "home",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -382,25 +399,26 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84e5-7a53-aa80-56eff5e174b7",
+            "match_id": "019dbffa-98f8-7d91-a9f8-d521bef9d262",
             "home_team_id": null,
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528824",
-            "stage_id": "019dbfd1-84d3-7308-9878-6d30f6192d5e",
+            "scheduled_time": "2026-04-24T17:52:44.643387",
+            "stage_id": "019dbffa-98e6-7779-b5f0-ae0f9cf38587",
             "home_source": {
-                "source_id": "019dbfd1-84dd-7432-b992-8083f37299fd",
+                "source_id": "019dbffa-98f0-7d80-acba-bec7df294254",
                 "source_type": "match",
                 "rule": "winner"
             },
             "away_source": {
-                "source_id": "019dbfd1-84de-76c2-b4c1-9f7e67b8ebeb",
+                "source_id": "019dbffa-98f1-7c0e-97e1-e2da9bd82075",
                 "source_type": "match",
                 "rule": "winner"
             },
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e8-7a9c-86dc-2f90b8138877",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98fb-7a6b-8572-b8fbc4b8677b",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -408,25 +426,26 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84e6-70ed-93d9-4bd8297318e2",
+            "match_id": "019dbffa-98f9-70a7-8d86-efd4b0869fe2",
             "home_team_id": null,
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528835",
-            "stage_id": "019dbfd1-84d3-7308-9878-6d30f6192d5e",
+            "scheduled_time": "2026-04-24T17:52:44.643393",
+            "stage_id": "019dbffa-98e6-7779-b5f0-ae0f9cf38587",
             "home_source": {
-                "source_id": "019dbfd1-84e0-773a-bce2-40192c984244",
+                "source_id": "019dbffa-98f3-7003-bab7-dabbc855cf03",
                 "source_type": "match",
                 "rule": "winner"
             },
             "away_source": {
-                "source_id": "019dbfd1-84e3-7a3a-8151-db4a87923775",
+                "source_id": "019dbffa-98f6-7064-887a-70d099a763ce",
                 "source_type": "match",
                 "rule": "winner"
             },
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e9-7e0f-8b2b-16a49018e0eb",
-                    "target_slot": "home"
+                    "target_id": "019dbffa-98fc-71b2-84ee-12e8a6e4b36f",
+                    "target_slot": "home",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -434,25 +453,26 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84e7-7ba6-9959-ed502186e96a",
+            "match_id": "019dbffa-98fa-7da2-8244-5ea521baa47b",
             "home_team_id": null,
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528844",
-            "stage_id": "019dbfd1-84d3-7308-9878-6d30f6192d5e",
+            "scheduled_time": "2026-04-24T17:52:44.643398",
+            "stage_id": "019dbffa-98e6-7779-b5f0-ae0f9cf38587",
             "home_source": {
-                "source_id": "019dbfd1-84e1-7da0-8b20-e99a53e27545",
+                "source_id": "019dbffa-98f4-7c2a-844e-f8e6ee035325",
                 "source_type": "match",
                 "rule": "winner"
             },
             "away_source": {
-                "source_id": "019dbfd1-84e2-7c0e-bd6b-5d84c917ebfc",
+                "source_id": "019dbffa-98f5-7291-b838-1a08df65f0e0",
                 "source_type": "match",
                 "rule": "winner"
             },
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84e9-7e0f-8b2b-16a49018e0eb",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98fc-71b2-84ee-12e8a6e4b36f",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -460,25 +480,26 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84e8-7a9c-86dc-2f90b8138877",
+            "match_id": "019dbffa-98fb-7a6b-8572-b8fbc4b8677b",
             "home_team_id": null,
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528856",
-            "stage_id": "019dbfd1-84d4-7cd7-95c3-db2f32333554",
+            "scheduled_time": "2026-04-24T17:52:44.643402",
+            "stage_id": "019dbffa-98e7-7c1c-9096-41bc7fdee4b0",
             "home_source": {
-                "source_id": "019dbfd1-84e4-7620-84f8-a454eda588a2",
+                "source_id": "019dbffa-98f7-75e3-93fa-8c446987c39a",
                 "source_type": "match",
                 "rule": "winner"
             },
             "away_source": {
-                "source_id": "019dbfd1-84e5-7a53-aa80-56eff5e174b7",
+                "source_id": "019dbffa-98f8-7d91-a9f8-d521bef9d262",
                 "source_type": "match",
                 "rule": "winner"
             },
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84ea-7729-a664-c974cde7cc1a",
-                    "target_slot": "home"
+                    "target_id": "019dbffa-98fd-7f11-b9ed-463c3af19c78",
+                    "target_slot": "home",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -486,25 +507,26 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84e9-7e0f-8b2b-16a49018e0eb",
+            "match_id": "019dbffa-98fc-71b2-84ee-12e8a6e4b36f",
             "home_team_id": null,
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528865",
-            "stage_id": "019dbfd1-84d4-7cd7-95c3-db2f32333554",
+            "scheduled_time": "2026-04-24T17:52:44.643406",
+            "stage_id": "019dbffa-98e7-7c1c-9096-41bc7fdee4b0",
             "home_source": {
-                "source_id": "019dbfd1-84e6-70ed-93d9-4bd8297318e2",
+                "source_id": "019dbffa-98f9-70a7-8d86-efd4b0869fe2",
                 "source_type": "match",
                 "rule": "winner"
             },
             "away_source": {
-                "source_id": "019dbfd1-84e7-7ba6-9959-ed502186e96a",
+                "source_id": "019dbffa-98fa-7da2-8244-5ea521baa47b",
                 "source_type": "match",
                 "rule": "winner"
             },
             "output_targets": [
                 {
-                    "target_id": "019dbfd1-84ea-7729-a664-c974cde7cc1a",
-                    "target_slot": "away"
+                    "target_id": "019dbffa-98fd-7f11-b9ed-463c3af19c78",
+                    "target_slot": "away",
+                    "rule": "winner"
                 }
             ],
             "score": "TBD",
@@ -512,18 +534,18 @@
             "has_ended": false
         },
         {
-            "match_id": "019dbfd1-84ea-7729-a664-c974cde7cc1a",
+            "match_id": "019dbffa-98fd-7f11-b9ed-463c3af19c78",
             "home_team_id": null,
             "away_team_id": null,
-            "scheduled_time": "2026-04-24T17:07:52.528875",
-            "stage_id": "019dbfd1-84d5-7672-80d4-2da9bb6974fb",
+            "scheduled_time": "2026-04-24T17:52:44.643410",
+            "stage_id": "019dbffa-98e8-7445-9764-7473d823a61b",
             "home_source": {
-                "source_id": "019dbfd1-84e8-7a9c-86dc-2f90b8138877",
+                "source_id": "019dbffa-98fb-7a6b-8572-b8fbc4b8677b",
                 "source_type": "match",
                 "rule": "winner"
             },
             "away_source": {
-                "source_id": "019dbfd1-84e9-7e0f-8b2b-16a49018e0eb",
+                "source_id": "019dbffa-98fc-71b2-84ee-12e8a6e4b36f",
                 "source_type": "match",
                 "rule": "winner"
             },

@@ -17,7 +17,7 @@ UCL_TOURNAMENT_ID = uuid6.UUID("019dbbe0-fb86-771f-8c54-c3f07108f0b4")
 
 def load_teams_map() -> Dict[str, str]:
     """Loads existing teams and maps their name to their established UUID."""
-    with open("data/v2_local/teams.json", "r", encoding="utf-8") as f:
+    with open("../data/v2_local/teams.json", "r", encoding="utf-8") as f:
         teams_data = json.load(f)
     return {details["team_name"]: tid for tid, details in teams_data.items()}
 
@@ -111,7 +111,8 @@ def build_tournament(config, tournament_id: tournamentId, tournament_type: str, 
                 # Create Dependency Target (Output)
                 source_match.output_targets.append(DependencyTarget(
                     target_id=current_match.match_id,
-                    target_slot="home" if index == 0 else "away"
+                    target_slot="home" if index == 0 else "away",
+                    rule=rule  # Added this line
                 ))
 
     # 3. Assemble Tournament

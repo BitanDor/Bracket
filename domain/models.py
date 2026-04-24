@@ -89,6 +89,7 @@ class DependencyTarget(BaseModel):
     target_id: Union[matchId, groupId]
     # 'home', 'away' for matches, or 'group_member' for groups
     target_slot: str
+    rule: SelectionRule
 
 class MatchGuessData(BaseModel):
     score: MatchScore
