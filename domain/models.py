@@ -1,6 +1,6 @@
 from enum import Enum
 from datetime import datetime
-from typing import TypeAlias, Tuple, Dict, List, Optional, Union
+from typing import TypeAlias, Tuple, Dict, List, Optional, Union, Set
 import uuid6 # we use uuid6.uuid7()
 from pydantic import BaseModel, Field, EmailStr, ConfigDict
 # TODO: use Field to specify rules regarding data validation, e.g., for email format, password strength, etc.
@@ -195,7 +195,7 @@ class Tournament(BaseModel):
     stages: List[Stage]
     groups: List[Group] = []
     matches: List[Match]
-    participating_users: set[userId]
+    participating_users: Set[userId]
     private_brackets: list[privateBracketId]
     def store_to_database(self):
         # TODO: Implement tournament serialization to Supabase

@@ -4,3 +4,4 @@
 003 - create v2 users local JSON (23.4)
 004 - create v2 teams local JSON (23.4)
 005 - create v2 tournaments local JSON (24.4)
+006 - update v2 tournaments local JSON with advanced logic (24.4)
