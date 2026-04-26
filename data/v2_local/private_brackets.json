@@ -1,0 +1,46 @@
+{
+    "019dcacd-c83e-7a3c-8617-2608fc9f3a6b": {
+        "bracket_id": "019dcacd-c83e-7a3c-8617-2608fc9f3a6b",
+        "tournament_id": "019dbbe0-fb87-7065-96f5-b4e509a4aa74",
+        "join_link": "https://bracketmaster.streamlit.app/join/nba-private-v1",
+        "participants_ids": [
+            "019dbbe0-fb88-7250-9bd3-2eb71bbbd15b",
+            "019dbbe0-fb89-771d-a82f-051e9a671af1",
+            "019dbbe0-fb8a-7a4a-a36b-8962a82dbc39",
+            "019dbbe0-fb8b-7dd7-b9ce-fdb8e560af94"
+        ],
+        "manager_id": "019dbbe0-fb88-7250-9bd3-2eb71bbbd15b",
+        "leaderboard": {
+            "019dbbe0-fb88-7250-9bd3-2eb71bbbd15b": 0,
+            "019dbbe0-fb89-771d-a82f-051e9a671af1": 0,
+            "019dbbe0-fb8a-7a4a-a36b-8962a82dbc39": 0,
+            "019dbbe0-fb8b-7dd7-b9ce-fdb8e560af94": 0
+        },
+        "whatsapp_group_connection_details": null
+    },
+    "019dcacd-c83f-7a96-88de-165891feb820": {
+        "bracket_id": "019dcacd-c83f-7a96-88de-165891feb820",
+        "tournament_id": "019dbbe0-fb86-771f-8c54-c3f07108f0b4",
+        "join_link": "https://bracketmaster.streamlit.app/join/ucl-private-v1",
+        "participants_ids": [
+            "019dbbe0-fb88-7250-9bd3-2eb71bbbd15b",
+            "019dbbe0-fb89-771d-a82f-051e9a671af1",
+            "019dbbe0-fb8a-7a4a-a36b-8962a82dbc39",
+            "019dbbe0-fb8c-7279-910d-5c2774126752",
+            "019dbbe0-fb8d-737a-90f0-b9c93fe9d076",
+            "019dbbe0-fb8e-7982-871f-951b96334895",
+            "019dbbe0-fb8f-708a-b02c-f9badf3cf381"
+        ],
+        "manager_id": "019dbbe0-fb88-7250-9bd3-2eb71bbbd15b",
+        "leaderboard": {
+            "019dbbe0-fb88-7250-9bd3-2eb71bbbd15b": 0,
+            "019dbbe0-fb89-771d-a82f-051e9a671af1": 0,
+            "019dbbe0-fb8a-7a4a-a36b-8962a82dbc39": 0,
+            "019dbbe0-fb8c-7279-910d-5c2774126752": 0,
+            "019dbbe0-fb8d-737a-90f0-b9c93fe9d076": 0,
+            "019dbbe0-fb8e-7982-871f-951b96334895": 0,
+            "019dbbe0-fb8f-708a-b02c-f9badf3cf381": 0
+        },
+        "whatsapp_group_connection_details": null
+    }
+}

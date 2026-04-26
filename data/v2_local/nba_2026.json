@@ -555,6 +555,13 @@
             "has_ended": false
         }
     ],
-    "participating_users": [],
-    "private_brackets": []
+    "participating_users": [
+        "019dbbe0-fb88-7250-9bd3-2eb71bbbd15b",
+        "019dbbe0-fb8b-7dd7-b9ce-fdb8e560af94",
+        "019dbbe0-fb8a-7a4a-a36b-8962a82dbc39",
+        "019dbbe0-fb89-771d-a82f-051e9a671af1"
+    ],
+    "private_brackets": [
+        "019dcacd-c83e-7a3c-8617-2608fc9f3a6b"
+    ]
 }

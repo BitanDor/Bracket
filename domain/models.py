@@ -1,17 +1,17 @@
 from enum import Enum
 from datetime import datetime
 from typing import TypeAlias, Tuple, Dict, List, Optional, Union, Set
-import uuid6 # we use uuid6.uuid7()
+import uuid # we use uuid6.uuid7() to generate ids, but uuid to read them from str
 from pydantic import BaseModel, Field, EmailStr, ConfigDict
 # TODO: use Field to specify rules regarding data validation, e.g., for email format, password strength, etc.
 
-userId: TypeAlias = uuid6.UUID
-stageId: TypeAlias = uuid6.UUID
-matchId: TypeAlias = uuid6.UUID
-teamId: TypeAlias = uuid6.UUID
-tournamentId: TypeAlias = uuid6.UUID
-privateBracketId: TypeAlias = uuid6.UUID
-groupId: TypeAlias = uuid6.UUID
+userId: TypeAlias = uuid.UUID
+stageId: TypeAlias = uuid.UUID
+matchId: TypeAlias = uuid.UUID
+teamId: TypeAlias = uuid.UUID
+tournamentId: TypeAlias = uuid.UUID
+privateBracketId: TypeAlias = uuid.UUID
+groupId: TypeAlias = uuid.UUID
 SingleMatchScore: TypeAlias = Tuple[int, int]
 
 class StageType(str, Enum):
