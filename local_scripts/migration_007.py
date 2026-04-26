@@ -11,7 +11,7 @@ DOR_USER_ID = uuid.UUID("019dbbe0-fb88-7250-9bd3-2eb71bbbd15b")
 
 
 def load_users():
-    with open("data/v2_local/users.json", "r", encoding="utf-8") as f:
+    with open("../data/v2_local/users.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -82,10 +82,10 @@ def migrate_participants_and_brackets():
     private_brackets_db[str(ucl_bracket_id)] = ucl_bracket.model_dump(mode='json')
 
     # --- 3. Save All Outputs ---
-    with open("data/v2_local/nba_2026.json", "w", encoding="utf-8") as f:
+    with open("../data/v2_local/nba_2026.json", "w", encoding="utf-8") as f:
         f.write(nba_tournament.model_dump_json(indent=4))
 
-    with open("data/v2_local/ucl_2026.json", "w", encoding="utf-8") as f:
+    with open("../data/v2_local/ucl_2026.json", "w", encoding="utf-8") as f:
         f.write(ucl_tournament.model_dump_json(indent=4))
 
     save_json(private_brackets_db, "private_brackets.json")
