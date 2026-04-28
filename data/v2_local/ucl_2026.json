@@ -64,7 +64,13 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-9903-736c-8a15-8a399eb3af53",
@@ -83,7 +89,13 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-9904-796c-9cf5-8e1247bf426c",
@@ -102,7 +114,13 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-9905-7766-a792-70c73b963629",
@@ -121,7 +139,13 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-9906-732e-a79b-47e22f24a80e",
@@ -140,7 +164,13 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-9907-736d-bac2-3d88911ddf0d",
@@ -159,7 +189,13 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-9908-74d8-88ee-a77bbd618b0f",
@@ -178,7 +214,13 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-9909-77d3-9b82-839483b170a3",
@@ -197,7 +239,13 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-990a-739e-97c3-1867955aaf30",
@@ -224,7 +272,17 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ],
+                "019dbffa-98ff-72e1-bec8-68d4013d1f46": [
+                    "2026-04-07 00:00",
+                    "2026-04-16 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-990b-7349-9689-053e903015d8",
@@ -251,7 +309,17 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ],
+                "019dbffa-98ff-72e1-bec8-68d4013d1f46": [
+                    "2026-04-07 00:00",
+                    "2026-04-16 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-990c-7e08-8a5c-30110d14e34e",
@@ -278,7 +346,17 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ],
+                "019dbffa-98ff-72e1-bec8-68d4013d1f46": [
+                    "2026-04-07 00:00",
+                    "2026-04-16 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-990d-7a14-894b-5ec3c523a432",
@@ -305,7 +383,17 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ],
+                "019dbffa-98ff-72e1-bec8-68d4013d1f46": [
+                    "2026-04-07 00:00",
+                    "2026-04-16 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-990e-7704-bab4-5c09552ef27b",
@@ -332,7 +420,21 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ],
+                "019dbffa-98ff-72e1-bec8-68d4013d1f46": [
+                    "2026-04-07 00:00",
+                    "2026-04-16 23:59"
+                ],
+                "019dbffa-9900-7e47-83de-76525d8a3c9c": [
+                    "2026-04-28 00:00",
+                    "2026-05-07 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-990f-72cd-9ffd-c2ee74ebab7c",
@@ -359,7 +461,21 @@
             ],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ],
+                "019dbffa-98ff-72e1-bec8-68d4013d1f46": [
+                    "2026-04-07 00:00",
+                    "2026-04-16 23:59"
+                ],
+                "019dbffa-9900-7e47-83de-76525d8a3c9c": [
+                    "2026-04-28 00:00",
+                    "2026-05-07 23:59"
+                ]
+            }
         },
         {
             "match_id": "019dbffa-9910-7d8e-8f27-be593b7970d4",
@@ -380,7 +496,25 @@
             "output_targets": [],
             "score": "TBD",
             "detailed_score": null,
-            "has_ended": false
+            "has_ended": false,
+            "match_guess_time_windows": {
+                "019dbffa-98fe-73aa-87cf-5b1801e171bd": [
+                    "2026-02-10 00:00",
+                    "2026-03-18 23:59"
+                ],
+                "019dbffa-98ff-72e1-bec8-68d4013d1f46": [
+                    "2026-04-07 00:00",
+                    "2026-04-16 23:59"
+                ],
+                "019dbffa-9900-7e47-83de-76525d8a3c9c": [
+                    "2026-04-28 00:00",
+                    "2026-05-07 23:59"
+                ],
+                "019dbffa-9901-739d-a2db-fd05c2e4c097": [
+                    "2026-05-08 00:00",
+                    "2026-05-30 23:59"
+                ]
+            }
         }
     ],
     "participating_users": [
