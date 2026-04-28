@@ -1,6 +1,44 @@
 {
     "tournament_id": "019dbbe0-fb86-771f-8c54-c3f07108f0b4",
     "tournament_name": "UEFA Champions League 2026",
+    "scoring_config": {
+        "points_map": {
+            "FINALS": {
+                "BASE": 8.0,
+                "PLAY_IN_1": 8.0,
+                "PLAY_IN_2": 8.0,
+                "R1": 4.0,
+                "CONF_SEMIS": 2.0,
+                "CONF_FINALS": 1.0
+            },
+            "CONF_FINALS": {
+                "BASE": 4.0,
+                "PLAY_IN_1": 4.0,
+                "PLAY_IN_2": 4.0,
+                "R1": 2.0,
+                "CONF_SEMIS": 1.0
+            },
+            "CONF_SEMIS": {
+                "BASE": 2.0,
+                "PLAY_IN_1": 2.0,
+                "PLAY_IN_2": 2.0,
+                "R1": 1.0
+            },
+            "R1": {
+                "BASE": 1.0,
+                "PLAY_IN_1": 1.0,
+                "PLAY_IN_2": 1.0
+            },
+            "PLAY_IN_2": {
+                "BASE": 1.0,
+                "PLAY_IN_1": 1.0
+            },
+            "PLAY_IN_1": {
+                "BASE": 1.0
+            }
+        },
+        "detailed_score_multiplier": 1.0
+    },
     "participating_teams": [
         "019dbbf7-f22e-7a0e-8d6a-735b7662d44a",
         "019dbbf7-f22f-781a-91d6-d22c94006e98",

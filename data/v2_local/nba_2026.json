@@ -1,6 +1,29 @@
 {
     "tournament_id": "019dbbe0-fb87-7065-96f5-b4e509a4aa74",
     "tournament_name": "NBA Playoffs 2026",
+    "scoring_config": {
+        "points_map": {
+            "FINAL": {
+                "BASE": 8.0,
+                "R16": 4.0,
+                "QF": 2.0,
+                "SF": 1.0
+            },
+            "SF": {
+                "BASE": 4.0,
+                "R16": 2.0,
+                "QF": 1.0
+            },
+            "QF": {
+                "BASE": 2.0,
+                "R16": 1.0
+            },
+            "R16": {
+                "BASE": 1.0
+            }
+        },
+        "detailed_score_multiplier": 3.0
+    },
     "participating_teams": [
         "019dbbf7-f21a-737a-85aa-a0bcddb853af",
         "019dbbf7-f21b-7dee-af90-f3f6b395123f",
