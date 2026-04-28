@@ -25,7 +25,7 @@ UCL_TIME_WINDOWS = {
 
 UCL_STAGE_ORDER = ["R16", "QF", "SF", "FINAL"]
 
-DATA_DIR = "data/v2_local"
+DATA_DIR = "../data/v2_local"
 
 
 def update_tournament_windows(file_name, window_config, stage_order):
