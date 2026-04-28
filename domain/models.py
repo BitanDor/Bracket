@@ -147,7 +147,7 @@ class Match(BaseModel):
     match_id: matchId
     home_team_id: Optional[teamId] = None
     away_team_id: Optional[teamId] = None
-    scheduled_time: datetime
+    match_guess_time_windows: Dict[stageId, Tuple[datetime, datetime]] = Field(default_factory=dict) # determines how many points a guess is worth based on WHEN it was made.
     stage_id: stageId
     home_source: Optional[DependencySource] = None
     away_source: Optional[DependencySource] = None
@@ -188,6 +188,14 @@ class User(BaseModel):
                 setattr(self, key, value)
 
 
+class ScoringConfig(BaseModel):
+    """Configuration for the scoring engine"""
+    # Map: TournamentStageName -> { GuessTimeStageName: BasePoints }
+    # Example: "FINALS": {"BASE": 8, "R1": 4}
+    points_map: Dict[str, Dict[str, float]]
+    detailed_score_multiplier: float = 2.0 # Multiplier for points when detailed score is guessed correctly
+
+
 class Tournament(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
     tournament_id: tournamentId
@@ -198,17 +206,5 @@ class Tournament(BaseModel):
     matches: List[Match]
     participating_users: Set[userId]
     private_brackets: list[privateBracketId]
-    def store_to_database(self):
-        # TODO: Implement tournament serialization to Supabase
-        pass
-    def update_true_results_and_process(self, results: Dict[matchId, MatchGuessData]):
-        """
-        Main engine function:
-        1. Updates actual match scores.
-        2. Triggers re-calculation for all participating users' scores.
-        3. Updates leaderboards for all linked PrivateBrackets.
-        4. Processes "Feed Forward" logic for subsequent matches (TBD -> Team).
-        """
-        # TODO: Implement the scoring and propagation engine logic
-        pass
+    scoring_config: ScoringConfig
 
