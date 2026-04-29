@@ -25,10 +25,13 @@ def get_match_box_html(m_id, winner_node, is_actual_view, raw_user_obj, config, 
 
     exact_enabled = getattr(config, "IS_EXACT_ENABLED", False)
     exact_options = getattr(config, "EXACT_OPTIONS", [4, 5, 6, 7])
+    is_play_in_match = m_id.startswith("PLAY_IN")
+    is_concluded_match = actual_winner_name and actual_winner_name != logic.NOT_DETERMINED
 
     # בתצוגות עם תוצאה מדויקת: מנצחת תמיד עם 4, המפסידה = total_games - 4
     show_series_scores = (
         exact_enabled
+        and not is_play_in_match
         and winner_name
         and winner_name != logic.NOT_DETERMINED
         and winner_name in participants
@@ -62,9 +65,21 @@ def get_match_box_html(m_id, winner_node, is_actual_view, raw_user_obj, config, 
             status_msg = f"<div style='color: #ffaa00; font-size: 0.85em; margin-top:4px; font-weight: bold;'>⚠️ Corrected. Prev: {prev_val_name}</div>"
 
         # ב. בדיקת תוצאה (השוואת שמות בלבד לצורך צבע התיבה)
-        if actual_winner_name and actual_winner_name != logic.NOT_DETERMINED:
+        if is_concluded_match:
             if winner_name == actual_winner_name:
                 bg_color, border_color = "#2e7d32", "#1b5e20"
+
+                # ניחוש מדויק: גם מנצחת וגם מספר משחקים נכון
+                actual_exact_games = logic.get_winner_result(actual_val_raw)
+                is_exact_hit = (
+                    exact_enabled
+                    and not is_play_in_match
+                    and actual_exact_games in exact_options
+                    and winner_exact_games == actual_exact_games
+                )
+                if is_exact_hit:
+                    border_color = "#f5c542"
+                    status_msg += "<div style='color: #ffe082; font-size: 0.85em; margin-top:4px; font-weight: bold;'>✨ EXACT!</div>"
             else:
                 bg_color, border_color = "#c62828", "#b71c1c"
         else:
