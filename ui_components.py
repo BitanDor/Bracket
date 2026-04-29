@@ -3,15 +3,14 @@
 import logic
 
 
-def format_team(team_name, winner_node, config):
-    # winner_node יכול להיות מחרוזת או מערך [team, score]
-    winner_name = logic.get_winner_name(winner_node)
-
+def format_team(team_name, winner_name, series_score, config):
+    # series_score מוצג רק כשקיימת תוצאה מדויקת תקינה
     if team_name == logic.NOT_DETERMINED: return "<i>TBD</i>"
     flag = config.TEAM_FLAGS.get(team_name, "")
+    score_suffix = f" ({series_score})" if series_score is not None else ""
     style = "font-weight: bold;" if team_name == winner_name else ""
     star = " 🌟" if team_name == winner_name else ""
-    return f"<span style='{style}'>{flag} {team_name}{star}</span>"
+    return f"<span style='{style}'>{flag} {team_name}{score_suffix}{star}</span>"
 
 
 def get_match_box_html(m_id, winner_node, is_actual_view, raw_user_obj, config, current_guesses, actual_results):
@@ -22,8 +21,32 @@ def get_match_box_html(m_id, winner_node, is_actual_view, raw_user_obj, config, 
     actual_val_raw = actual_results.get(m_id)
     actual_winner_name = logic.get_winner_name(actual_val_raw)
     winner_name = logic.get_winner_name(winner_node)
+    winner_exact_games = logic.get_winner_result(winner_node)
 
-    match_body = f"<div style='line-height: 1.1;'><br>{format_team(team_a, winner_node, config)}<br><small>vs</small><br>{format_team(team_b, winner_node, config)}</div>"
+    exact_enabled = getattr(config, "IS_EXACT_ENABLED", False)
+    exact_options = getattr(config, "EXACT_OPTIONS", [4, 5, 6, 7])
+
+    # בתצוגות עם תוצאה מדויקת: מנצחת תמיד עם 4, המפסידה = total_games - 4
+    show_series_scores = (
+        exact_enabled
+        and winner_name
+        and winner_name != logic.NOT_DETERMINED
+        and winner_name in participants
+        and winner_exact_games in exact_options
+    )
+
+    winner_series_score = 4 if show_series_scores else None
+    loser_series_score = (winner_exact_games - 4) if show_series_scores else None
+
+    team_a_score = None
+    if show_series_scores and team_a != logic.NOT_DETERMINED:
+        team_a_score = winner_series_score if team_a == winner_name else loser_series_score
+
+    team_b_score = None
+    if show_series_scores and team_b != logic.NOT_DETERMINED:
+        team_b_score = winner_series_score if team_b == winner_name else loser_series_score
+
+    match_body = f"<div style='line-height: 1.1;'><br>{format_team(team_a, winner_name, team_a_score, config)}<br><small>vs</small><br>{format_team(team_b, winner_name, team_b_score, config)}</div>"
 
     bg_color, border_color, text_color = "#1976d2", "#1565c0", "white"
     status_msg = ""
