@@ -89,7 +89,7 @@ def render_rules_tab(config, actual_results, user_role='guest'):
     rules_cache = load_ai_cache(config.ID)
     cached_points_map = rules_cache.get("points_map")
     cached_response = str(rules_cache.get("response"))
-    if str(cached_points_map) != str(recent_points_map):
+    if str(cached_points_map) != str(recent_points_map) and False:
         with st.spinner("Gemini מחשב ומעצב את טבלת הניקוד..."):
                 ai_table = get_ai_scoring_table(recent_points_map, config.ROUND_DICT)
                 valid_response = not ai_table.startswith("ERROR:")
