@@ -80,6 +80,11 @@ def get_match_box_html(m_id, winner_node, is_actual_view, raw_user_obj, config, 
                 if is_exact_hit:
                     border_color = "#f5c542"
                     status_msg += "<div style='color: #ffe082; font-size: 0.85em; margin-top:4px; font-weight: bold;'>✨ EXACT!</div>"
+                elif exact_enabled and not is_play_in_match and actual_exact_games in exact_options:
+                    # סדר תצוגה: קודם הקבוצה העליונה, ואז התחתונה
+                    top_score = 4 if team_a == actual_winner_name else (actual_exact_games - 4)
+                    bottom_score = 4 if team_b == actual_winner_name else (actual_exact_games - 4)
+                    status_msg += f"<div style='color: #dcedc8; font-size: 0.85em; margin-top:4px; font-weight: bold;'>True score: {top_score}:{bottom_score}</div>"
             else:
                 bg_color, border_color = "#c62828", "#b71c1c"
         else:
