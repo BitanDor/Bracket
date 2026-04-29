@@ -154,6 +154,7 @@ class Match(BaseModel):
     output_targets: List[DependencyTarget] = []
     score: MatchScore = MatchScore.PENDING
     detailed_score: Optional[DetailedScore] = None
+    scheduled_time: Optional[str] = None
     has_ended: bool = False
 
 
