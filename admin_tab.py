@@ -6,7 +6,7 @@ import data_manager
 import ai_commentary
 
 
-def render_admin_tab(actual_results, config, comp_id):
+def render_admin_tab(actual_results, config, comp_id, uid_to_name):
     st.header("⚙️ ניהול (Admin)")
 
     # עבודה על עותק כדי למנוע שינויים לא רצויים לפני לחיצה על "שמור"
@@ -56,12 +56,20 @@ def render_admin_tab(actual_results, config, comp_id):
                     updated_actual[m_id] = choice
 
     if st.button("💾 שמור תוצאות אמת", use_container_width=True):
+        previous_actual = actual_results.copy()
         data_manager.save_actual_results(comp_id, updated_actual)
 
         # עדכון הפרשנות ב-AI מיד לאחר עדכון התוצאות
         with st.spinner("🎙️ הפרשן מנתח את הטבלה..."):
             all_guesses = data_manager.load_all_guesses(comp_id)
-            success = ai_commentary.update_tournament_commentary(comp_id, config, all_guesses, updated_actual)
+            success = ai_commentary.update_tournament_commentary(
+                comp_id,
+                config,
+                all_guesses,
+                previous_actual,
+                updated_actual,
+                uid_to_name,
+            )
 
         if success:
             st.success("התוצאות והפרשנות עודכנו בהצלחה!")

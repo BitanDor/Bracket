@@ -72,7 +72,7 @@ def main():
         if user_role == "admin":
             with tabs[2]:
                 from admin_tab import render_admin_tab
-                render_admin_tab(actual_results, config, comp_id)
+                render_admin_tab(actual_results, config, comp_id, uid_to_name)
 
     with tabs[-1]:
         user_role = users_auth['usernames'][username].get('role', 'user') if auth_status else 'guest'

@@ -17,7 +17,10 @@ def load_users():
 def get_uid_to_name_map():
     users_data = load_users()
     usernames = users_data.get("usernames", {})
-    return {details.get("user_id"): name for name, details in usernames.items()}
+    return {
+        details.get("user_id"): details.get("name") or name
+        for name, details in usernames.items()
+    }
 
 @st.cache_data(ttl=60)
 def load_all_guesses(comp_id):
@@ -64,11 +67,13 @@ def save_actual_results(comp_id, results):
     supabase = get_client()
     data = {"comp_id": comp_id, "results": results}
     supabase.table("actual_results").upsert(data, on_conflict="comp_id").execute()
+    st.cache_data.clear()
 
 def save_commentary_cache(comp_id, history):
     supabase = get_client()
     data = {"comp_id": comp_id, "history": history}
     supabase.table("ai_commentary").upsert(data, on_conflict="comp_id").execute()
+    st.cache_data.clear()
 
 def save_ai_cache(comp_id, cache_data):
     supabase = get_client()
