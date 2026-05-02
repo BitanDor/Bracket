@@ -21,6 +21,20 @@ def _format_result_line(team_name, score):
     return f"{team_name} ({score} games)"
 
 
+def _is_local_debug_request():
+    """Return True only for local Streamlit requests on port 8501."""
+    try:
+        headers = st.context.headers
+    except Exception:
+        return False
+
+    host = (headers.get("x-forwarded-host") or headers.get("host") or "").lower()
+    origin = (headers.get("origin") or "").lower()
+    referer = (headers.get("referer") or "").lower()
+    values = f"{host} {origin} {referer}"
+    return "localhost:8501" in values or "127.0.0.1:8501" in values
+
+
 def update_tournament_commentary(comp_id, config, all_guesses, previous_actual_results, updated_actual_results, uid_to_name):
     """Generate AI commentary with score-impact context and save to history."""
 
@@ -160,7 +174,8 @@ Per-participant impact in this update:
 
     api_key = st.secrets["GEMINI_API_KEY"]
     client = genai.Client(api_key=api_key)
-
+    if _is_local_debug_request():
+        print(f"Sending the following prompt to gemini 2.5:\n\n{prompt}")
     try:
         response = client.models.generate_content(
             model="gemini-2.5-flash",  #
